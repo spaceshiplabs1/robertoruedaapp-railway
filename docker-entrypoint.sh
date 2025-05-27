@@ -15,6 +15,13 @@ echo "🔑 Enterprise Code: ${ENTERPRISE_CODE:-NOT_SET}"
 echo "🔧 Creating Odoo configuration..."
 envsubst < /etc/odoo/odoo.railway.conf > /etc/odoo/odoo.conf
 
+# Fix permissions for persistent volume (Railway mounts as root)
+echo "🔧 Fixing filestore permissions..."
+# Create directories with proper permissions if they don't exist
+mkdir -p /app/filestore/sessions /app/filestore/filestore
+chown -R odoo:odoo /app/filestore
+chmod -R 755 /app/filestore
+
 # Show the generated config for debugging
 echo "📋 Generated configuration:"
 cat /etc/odoo/odoo.conf | head -20

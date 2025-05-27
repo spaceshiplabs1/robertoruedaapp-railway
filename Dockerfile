@@ -5,8 +5,8 @@ FROM odoo:18
 # Switch to root for setup
 USER root
 
-# Install envsubst for environment variable substitution
-RUN apt-get update && apt-get install -y gettext-base && rm -rf /var/lib/apt/lists/*
+# Install envsubst for environment variable substitution and gosu for user switching
+RUN apt-get update && apt-get install -y gettext-base gosu && rm -rf /var/lib/apt/lists/*
 
 # Copy fitness module
 COPY odoo-18.0+e.20250521/custom_addons /mnt/extra-addons
@@ -19,15 +19,16 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # Set permissions and create directories
-RUN mkdir -p /var/lib/odoo && \
-    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /var/lib/odoo /docker-entrypoint.sh
+RUN mkdir -p /app/filestore && \
+    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore /docker-entrypoint.sh && \
+    chmod -R 755 /app/filestore
 
-# Switch back to odoo user
-USER odoo
+# Don't switch to odoo user yet - entrypoint needs root for permissions
+# USER odoo
 
 # Expose Odoo port
 EXPOSE 8069
 
 # Use our custom entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["odoo", "-c", "/etc/odoo/odoo.conf"] 
+CMD ["gosu", "odoo", "odoo", "-c", "/etc/odoo/odoo.conf"] 
