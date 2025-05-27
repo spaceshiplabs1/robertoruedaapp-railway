@@ -1,17 +1,23 @@
 #!/bin/bash
 set -e
 
+# Debug: Show environment variables
+echo "🚀 Railway Deployment Starting..."
+echo "📊 Database Host: ${DB_HOST:-NOT_SET}"
+echo "📊 Database Name: ${DB_NAME:-NOT_SET}"
+echo "📊 Database User: ${DB_USER:-NOT_SET}"
+echo "🔧 Workers: ${WORKERS:-NOT_SET}"
+echo "📁 Addons Path: ${ADDONS_PATH:-NOT_SET}"
+echo "💾 Data Dir: ${DATA_DIR:-NOT_SET}"
+echo "🔑 Enterprise Code: ${ENTERPRISE_CODE:-NOT_SET}"
+
 # Create the final config file by substituting environment variables
+echo "🔧 Creating Odoo configuration..."
 envsubst < /etc/odoo/odoo.railway.conf > /etc/odoo/odoo.conf
 
-# Debug: Show the database connection being used
-echo "🚀 Railway Deployment Starting..."
-echo "📊 Database Host: $DB_HOST"
-echo "📊 Database Name: $DB_NAME"
-echo "📊 Database User: $DB_USER"
-echo "🔧 Workers: $WORKERS"
-echo "📁 Addons Path: $ADDONS_PATH"
-echo "💾 Data Dir: $DATA_DIR"
+# Show the generated config for debugging
+echo "📋 Generated configuration:"
+cat /etc/odoo/odoo.conf | head -20
 
 # Execute the original command
 exec "$@" 

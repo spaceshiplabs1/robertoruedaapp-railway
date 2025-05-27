@@ -4,6 +4,6 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "startCommand": "sh -c 'ODOO_HTTP_PORT=$PORT odoo -c /etc/odoo/odoo.conf'"
+    "startCommand": "/docker-entrypoint.sh odoo -c /etc/odoo/odoo.conf"
   }
 } 
