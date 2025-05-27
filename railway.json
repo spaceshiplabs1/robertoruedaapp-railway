@@ -4,6 +4,6 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "startCommand": "python /usr/lib/python3/dist-packages/odoo/odoo-bin -c /etc/odoo/odoo.conf --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --database=odoo --without-demo=all"
+    "startCommand": "python3 /usr/lib/python3/dist-packages/odoo/odoo-bin -c /etc/odoo/odoo.conf --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --database=neondb --without-demo=all"
   }
 } 
