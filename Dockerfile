@@ -22,5 +22,5 @@ USER odoo
 # Expose port
 EXPOSE 8069
 
-# Use the default Odoo entrypoint with our config
-CMD ["odoo", "-c", "/etc/odoo/odoo.conf"] 
+# Use the exact same command as the base Odoo image but with our config
+CMD ["/usr/local/bin/odoo", "-c", "/etc/odoo/odoo.conf"] 
