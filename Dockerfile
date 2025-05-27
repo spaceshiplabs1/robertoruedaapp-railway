@@ -1,26 +1,29 @@
-# Use official Odoo image
+# Roberto Rueda Fitness App - Railway Deployment
+# Using official Odoo 18 base image
 FROM odoo:18
 
-# Set the user to root to install packages and copy files
+# Switch to root for setup
 USER root
 
-# Copy our custom addons to the extra-addons directory
+# Copy custom fitness module
 COPY odoo-18.0+e.20250521/custom_addons /mnt/extra-addons
 
-# Copy our configuration files
+# Copy main configuration
 COPY odoo.conf /etc/odoo/odoo.conf
 
-# Set proper permissions
-RUN chown -R odoo:odoo /mnt/extra-addons /etc/odoo
-
-# Create necessary directories
-RUN mkdir -p /app/filestore && chown -R odoo:odoo /app/filestore
+# Create and set permissions for all directories
+RUN mkdir -p /app/filestore /var/lib/odoo && \
+    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore /var/lib/odoo
 
 # Switch back to odoo user
 USER odoo
 
-# Expose port
+# Set working directory
+WORKDIR /usr/lib/python3/dist-packages/odoo
+
+# Expose Odoo port
 EXPOSE 8069
 
-# Use the exact same command as the base Odoo image but with our config
-CMD ["/usr/local/bin/odoo", "-c", "/etc/odoo/odoo.conf"] 
+# Start Odoo with our configuration
+# Using python3 explicitly since that's what's available in the container
+CMD ["python3", "/usr/lib/python3/dist-packages/odoo/odoo-bin", "-c", "/etc/odoo/odoo.conf"] 
