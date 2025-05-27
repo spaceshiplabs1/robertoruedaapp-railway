@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 8: REGISTRO DE ENTRENAMIENTOS REALIZADOS
+             ======================================== -->
+        
+        <!-- 1. HISTORIAL DE ENTRENAMIENTOS COMPLETADOS -->
+        
+        <!-- Historial 1: Ana Pérez completando "Semana 1-2: Día A - Empuje" -->
+        <record id="workout_history_ana_dia_a" model="fitness.workout.history">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="workout_definition_id" ref="workout_fuerza_dia_a"/>
+            <field name="user_program_id" ref="user_program_ana_fuerza_inicial"/>
+            <field name="completion_datetime">2025-06-03 18:30:00</field>
+            <field name="actual_duration_minutes">55</field>
+            <field name="user_rating">4</field>
+            <field name="difficulty_feedback">challenging</field>
+            <field name="user_session_notes">Me sentí con buena energía hoy. El press de banca fue duro pero manejable.</field>
+        </record>
+        
+        <!-- Historial 2: Carlos López completando "Lunes: MetCon Full Body A" -->
+        <record id="workout_history_carlos_metcon" model="fitness.workout.history">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="workout_definition_id" ref="workout_metcon_lunes"/>
+            <field name="user_program_id" ref="user_program_carlos_metcon"/>
+            <field name="completion_datetime">2025-06-03 07:45:00</field>
+            <field name="actual_duration_minutes">28</field>
+            <field name="user_rating">5</field>
+            <field name="difficulty_feedback">challenging</field>
+            <field name="user_session_notes">¡Gran sesión! Terminé sudando mucho. Las transiciones fueron rápidas.</field>
+        </record>
+        
+        <!-- Historial 3: Ana Pérez completando "Semana 1-2: Día B - Tracción y Pierna" -->
+        <record id="workout_history_ana_dia_b" model="fitness.workout.history">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="workout_definition_id" ref="workout_fuerza_dia_b"/>
+            <field name="user_program_id" ref="user_program_ana_fuerza_inicial"/>
+            <field name="completion_datetime">2025-06-05 19:00:00</field>
+            <field name="actual_duration_minutes">70</field>
+            <field name="user_rating">4</field>
+            <field name="difficulty_feedback">just_right</field>
+            <field name="user_session_notes">Las sentadillas se sintieron sólidas. Intenté hacer dominadas asistidas.</field>
+        </record>
+        
+        <!-- Historial 4: Laura Gómez completando "Programa de Introducción al Gym" -->
+        <record id="workout_history_laura_intro" model="fitness.workout.history">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="workout_definition_id" ref="workout_fuerza_dia_a"/>
+            <field name="user_program_id" ref="user_program_laura_fuerza_inicial"/>
+            <field name="completion_datetime">2025-06-04 16:15:00</field>
+            <field name="actual_duration_minutes">45</field>
+            <field name="user_rating">3</field>
+            <field name="difficulty_feedback">too_easy</field>
+            <field name="user_session_notes">Primera vez en el gym. Todo muy nuevo pero me gustó. Los pesos fueron ligeros.</field>
+        </record>
+        
+        <!-- Historial 5: Carlos López - Segunda sesión MetCon -->
+        <record id="workout_history_carlos_metcon_2" model="fitness.workout.history">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="workout_definition_id" ref="workout_metcon_lunes"/>
+            <field name="user_program_id" ref="user_program_carlos_metcon"/>
+            <field name="completion_datetime">2025-06-05 07:30:00</field>
+            <field name="actual_duration_minutes">26</field>
+            <field name="user_rating">5</field>
+            <field name="difficulty_feedback">just_right</field>
+            <field name="user_session_notes">Mejoré el tiempo. Las transiciones más fluidas que la vez anterior.</field>
+        </record>
+        
+        <!-- 2. RENDIMIENTO DETALLADO DE EJERCICIOS -->
+        
+        <!-- Rendimiento para Historial 1: Ana Pérez - Día A Empuje -->
+        
+        <!-- Rendimiento 1.1: Press de Banca -->
+        <record id="performance_ana_dia_a_press_banca" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_banca"/>
+            <field name="workout_line_id" ref="workout_line_1_1_1"/>
+            <field name="sequence">10</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">10, 9, 8</field>
+            <field name="weights_used_text">30kg, 30kg, 32.5kg</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">4_hard</field>
+            <field name="progress_notes_exercise">La última repetición del último set fue muy difícil. Buena forma en general.</field>
+        </record>
+        
+        <!-- Rendimiento 1.2: Press Inclinado con Mancuernas -->
+        <record id="performance_ana_dia_a_press_inclinado" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_inclinado_mancuernas"/>
+            <field name="workout_line_id" ref="workout_line_1_1_2"/>
+            <field name="sequence">20</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">12, 11, 10</field>
+            <field name="weights_used_text">10kg (cada mancuerna)</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Controlado. Podría intentar 12kg la próxima vez.</field>
+        </record>
+        
+        <!-- Rendimiento 1.3: Press Militar -->
+        <record id="performance_ana_dia_a_press_militar" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_militar"/>
+            <field name="workout_line_id" ref="workout_line_1_1_3"/>
+            <field name="sequence">30</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">8, 8, 7</field>
+            <field name="weights_used_text">20kg</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">4_hard</field>
+            <field name="progress_notes_exercise">Cansada al final, pero mantuve la técnica.</field>
+        </record>
+        
+        <!-- Rendimiento para Historial 2: Carlos López - MetCon -->
+        
+        <!-- Rendimiento 2.1: Kettlebell Swings -->
+        <record id="performance_carlos_metcon_kettlebell" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon"/>
+            <field name="exercise_id" ref="exercise_kettlebell_swings"/>
+            <field name="workout_line_id" ref="workout_line_2_1_1"/>
+            <field name="sequence">10</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text">15, 15, 15</field>
+            <field name="weights_used_text">16kg Kettlebell</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Buen ritmo, explosivo.</field>
+        </record>
+        
+        <!-- Rendimiento 2.2: Plancha Abdominal -->
+        <record id="performance_carlos_metcon_plancha" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon"/>
+            <field name="exercise_id" ref="exercise_plancha"/>
+            <field name="workout_line_id" ref="workout_line_2_1_2"/>
+            <field name="sequence">20</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text"></field>
+            <field name="weights_used_text">Peso Corporal</field>
+            <field name="duration_seconds_completed">35</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Mantuve la forma. La última un poco temblorosa.</field>
+        </record>
+        
+        <!-- Rendimiento 2.3: Burpees -->
+        <record id="performance_carlos_metcon_burpees" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon"/>
+            <field name="exercise_id" ref="exercise_burpees"/>
+            <field name="workout_line_id" ref="workout_line_2_1_3"/>
+            <field name="sequence">30</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text">10, 10, 8</field>
+            <field name="weights_used_text">Peso Corporal</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">4_hard</field>
+            <field name="progress_notes_exercise">Los últimos burpees fueron duros. Buena intensidad.</field>
+        </record>
+        
+        <!-- Rendimiento para Historial 3: Ana Pérez - Día B Tracción y Pierna -->
+        
+        <!-- Rendimiento 3.1: Sentadilla -->
+        <record id="performance_ana_dia_b_sentadilla" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_b"/>
+            <field name="exercise_id" ref="exercise_sentadilla"/>
+            <field name="workout_line_id" ref="workout_line_1_2_1"/>
+            <field name="sequence">10</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">12, 12, 10</field>
+            <field name="weights_used_text">40kg</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Me sentí fuerte. Profundidad buena en todas las repeticiones.</field>
+        </record>
+        
+        <!-- Rendimiento 3.2: Dominadas (Asistidas) -->
+        <record id="performance_ana_dia_b_dominadas" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_b"/>
+            <field name="exercise_id" ref="exercise_dominadas"/>
+            <field name="workout_line_id" ref="workout_line_1_2_2"/>
+            <field name="sequence">20</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">6, 5, 4</field>
+            <field name="weights_used_text">Asistencia -20kg</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">4_hard</field>
+            <field name="progress_notes_exercise">Usé la máquina de asistencia. Cada vez necesito menos ayuda.</field>
+        </record>
+        
+        <!-- Rendimiento 3.3: Peso Muerto -->
+        <record id="performance_ana_dia_b_peso_muerto" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_ana_dia_b"/>
+            <field name="exercise_id" ref="exercise_peso_muerto"/>
+            <field name="workout_line_id" ref="workout_line_1_2_3"/>
+            <field name="sequence">30</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">8, 8, 8</field>
+            <field name="weights_used_text">50kg</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Técnica sólida. Me concentré en mantener la espalda recta.</field>
+        </record>
+        
+        <!-- Rendimiento para Historial 4: Laura Gómez - Primera vez en el gym -->
+        
+        <!-- Rendimiento 4.1: Press de Banca (peso ligero) -->
+        <record id="performance_laura_intro_press_banca" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_laura_intro"/>
+            <field name="exercise_id" ref="exercise_press_banca"/>
+            <field name="workout_line_id" ref="workout_line_1_1_1"/>
+            <field name="sequence">10</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">12, 12, 12</field>
+            <field name="weights_used_text">15kg (solo la barra)</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">2_easy</field>
+            <field name="progress_notes_exercise">Primera vez haciendo press de banca. Me enseñaron la técnica básica.</field>
+        </record>
+        
+        <!-- Rendimiento 4.2: Press Inclinado (mancuernas ligeras) -->
+        <record id="performance_laura_intro_press_inclinado" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_laura_intro"/>
+            <field name="exercise_id" ref="exercise_press_inclinado_mancuernas"/>
+            <field name="workout_line_id" ref="workout_line_1_1_2"/>
+            <field name="sequence">20</field>
+            <field name="sets_completed_text">3</field>
+            <field name="reps_completed_text">15, 15, 12</field>
+            <field name="weights_used_text">5kg (cada mancuerna)</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">2_easy</field>
+            <field name="progress_notes_exercise">Las mancuernas se sintieron cómodas. Buena coordinación.</field>
+        </record>
+        
+        <!-- Rendimiento para Historial 5: Carlos López - Segunda sesión MetCon (mejorada) -->
+        
+        <!-- Rendimiento 5.1: Kettlebell Swings (mejorado) -->
+        <record id="performance_carlos_metcon_2_kettlebell" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon_2"/>
+            <field name="exercise_id" ref="exercise_kettlebell_swings"/>
+            <field name="workout_line_id" ref="workout_line_2_1_1"/>
+            <field name="sequence">10</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text">15, 15, 15</field>
+            <field name="weights_used_text">20kg Kettlebell</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Aumenté el peso. Mantuve el mismo ritmo explosivo.</field>
+        </record>
+        
+        <!-- Rendimiento 5.2: Plancha Abdominal (mejorada) -->
+        <record id="performance_carlos_metcon_2_plancha" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon_2"/>
+            <field name="exercise_id" ref="exercise_plancha"/>
+            <field name="workout_line_id" ref="workout_line_2_1_2"/>
+            <field name="sequence">20</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text"></field>
+            <field name="weights_used_text">Peso Corporal</field>
+            <field name="duration_seconds_completed">45</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Aguanté 10 segundos más que la vez anterior. Progreso constante.</field>
+        </record>
+        
+        <!-- Rendimiento 5.3: Burpees (mejorado) -->
+        <record id="performance_carlos_metcon_2_burpees" model="fitness.exercise.performance">
+            <field name="workout_history_id" ref="workout_history_carlos_metcon_2"/>
+            <field name="exercise_id" ref="exercise_burpees"/>
+            <field name="workout_line_id" ref="workout_line_2_1_3"/>
+            <field name="sequence">30</field>
+            <field name="sets_completed_text">3 rondas</field>
+            <field name="reps_completed_text">10, 10, 10</field>
+            <field name="weights_used_text">Peso Corporal</field>
+            <field name="duration_seconds_completed">0</field>
+            <field name="difficulty_perception_exercise">3_moderate</field>
+            <field name="progress_notes_exercise">Completé todas las repeticiones esta vez. Mejor resistencia.</field>
+        </record>
+        
+    </data>
+</odoo> 

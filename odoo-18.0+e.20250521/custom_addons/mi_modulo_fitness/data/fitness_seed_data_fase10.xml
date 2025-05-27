@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 10: PROTOCOLOS DE USUARIO (FINAL)
+             ======================================== -->
+        
+        <!-- 1. PROTOCOLOS PERSONALIZADOS POR USUARIO -->
+        
+        <!-- Protocolo 1: Ana Pérez - Enfocado en Recuperación y NEAT -->
+        <record id="protocol_ana_recuperacion_neat" model="fitness.user.protocol">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="is_active_protocol">True</field>
+            <field name="start_date">2025-06-01</field>
+            <field name="end_date" eval="False"/>
+            <field name="fasting_protocol_description">Ayuno intermitente 14:10 la mayoría de los días (ej. última comida 8pm, primera comida 10am).</field>
+            <field name="sauna_steam_protocol_description">2 sesiones de sauna de 15 minutos por semana, después de entrenamientos de fuerza si es posible.</field>
+            <field name="cold_exposure_protocol_description">Terminar duchas con 1-2 minutos de agua fría.</field>
+            <field name="sleep_recovery_protocol_description">Objetivo: 7.5-8 horas de sueño. Evitar cafeína después de las 3pm. Crear un ambiente oscuro y fresco para dormir.</field>
+            <field name="daily_movement_protocol_description">Mínimo 8,000 pasos diarios. Intentar una caminata ligera de 20-30 minutos los días de descanso.</field>
+            <field name="hydration_protocol_description">Beber al menos 2.5 litros de agua al día, más en días de entrenamiento.</field>
+            <field name="stress_management_protocol_description">Practicar 5-10 minutos de meditación o respiración consciente por la mañana o antes de dormir.</field>
+            <field name="other_recommendations">Considerar un suplemento de Magnesio por la noche para ayudar con la relajación muscular y el sueño.</field>
+        </record>
+        
+        <!-- Protocolo 2: Carlos López - Optimización de Rendimiento y Recuperación -->
+        <record id="protocol_carlos_rendimiento_recuperacion" model="fitness.user.protocol">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="is_active_protocol">True</field>
+            <field name="start_date">2025-05-27</field>
+            <field name="end_date" eval="False"/>
+            <field name="fasting_protocol_description">No se enfoca en ayuno estructurado, pero mantener un mínimo de 12 horas de ayuno nocturno natural.</field>
+            <field name="sauna_steam_protocol_description">Sauna 20 minutos, 2-3 veces por semana. Contrastar con ducha fría si es posible.</field>
+            <field name="cold_exposure_protocol_description">Inmersiones en agua fría (10-15°C) por 3-5 minutos, 1-2 veces por semana después de entrenamientos intensos para recuperación.</field>
+            <field name="sleep_recovery_protocol_description">Priorizar 8 horas de sueño. Utilizar antifaz y tapones para los oídos si es necesario. Revisar métricas de sueño con wearable.</field>
+            <field name="daily_movement_protocol_description">Mantener un alto NEAT debido a su trabajo. Enfatizar movilidad y estiramientos dinámicos antes de cada sesión.</field>
+            <field name="hydration_protocol_description">3-4 litros de agua al día, con electrolitos durante y después de entrenamientos largos o intensos.</field>
+            <field name="stress_management_protocol_description">Desconexión digital al menos 1 hora antes de dormir. Tiempo de ocio activo los fines de semana.</field>
+            <field name="other_recommendations">Revisar la ingesta de Omega-3. Considerar Creatina para el rendimiento de fuerza.</field>
+        </record>
+        
+        <!-- Protocolo 3: Laura Gómez - Básico para adherencia y bienestar -->
+        <record id="protocol_laura_basico_bienestar" model="fitness.user.protocol">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="is_active_protocol">True</field>
+            <field name="start_date">2025-06-10</field>
+            <field name="end_date" eval="False"/>
+            <field name="fasting_protocol_description">No es un foco principal por ahora. Simplemente intentar no comer muy tarde por la noche.</field>
+            <field name="sauna_steam_protocol_description">Opcional si el gimnasio tiene y le apetece.</field>
+            <field name="cold_exposure_protocol_description">Probar terminar la ducha con 30s de agua más fría si se anima.</field>
+            <field name="sleep_recovery_protocol_description">Intentar dormir al menos 7 horas. Establecer un horario de sueño más regular.</field>
+            <field name="daily_movement_protocol_description">Aumentar los pasos diarios a 7,000. Usar las escaleras en la universidad.</field>
+            <field name="hydration_protocol_description">Llevar una botella de agua y rellenarla 2-3 veces al día (aprox 2 litros).</field>
+            <field name="stress_management_protocol_description">Tomar descansos cortos durante las sesiones de estudio para estirarse o caminar un poco.</field>
+            <field name="other_recommendations">Enfocarse en disfrutar el proceso de entrenamiento y ser constante.</field>
+        </record>
+        
+        <!-- Protocolo 4: Ana Pérez - Protocolo Anterior (Inactivo) -->
+        <record id="protocol_ana_anterior_inactivo" model="fitness.user.protocol">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="is_active_protocol">False</field>
+            <field name="start_date">2025-03-01</field>
+            <field name="end_date">2025-05-31</field>
+            <field name="fasting_protocol_description">Protocolo inicial más estricto: ayuno 16:8 todos los días.</field>
+            <field name="sauna_steam_protocol_description">No tenía acceso a sauna en ese momento.</field>
+            <field name="cold_exposure_protocol_description">Solo duchas frías ocasionales.</field>
+            <field name="sleep_recovery_protocol_description">Objetivo básico de 7 horas de sueño.</field>
+            <field name="daily_movement_protocol_description">Objetivo inicial de 6,000 pasos diarios.</field>
+            <field name="hydration_protocol_description">2 litros de agua al día.</field>
+            <field name="stress_management_protocol_description">Lectura antes de dormir para relajarse.</field>
+            <field name="other_recommendations">Protocolo inicial más simple que evolucionó al actual.</field>
+        </record>
+        
+        <!-- Protocolo 5: Carlos López - Protocolo de Competición (Temporal) -->
+        <record id="protocol_carlos_competicion_temporal" model="fitness.user.protocol">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="is_active_protocol">False</field>
+            <field name="start_date">2025-02-01</field>
+            <field name="end_date">2025-04-30</field>
+            <field name="fasting_protocol_description">Ayuno más estructurado para optimizar composición corporal: 16:8 estricto.</field>
+            <field name="sauna_steam_protocol_description">Sauna diario de 25 minutos para recuperación intensiva.</field>
+            <field name="cold_exposure_protocol_description">Inmersiones diarias en agua fría de 5-8 minutos para recuperación máxima.</field>
+            <field name="sleep_recovery_protocol_description">8.5 horas de sueño obligatorio. Monitoreo estricto con dispositivos.</field>
+            <field name="daily_movement_protocol_description">Movilidad y activación específica pre-entrenamiento. Caminatas de recuperación activa.</field>
+            <field name="hydration_protocol_description">4-5 litros de agua con electrolitos específicos según el entrenamiento del día.</field>
+            <field name="stress_management_protocol_description">Meditación guiada de 15 minutos diarios. Técnicas de visualización para competición.</field>
+            <field name="other_recommendations">Protocolo intensivo usado durante preparación para competición que no se materializó.</field>
+        </record>
+        
+    </data>
+</odoo> 

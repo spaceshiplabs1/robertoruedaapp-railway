@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 5: SEGUIMIENTO CORPORAL Y EVALUACIONES
+             ======================================== -->
+        
+        <!-- 1. MEDICIONES CORPORALES -->
+        
+        <!-- Medición 1: Ana Pérez - Inicial -->
+        <record id="body_measurement_ana_inicial" model="fitness.body.measurement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="date">2025-06-01</field>
+            <field name="weight">65.0</field>
+            <field name="chest">90.0</field>
+            <field name="waist">70.0</field>
+            <field name="hips">98.0</field>
+            <field name="left_arm">30.0</field>
+            <field name="right_arm">30.5</field>
+            <field name="left_thigh">55.0</field>
+            <field name="right_thigh">55.5</field>
+            <field name="body_fat_percentage">25.0</field>
+            <field name="notes">Mediciones iniciales para el programa 'Fuerza Inicial'.</field>
+        </record>
+        
+        <!-- Medición 2: Ana Pérez - Progreso -->
+        <record id="body_measurement_ana_progreso" model="fitness.body.measurement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="date">2025-06-28</field>
+            <field name="weight">64.0</field>
+            <field name="chest">91.0</field>
+            <field name="waist">68.0</field>
+            <field name="hips">97.0</field>
+            <field name="left_arm">31.0</field>
+            <field name="right_arm">31.5</field>
+            <field name="left_thigh">56.0</field>
+            <field name="right_thigh">56.5</field>
+            <field name="body_fat_percentage">23.5</field>
+            <field name="notes">Resultados después de 4 semanas. Buena reducción de cintura y aumento en brazos/muslos.</field>
+        </record>
+        
+        <!-- Medición 3: Carlos López -->
+        <record id="body_measurement_carlos_inicial" model="fitness.body.measurement">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="date">2025-05-27</field>
+            <field name="weight">80.0</field>
+            <field name="chest">105.0</field>
+            <field name="waist">82.0</field>
+            <field name="hips">100.0</field>
+            <field name="left_arm">38.0</field>
+            <field name="right_arm">38.0</field>
+            <field name="left_thigh">60.0</field>
+            <field name="right_thigh">60.0</field>
+            <field name="body_fat_percentage">15.0</field>
+            <field name="notes">Medición de rutina.</field>
+        </record>
+        
+        <!-- Medición 4: Laura Gómez - Inicial -->
+        <record id="body_measurement_laura_inicial" model="fitness.body.measurement">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="date">2025-04-01</field>
+            <field name="weight">58.0</field>
+            <field name="chest">85.0</field>
+            <field name="waist">65.0</field>
+            <field name="hips">92.0</field>
+            <field name="left_arm">27.0</field>
+            <field name="right_arm">27.0</field>
+            <field name="left_thigh">52.0</field>
+            <field name="right_thigh">52.0</field>
+            <field name="body_fat_percentage">22.0</field>
+            <field name="notes">Medición inicial antes de pausar por exámenes.</field>
+        </record>
+        
+        <!-- 2. EVALUACIONES FÍSICAS -->
+        
+        <!-- Evaluación 1: Ana Pérez - Baseline Press de Banca -->
+        <record id="assessment_ana_press_banca_inicial" model="fitness.assessment">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="assessment_type_id" ref="assessment_1rm_press_banca"/>
+            <field name="date">2025-06-01</field>
+            <field name="value_numerical">40.0</field>
+            <field name="value_text">Estimado, primera vez probando.</field>
+            <field name="notes">Realizado como parte de la evaluación inicial del programa 'Fuerza Inicial'.</field>
+        </record>
+        
+        <!-- Evaluación 2: Ana Pérez - Baseline Lagartijas -->
+        <record id="assessment_ana_lagartijas_inicial" model="fitness.assessment">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="assessment_type_id" ref="assessment_max_lagartijas"/>
+            <field name="date">2025-06-01</field>
+            <field name="value_numerical">12</field>
+            <field name="value_text">Con rodillas apoyadas después de 5 estrictas.</field>
+            <field name="notes">Evaluación de resistencia muscular del tren superior.</field>
+        </record>
+        
+        <!-- Evaluación 3: Carlos López - Test de Cooper -->
+        <record id="assessment_carlos_cooper" model="fitness.assessment">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="assessment_type_id" ref="assessment_test_cooper"/>
+            <field name="date">2025-05-20</field>
+            <field name="value_numerical">2800</field>
+            <field name="value_text">Buen ritmo constante.</field>
+            <field name="notes">Prueba de resistencia cardiovascular.</field>
+        </record>
+        
+        <!-- Evaluación 4: Ana Pérez - Re-evaluación Lagartijas -->
+        <record id="assessment_ana_lagartijas_progreso" model="fitness.assessment">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="assessment_type_id" ref="assessment_max_lagartijas"/>
+            <field name="date">2025-06-28</field>
+            <field name="value_numerical">20</field>
+            <field name="value_text">8 estrictas, resto con rodillas.</field>
+            <field name="notes">Mejora notable después de 4 semanas de entrenamiento.</field>
+        </record>
+        
+        <!-- Evaluación 5: Ana Pérez - Re-evaluación Press de Banca -->
+        <record id="assessment_ana_press_banca_progreso" model="fitness.assessment">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="assessment_type_id" ref="assessment_1rm_press_banca"/>
+            <field name="date">2025-06-28</field>
+            <field name="value_numerical">50.0</field>
+            <field name="value_text">Mejora significativa en técnica y fuerza.</field>
+            <field name="notes">Progreso excelente después de 4 semanas de entrenamiento estructurado.</field>
+        </record>
+        
+        <!-- Evaluación 6: Carlos López - Press de Banca -->
+        <record id="assessment_carlos_press_banca" model="fitness.assessment">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="assessment_type_id" ref="assessment_1rm_press_banca"/>
+            <field name="date">2025-05-27</field>
+            <field name="value_numerical">95.0</field>
+            <field name="value_text">Técnica excelente, experiencia previa evidente.</field>
+            <field name="notes">Evaluación de referencia para entrenador personal.</field>
+        </record>
+        
+        <!-- Evaluación 7: Laura Gómez - Salto Vertical -->
+        <record id="assessment_laura_salto_vertical" model="fitness.assessment">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="assessment_type_id" ref="assessment_salto_vertical"/>
+            <field name="date">2025-04-01</field>
+            <field name="value_numerical">35.0</field>
+            <field name="value_text">Buena explosividad natural.</field>
+            <field name="notes">Evaluación inicial antes de pausar por estudios.</field>
+        </record>
+        
+        <!-- Evaluación 8: Laura Gómez - Carrera 5km -->
+        <record id="assessment_laura_carrera_5km" model="fitness.assessment">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="assessment_type_id" ref="assessment_carrera_5km"/>
+            <field name="date">2025-04-05</field>
+            <field name="value_numerical">28.5</field>
+            <field name="value_text">28:30 - Ritmo constante, buena resistencia base.</field>
+            <field name="notes">Primera evaluación cardiovascular. Buen punto de partida.</field>
+        </record>
+        
+    </data>
+</odoo> 

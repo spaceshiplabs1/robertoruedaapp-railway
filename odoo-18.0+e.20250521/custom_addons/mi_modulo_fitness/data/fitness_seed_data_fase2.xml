@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 2: USUARIOS Y EJERCICIOS
+             ======================================== -->
+        
+        <!-- 1. USUARIOS DE FITNESS -->
+        <record id="user_ana_perez" model="res.partner">
+            <field name="name">Ana Pérez</field>
+            <field name="email">ana.perez@example.com</field>
+            <field name="date_of_birth">1990-05-15</field>
+            <field name="gender">female</field>
+            <field name="account_fitness_status">active</field>
+            <field name="height_cm">165</field>
+            <field name="activity_level">moderate</field>
+            <field name="job_description_neat">Trabajo de oficina, sentada la mayor parte del día. Intenta caminar en descansos.</field>
+            <field name="instagram_handle">anita_fit</field>
+        </record>
+        
+        <record id="user_carlos_lopez" model="res.partner">
+            <field name="name">Carlos López</field>
+            <field name="email">carlos.lopez@example.com</field>
+            <field name="date_of_birth">1985-11-20</field>
+            <field name="gender">male</field>
+            <field name="account_fitness_status">active</field>
+            <field name="height_cm">180</field>
+            <field name="activity_level">active</field>
+            <field name="job_description_neat">Entrenador personal, activo durante el día, más 2 horas de entrenamiento propio.</field>
+            <field name="instagram_handle">coach_carlos</field>
+        </record>
+        
+        <record id="user_laura_gomez" model="res.partner">
+            <field name="name">Laura Gómez</field>
+            <field name="email">laura.gomez@example.com</field>
+            <field name="date_of_birth">1998-02-10</field>
+            <field name="gender">female</field>
+            <field name="account_fitness_status">trial</field>
+            <field name="height_cm">172</field>
+            <field name="activity_level">light</field>
+            <field name="job_description_neat">Estudiante, muchas horas de estudio, va al gimnasio ocasionalmente.</field>
+            <field name="instagram_handle">lau_gfit</field>
+        </record>
+        
+        <!-- 2. BIBLIOTECA DE EJERCICIOS -->
+        <record id="exercise_press_banca" model="fitness.exercise">
+            <field name="name">Press de Banca con Barra</field>
+            <field name="description">Ejercicio compuesto para el desarrollo del pectoral, hombros y tríceps, acostado en un banco plano.</field>
+            <field name="primary_muscle_group_id" ref="muscle_pecho"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_hombros'), ref('muscle_triceps')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica'), ref('equipment_banco_plano')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_pressbanca</field>
+            <field name="internal_notes">Asegurar retracción escapular. Codos a 45-60 grados.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_sentadilla" model="fitness.exercise">
+            <field name="name">Sentadilla con Barra (Trasera)</field>
+            <field name="description">Ejercicio fundamental para el tren inferior, trabajando cuádriceps, glúteos e isquiotibiales.</field>
+            <field name="primary_muscle_group_id" ref="muscle_piernas"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_abdominales')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica'), ref('equipment_rack_sentadillas')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_sentadilla</field>
+            <field name="internal_notes">Mantener espalda recta, romper paralela si la movilidad lo permite.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_dominadas" model="fitness.exercise">
+            <field name="name">Dominadas (Pull-ups)</field>
+            <field name="description">Ejercicio de peso corporal para la espalda alta y bíceps, colgándose de una barra.</field>
+            <field name="primary_muscle_group_id" ref="muscle_espalda"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_biceps')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_dominadas')])]"/>
+            <field name="difficulty_id" ref="difficulty_avanzado"/>
+            <field name="video_url">https://youtube.com/ejemplo_dominadas</field>
+            <field name="internal_notes">Se puede asistir con bandas o máquina si es necesario.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_plancha" model="fitness.exercise">
+            <field name="name">Plancha Abdominal (Plank)</field>
+            <field name="description">Ejercicio isométrico para fortalecer el core.</field>
+            <field name="primary_muscle_group_id" ref="muscle_abdominales"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_peso_corporal')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url"></field>
+            <field name="internal_notes">Mantener cuerpo recto desde cabeza a talones.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_zancadas" model="fitness.exercise">
+            <field name="name">Zancadas con Mancuernas (Lunges)</field>
+            <field name="description">Ejercicio unilateral para piernas y glúteos.</field>
+            <field name="primary_muscle_group_id" ref="muscle_piernas"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_mancuernas')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url">https://youtube.com/ejemplo_zancadas</field>
+            <field name="internal_notes">Cuidar la alineación de la rodilla.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Ejercicios adicionales para completar la biblioteca -->
+        <record id="exercise_peso_muerto" model="fitness.exercise">
+            <field name="name">Peso Muerto Convencional</field>
+            <field name="description">Ejercicio compuesto que trabaja toda la cadena posterior: glúteos, isquiotibiales, espalda baja y alta.</field>
+            <field name="primary_muscle_group_id" ref="muscle_espalda"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_piernas')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_peso_muerto</field>
+            <field name="internal_notes">Mantener la barra cerca del cuerpo. Activar glúteos en la subida.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_press_militar" model="fitness.exercise">
+            <field name="name">Press Militar de Pie</field>
+            <field name="description">Ejercicio para desarrollar fuerza y masa en los hombros, de pie con barra.</field>
+            <field name="primary_muscle_group_id" ref="muscle_hombros"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_triceps'), ref('muscle_abdominales')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_press_militar</field>
+            <field name="internal_notes">Mantener core activado. No arquear excesivamente la espalda.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_remo_barra" model="fitness.exercise">
+            <field name="name">Remo con Barra Inclinado</field>
+            <field name="description">Ejercicio para desarrollar la espalda media y alta, inclinado hacia adelante.</field>
+            <field name="primary_muscle_group_id" ref="muscle_espalda"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_biceps')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_remo_barra</field>
+            <field name="internal_notes">Mantener espalda recta. Llevar la barra hacia el abdomen bajo.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_curl_biceps" model="fitness.exercise">
+            <field name="name">Curl de Bíceps con Mancuernas</field>
+            <field name="description">Ejercicio de aislamiento para el desarrollo de los bíceps.</field>
+            <field name="primary_muscle_group_id" ref="muscle_biceps"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_mancuernas')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url">https://youtube.com/ejemplo_curl_biceps</field>
+            <field name="internal_notes">Evitar balanceo. Controlar la fase excéntrica.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_extension_triceps" model="fitness.exercise">
+            <field name="name">Extensión de Tríceps con Mancuerna</field>
+            <field name="description">Ejercicio de aislamiento para el desarrollo de los tríceps, sentado o de pie.</field>
+            <field name="primary_muscle_group_id" ref="muscle_triceps"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_mancuernas')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url">https://youtube.com/ejemplo_extension_triceps</field>
+            <field name="internal_notes">Mantener codos fijos. Rango completo de movimiento.</field>
+            <field name="active">True</field>
+        </record>
+        
+    </data>
+</odoo> 

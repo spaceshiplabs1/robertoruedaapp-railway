@@ -1,0 +1,1 @@
+web: cd odoo-18.0+e.20250521 && python -m odoo --config=/app/odoo.conf --db-filter=^%d$ --without-demo=all --data-dir=/app/filestore 

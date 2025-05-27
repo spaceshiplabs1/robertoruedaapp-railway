@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 4: INSCRIPCIONES DE USUARIO A PROGRAMAS
+             ======================================== -->
+        
+        <!-- PROGRAMA ADICIONAL PARA EJEMPLO DE INSCRIPCIÓN COMPLETADA -->
+        <record id="program_introduccion_gym" model="fitness.program">
+            <field name="name">Programa de Introducción al Gym</field>
+            <field name="description">Programa básico de 4 semanas para familiarizarse con el gimnasio y los ejercicios fundamentales.</field>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="program_category_id" ref="category_acondicionamiento"/>
+            <field name="program_type_id" ref="type_bloques"/>
+            <field name="duration_text">4 Semanas</field>
+            <field name="privacy_setting">public</field>
+            <field name="autosync_user_schedule">False</field>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_peso_corporal'), ref('equipment_mancuernas'), ref('equipment_bandas_resistencia')])]"/>
+            <field name="active">True</field>
+            <field name="sequence">5</field>
+        </record>
+        
+        <!-- INSCRIPCIONES DE USUARIOS A PROGRAMAS -->
+        
+        <!-- Inscripción 1: Ana Pérez - Fuerza Inicial (Activa) -->
+        <record id="user_program_ana_fuerza_inicial" model="fitness.user.program">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="program_id" ref="program_fuerza_inicial"/>
+            <field name="enrollment_status">active</field>
+            <field name="start_date">2025-06-01</field>
+            <field name="end_date">2025-06-28</field>
+            <field name="completion_percentage">0.0</field>
+            <field name="trainer_notes">Ana está muy motivada para empezar. Enfocarse en la técnica de los levantamientos básicos.</field>
+            <field name="user_feedback"></field>
+        </record>
+        
+        <!-- Inscripción 2: Carlos López - Acondicionamiento Metabólico (Activa) -->
+        <record id="user_program_carlos_metcon" model="fitness.user.program">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="program_id" ref="program_metcon_express"/>
+            <field name="enrollment_status">active</field>
+            <field name="start_date">2025-05-27</field>
+            <field name="completion_percentage">0.0</field>
+            <field name="trainer_notes">Carlos busca complementar su entrenamiento de fuerza con algo de MetCon. Monitorear intensidad.</field>
+            <field name="user_feedback"></field>
+        </record>
+        
+        <!-- Inscripción 3: Laura Gómez - Fuerza Inicial (Pendiente de inicio) -->
+        <record id="user_program_laura_fuerza_inicial" model="fitness.user.program">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="program_id" ref="program_fuerza_inicial"/>
+            <field name="enrollment_status">pending_start</field>
+            <field name="start_date">2025-06-10</field>
+            <field name="end_date">2025-07-07</field>
+            <field name="completion_percentage">0.0</field>
+            <field name="trainer_notes">Laura iniciará después de sus exámenes. Entusiasmada por el programa de prueba.</field>
+            <field name="user_feedback"></field>
+        </record>
+        
+        <!-- Inscripción 4: Ana Pérez - Programa de Introducción (Completada) -->
+        <record id="user_program_ana_introduccion_completada" model="fitness.user.program">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="program_id" ref="program_introduccion_gym"/>
+            <field name="enrollment_status">completed</field>
+            <field name="start_date">2025-03-01</field>
+            <field name="end_date">2025-03-30</field>
+            <field name="completion_percentage">100.0</field>
+            <field name="trainer_notes">Ana completó el programa de introducción con éxito. Lista para 'Fuerza Inicial'.</field>
+            <field name="user_feedback">¡Me encantó el programa! Aprendí mucho y me siento más fuerte.</field>
+        </record>
+        
+        <!-- Inscripción 5: Carlos López - Programa de Introducción (Completada) -->
+        <record id="user_program_carlos_introduccion_completada" model="fitness.user.program">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="program_id" ref="program_introduccion_gym"/>
+            <field name="enrollment_status">completed</field>
+            <field name="start_date">2025-02-15</field>
+            <field name="end_date">2025-03-15</field>
+            <field name="completion_percentage">100.0</field>
+            <field name="trainer_notes">Carlos completó rápidamente el programa básico. Su experiencia como entrenador se nota.</field>
+            <field name="user_feedback">Buen programa para repasar fundamentos. Listo para algo más desafiante.</field>
+        </record>
+        
+        <!-- Inscripción 6: Laura Gómez - Programa de Introducción (En pausa) -->
+        <record id="user_program_laura_introduccion_paused" model="fitness.user.program">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="program_id" ref="program_introduccion_gym"/>
+            <field name="enrollment_status">paused</field>
+            <field name="start_date">2025-04-01</field>
+            <field name="completion_percentage">60.0</field>
+            <field name="trainer_notes">Laura pausó el programa por exámenes universitarios. Retomará en junio.</field>
+            <field name="user_feedback">Me gusta el programa pero necesito pausar por los estudios. Volveré pronto.</field>
+        </record>
+        
+    </data>
+</odoo> 

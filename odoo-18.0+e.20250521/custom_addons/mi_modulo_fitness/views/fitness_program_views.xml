@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Tree (Lista) para Programas de Entrenamiento -->
+    <record id="view_fitness_program_tree" model="ir.ui.view">
+        <field name="name">fitness.program.tree</field>
+        <field name="model">fitness.program</field>
+        <field name="arch" type="xml">
+            <list string="Programas de Entrenamiento" default_order="sequence,name">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="program_category_id"/>
+                <field name="program_type_id"/>
+                <field name="difficulty_id"/>
+                <field name="duration_text"/>
+                <field name="privacy_setting"/>
+                                 <field name="active"/>
+             </list>
+        </field>
+    </record>
+
+    <!-- Vista Form para Programas de Entrenamiento -->
+    <record id="view_fitness_program_form" model="ir.ui.view">
+        <field name="name">fitness.program.form</field>
+        <field name="model">fitness.program</field>
+        <field name="arch" type="xml">
+            <form string="Programa de Entrenamiento">
+                <header>
+                    <field name="active" widget="boolean_toggle"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Programa"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="program_category_id"/>
+                            <field name="program_type_id"/>
+                            <field name="difficulty_id"/>
+                            <field name="duration_text"/>
+                        </group>
+                        <group>
+                            <field name="privacy_setting"/>
+                            <field name="autosync_user_schedule"/>
+                            <field name="sequence"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description" placeholder="Descripción detallada del programa..."/>
+                        </page>
+                                                 <page string="Equipamiento Requerido">
+                             <field name="required_equipment_ids">
+                                 <list>
+                                     <field name="name"/>
+                                     <field name="brand"/>
+                                     <field name="location"/>
+                                 </list>
+                             </field>
+                         </page>
+                         <page string="Planes de Suscripción">
+                             <group>
+                                 <field name="allowed_subscription_product_ids" widget="many2many_tags">
+                                     <list>
+                                         <field name="name"/>
+                                         <field name="list_price"/>
+                                         <field name="recurring_invoice"/>
+                                     </list>
+                                 </field>
+                             </group>
+                             <div class="alert alert-info" role="alert">
+                                 <strong>Información:</strong> Si no seleccionas ningún plan de suscripción, 
+                                 el programa estará disponible para todos los usuarios sin restricciones.
+                                 Si seleccionas uno o más planes, solo los usuarios con suscripciones activas 
+                                 a esos planes podrán inscribirse en este programa.
+                             </div>
+                         </page>
+                         <page string="Entrenamientos">
+                             <field name="workout_ids">
+                                 <list>
+                                     <field name="name"/>
+                                     <field name="workout_type"/>
+                                     <field name="estimated_duration_minutes"/>
+                                     <field name="sequence_in_program"/>
+                                 </list>
+                             </field>
+                         </page>
+                         <page string="Inscripciones">
+                             <field name="user_enrollment_ids">
+                                 <list>
+                                     <field name="user_id"/>
+                                     <field name="start_date"/>
+                                     <field name="enrollment_status"/>
+                                     <field name="completion_percentage"/>
+                                 </list>
+                             </field>
+                         </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Kanban para Programas de Entrenamiento -->
+    <record id="view_fitness_program_kanban" model="ir.ui.view">
+        <field name="name">fitness.program.kanban</field>
+        <field name="model">fitness.program</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="program_category_id" class="o_kanban_small_column">
+                <field name="name"/>
+                <field name="program_category_id"/>
+                <field name="difficulty_id"/>
+                <field name="privacy_setting"/>
+                <field name="image_1920"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="record.image_1920.raw_value ? '/web/image/fitness.program/' + record.id.raw_value + '/image_1920' : '/web/static/img/placeholder.png'" alt="Programa"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_record_body">
+                                    <field name="difficulty_id"/>
+                                    <br/>
+                                    <field name="duration_text"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="privacy_setting" widget="label_selection" options="{'classes': {'public': 'success', 'private': 'warning'}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vista Search para Programas de Entrenamiento -->
+    <record id="view_fitness_program_search" model="ir.ui.view">
+        <field name="name">fitness.program.search</field>
+        <field name="model">fitness.program</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Programas">
+                <field name="name" string="Programa" filter_domain="[('name','ilike',self)]"/>
+                <field name="program_category_id"/>
+                <field name="program_type_id"/>
+                <field name="difficulty_id"/>
+                <separator/>
+                <filter string="Públicos" name="public" domain="[('privacy_setting','=','public')]"/>
+                <filter string="Privados" name="private" domain="[('privacy_setting','=','private')]"/>
+                <separator/>
+                <filter string="Activos" name="active" domain="[('active','=',True)]"/>
+                <filter string="Archivados" name="inactive" domain="[('active','=',False)]"/>
+                <separator/>
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Categoría" name="group_category" context="{'group_by':'program_category_id'}"/>
+                    <filter string="Tipo" name="group_type" context="{'group_by':'program_type_id'}"/>
+                    <filter string="Dificultad" name="group_difficulty" context="{'group_by':'difficulty_id'}"/>
+                    <filter string="Visibilidad" name="group_privacy" context="{'group_by':'privacy_setting'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción para Programas de Entrenamiento -->
+    <record id="action_fitness_program" model="ir.actions.act_window">
+        <field name="name">Programas de Entrenamiento</field>
+        <field name="res_model">fitness.program</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_fitness_program_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Crea tu primer programa de entrenamiento!
+            </p>
+            <p>
+                Los programas de entrenamiento te permiten organizar rutinas completas
+                con múltiples entrenamientos y seguimiento de progreso.
+            </p>
+        </field>
+    </record>
+</odoo> 

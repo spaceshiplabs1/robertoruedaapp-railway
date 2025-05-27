@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================= -->
+        <!-- DATOS PARA MÓDULOS ESTÁNDAR DE ODOO      -->
+        <!-- ========================================= -->
+        
+        <!-- ========================================= -->
+        <!-- CONFIGURACIONES BÁSICAS                  -->
+        <!-- ========================================= -->
+        
+        <!-- Equipo de ventas personalizado para fitness -->
+        <record id="sales_team_fitness" model="crm.team">
+            <field name="name">Equipo Fitness Roberto Rueda</field>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+        
+        <!-- Etapa personalizada de CRM para fitness -->
+        <record id="crm_stage_fitness_trial" model="crm.stage">
+            <field name="name">Prueba Gratuita</field>
+            <field name="sequence">15</field>
+            <field name="team_id" ref="sales_team_fitness"/>
+            <field name="fold">False</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- CRM - LEADS Y OPORTUNIDADES              -->
+        <!-- ========================================= -->
+        
+        <!-- Lead 1: Persona interesada en Plan Pro -->
+        <record id="crm_lead_maria_fitness" model="crm.lead">
+            <field name="name">María González - Interesada en Plan Pro</field>
+            <field name="partner_name">María González</field>
+            <field name="email_from">maria.gonzalez@email.com</field>
+            <field name="phone">+1-555-0123</field>
+            <field name="description">
+Contactó a través del sitio web preguntando sobre el Plan Pro.
+Quiere perder peso y tonificar. Tiene experiencia básica en gym.
+Presupuesto: $50-80/mes. Disponible para llamada martes/jueves 6-8pm.
+            </field>
+            <field name="stage_id" ref="crm.stage_lead1"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+            <field name="priority">1</field>
+
+        </record>
+        
+        <!-- Lead 2: Empresa interesada en plan corporativo -->
+        <record id="crm_lead_empresa_tech" model="crm.lead">
+            <field name="name">TechCorp - Plan Corporativo Wellness</field>
+            <field name="partner_name">TechCorp Solutions</field>
+            <field name="contact_name">Roberto Martínez</field>
+            <field name="email_from">roberto.martinez@techcorp.com</field>
+            <field name="phone">+1-555-0456</field>
+            <field name="description">
+Empresa de 50 empleados interesada en plan corporativo de wellness.
+Buscan mejorar salud y productividad del equipo.
+Presupuesto: $2000-3000/mes para toda la empresa.
+Reunión programada para próxima semana.
+            </field>
+            <field name="stage_id" ref="crm.stage_lead2"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+            <field name="priority">2</field>
+            <field name="expected_revenue">30000</field>
+        </record>
+        
+        <!-- Oportunidad 1: Cliente casi listo para cerrar -->
+        <record id="crm_opportunity_david" model="crm.lead">
+            <field name="name">David Ruiz - Plan Premium (Casi Cerrado)</field>
+            <field name="partner_name">David Ruiz</field>
+            <field name="email_from">david.ruiz@email.com</field>
+            <field name="phone">+1-555-0789</field>
+            <field name="description">
+Atleta amateur que compite en triatlón. 
+Ya probó el Plan Pro por 2 meses, muy satisfecho.
+Quiere upgrade a Premium para coaching personalizado.
+Propuesta enviada, esperando confirmación esta semana.
+            </field>
+            <field name="type">opportunity</field>
+            <field name="stage_id" ref="crm.stage_lead4"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+            <field name="priority">3</field>
+            <field name="expected_revenue">1200</field>
+            <field name="probability">85</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- CALENDAR - EVENTOS Y CITAS               -->
+        <!-- ========================================= -->
+        
+        <!-- Evento 1: Sesión de entrenamiento personal -->
+        <record id="calendar_training_ana" model="calendar.event">
+            <field name="name">Entrenamiento Personal - Ana Pérez</field>
+            <field name="description">
+Sesión de entrenamiento personalizado:
+- Evaluación de progreso mensual
+- Ajuste de rutina de fuerza
+- Revisión de metas nutricionales
+- Planificación próximas 4 semanas
+            </field>
+            <field name="start" eval="(DateTime.now() + timedelta(days=2, hours=9)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="stop" eval="(DateTime.now() + timedelta(days=2, hours=10)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="partner_ids" eval="[(6, 0, [ref('mi_modulo_fitness.user_ana_perez')])]"/>
+            <field name="location">Gym Roberto Rueda - Sala Personal Training</field>
+            <field name="allday">False</field>
+            <field name="show_as">busy</field>
+        </record>
+        
+        <!-- Evento 2: Clase grupal MetCon -->
+        <record id="calendar_class_metcon" model="calendar.event">
+            <field name="name">Clase Grupal: MetCon Express</field>
+            <field name="description">
+Clase grupal de acondicionamiento metabólico:
+- Calentamiento dinámico (10 min)
+- WOD principal (20 min)
+- Cool down y stretching (10 min)
+- Máximo 8 participantes
+            </field>
+            <field name="start" eval="(DateTime.now() + timedelta(days=1, hours=18)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="stop" eval="(DateTime.now() + timedelta(days=1, hours=19)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="partner_ids" eval="[(6, 0, [ref('mi_modulo_fitness.user_carlos_lopez'), ref('mi_modulo_fitness.user_laura_gomez')])]"/>
+            <field name="location">Gym Roberto Rueda - Área Funcional</field>
+            <field name="allday">False</field>
+            <field name="show_as">busy</field>
+        </record>
+        
+        <!-- Evento 3: Consulta nutricional -->
+        <record id="calendar_nutrition_consult" model="calendar.event">
+            <field name="name">Consulta Nutricional - Laura Gómez</field>
+            <field name="description">
+Primera consulta nutricional:
+- Análisis de hábitos alimentarios actuales
+- Establecimiento de metas nutricionales
+- Plan de alimentación personalizado
+- Educación sobre macronutrientes
+            </field>
+            <field name="start" eval="(DateTime.now() + timedelta(days=3, hours=16)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="stop" eval="(DateTime.now() + timedelta(days=3, hours=17)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="partner_ids" eval="[(6, 0, [ref('mi_modulo_fitness.user_laura_gomez')])]"/>
+            <field name="location">Oficina Roberto Rueda - Consulta Nutricional</field>
+            <field name="allday">False</field>
+            <field name="show_as">busy</field>
+        </record>
+        
+        <!-- Evento 4: Reunión con prospecto corporativo -->
+        <record id="calendar_meeting_techcorp" model="calendar.event">
+            <field name="name">Reunión Comercial - TechCorp Solutions</field>
+            <field name="description">
+Presentación de propuesta corporativa:
+- Presentación de servicios wellness
+- Demo de plataforma fitness
+- Propuesta económica personalizada
+- Q&amp;A y próximos pasos
+            </field>
+            <field name="start" eval="(DateTime.now() + timedelta(days=5, hours=14)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="stop" eval="(DateTime.now() + timedelta(days=5, hours=15, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="location">Oficinas TechCorp - Sala de Juntas A</field>
+            <field name="allday">False</field>
+            <field name="show_as">busy</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- SALE - ÓRDENES DE VENTA                  -->
+        <!-- ========================================= -->
+        
+        <!-- Orden 1: Venta de Plan Pro a Ana (histórica) -->
+        <record id="sale_order_ana_pro" model="sale.order">
+            <field name="name">SO001 - Ana Pérez Plan Pro</field>
+            <field name="partner_id" ref="mi_modulo_fitness.user_ana_perez"/>
+            <field name="date_order" eval="(DateTime.now() - timedelta(days=45)).strftime('%Y-%m-%d')"/>
+            <field name="state">sale</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+        </record>
+        
+        <!-- Línea de orden para Ana -->
+        <record id="sale_order_line_ana_pro" model="sale.order.line">
+            <field name="order_id" ref="sale_order_ana_pro"/>
+            <field name="product_id" ref="mi_modulo_fitness.product_fitness_pro"/>
+            <field name="name">Plan Pro Fitness - Suscripción Mensual</field>
+            <field name="product_uom_qty">1</field>
+            <field name="price_unit">49.00</field>
+        </record>
+        
+        <!-- Orden 2: Venta de Plan Premium a Carlos (histórica) -->
+        <record id="sale_order_carlos_premium" model="sale.order">
+            <field name="name">SO002 - Carlos López Plan Premium</field>
+            <field name="partner_id" ref="mi_modulo_fitness.user_carlos_lopez"/>
+            <field name="date_order" eval="(DateTime.now() - timedelta(days=120)).strftime('%Y-%m-%d')"/>
+            <field name="state">sale</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+        </record>
+        
+        <!-- Línea de orden para Carlos -->
+        <record id="sale_order_line_carlos_premium" model="sale.order.line">
+            <field name="order_id" ref="sale_order_carlos_premium"/>
+            <field name="product_id" ref="mi_modulo_fitness.product_fitness_premium"/>
+            <field name="name">Plan Premium Fitness - Suscripción Mensual</field>
+            <field name="product_uom_qty">1</field>
+            <field name="price_unit">99.99</field>
+        </record>
+        
+        <!-- Orden 3: Cotización pendiente para David -->
+        <record id="sale_order_david_quote" model="sale.order">
+            <field name="name">QUO003 - David Ruiz Plan Premium</field>
+            <field name="partner_id" ref="base.partner_admin"/>
+            <field name="date_order" eval="DateTime.now().strftime('%Y-%m-%d')"/>
+            <field name="state">sent</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="team_id" ref="sales_team_fitness"/>
+            <field name="validity_date" eval="(DateTime.now() + timedelta(days=15)).strftime('%Y-%m-%d')"/>
+        </record>
+        
+        <!-- Línea de cotización para David -->
+        <record id="sale_order_line_david_quote" model="sale.order.line">
+            <field name="order_id" ref="sale_order_david_quote"/>
+            <field name="product_id" ref="mi_modulo_fitness.product_fitness_premium"/>
+            <field name="name">Plan Premium Fitness - Upgrade desde Pro</field>
+            <field name="product_uom_qty">1</field>
+            <field name="price_unit">99.99</field>
+            <field name="discount">10</field>
+        </record>
+        
+
+        
+
+        
+    </data>
+</odoo> 

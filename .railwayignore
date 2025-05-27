@@ -1,0 +1,92 @@
+# Installation files
+*.tar.gz
+*.zip
+odoo_*.tar.gz
+odoo-*.tar.gz
+
+# Virtual environments (MAJOR SPACE SAVER - 183MB)
+odoo-18.0+e.20250521/odoo-venv/
+odoo-venv/
+venv/
+env/
+.venv/
+
+# Cache files and Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Local development files
+*.local
+.env.local
+odoo.conf.local
+odoo_local_dev.conf
+
+# Documentation and notes (save space)
+*.md
+*.txt
+README.*
+CHANGELOG.*
+modulesdescription/
+
+# IDE and development files
+.vscode/
+.idea/
+*.sublime-*
+robertoruedaapp.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Backup and temporary files
+*_backup.sql
+*.dump
+*.backup
+*.bak
+*.tmp
+
+# Git files (not needed in production)
+.git/
+.gitignore
+
+# Test files
+test_*.html
+*_test.py
+*/tests/
+*/test/
+
+# Development scripts (keep only essential ones)
+# odoo-18.0+e.20250521/restart_odoo.sh  # Keep if needed
+# odoo-18.0+e.20250521/quick_restart.sh  # Keep if needed
+
+# Static file caches (will be regenerated)
+odoo-18.0+e.20250521/odoo/addons/*/static/src/**/*.min.js
+odoo-18.0+e.20250521/odoo/addons/*/static/src/**/*.min.css
+
+# Large binary files that can be excluded
+*.mo
+*.pot
+
+# Log files
+*.log
+logs/
+
+# File uploads and attachments (should be in external storage for production)
+filestore/
+storage/
+
+# Session files
+sessions/
+
+# Include essential files by commenting them out:
+# !odoo-18.0+e.20250521/odoo/  # Core Odoo source code
+# !odoo-18.0+e.20250521/custom_addons/  # Your custom modules
+# !odoo-18.0+e.20250521/setup.py  # Setup script
+# !odoo-18.0+e.20250521/requirements.txt  # Dependencies (if exists)
+# !odoo.conf  # Main production config
+# !odoo_local.conf  # Production config 

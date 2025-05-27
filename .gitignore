@@ -1,0 +1,246 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Odoo specific
+*.pyc
+*.pyo
+*~
+*.swp
+*.swo
+*~
+.DS_Store
+._.DS_Store
+
+# Odoo filestore
+filestore/
+
+# Odoo sessions
+sessions/
+
+# Odoo logs
+*.log
+
+# Odoo backup files
+*.sql
+*.dump
+*.backup
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+robertoruedaapp.code-workspace
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+
+# Local configuration
+odoo.conf.local
+.odoorc
+
+# Node modules (if using website builder)
+node_modules/
+npm-debug.log*
+
+# Backup files
+*_backup.sql
+odoo_test_backup.sql
+
+# Installation files
+*.tar.gz
+*.zip
+odoo_*.tar.gz
+odoo-*.tar.gz
+
+# Large installation directories - be specific
+odoo-*/addons/
+odoo-*/odoo/
+odoo-*/setup/
+odoo-*/debian/
+odoo-*/doc/
+odoo-*/requirements.txt
+odoo-*/setup.py
+odoo-*/setup.cfg
+odoo-*/odoo-bin
+odoo-*/odoo.py
+
+# But keep custom modules
+# !odoo-*/custom_addons/ - This is now allowed by default
+
+# Odoo installation directory (specific) - be more selective
+odoo-18.0+e.20250521/addons/
+odoo-18.0+e.20250521/odoo/
+odoo-18.0+e.20250521/setup/
+odoo-18.0+e.20250521/debian/
+odoo-18.0+e.20250521/doc/
+odoo-18.0+e.20250521/requirements.txt
+odoo-18.0+e.20250521/setup.py
+odoo-18.0+e.20250521/setup.cfg
+odoo-18.0+e.20250521/odoo-bin
+odoo-18.0+e.20250521/odoo.py
+odoo-18.0+e.20250521/odoo-venv/
+
+# Include custom_addons if it exists in root
+!custom_addons/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+odoo-venv/
+venv/
+env/
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+robertoruedaapp.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local configuration files
+*.local
+.env.local
+odoo_local_dev.conf
+
+# Log files
+*.log
+logs/
+
+# Backup files
+*_backup.sql
+*.dump
+*.backup
+
+# Temporary files
+*.tmp
+*.bak
+
+# Session files
+sessions/
+
+# File uploads (development)
+filestore/
+
+# Git backup (if you have one)
+.git_backup/ 

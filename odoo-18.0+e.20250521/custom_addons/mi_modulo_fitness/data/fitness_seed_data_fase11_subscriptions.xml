@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================= -->
+        <!-- PRODUCTOS DE SUSCRIPCIÓN                 -->
+        <!-- ========================================= -->
+        
+        <!-- Producto 1: Plan Gratuito Fitness -->
+        <record id="product_fitness_free" model="product.template">
+            <field name="name">Plan Gratuito Fitness</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="list_price">0.00</field>
+            <field name="standard_price">0.00</field>
+            <field name="categ_id" ref="product.product_category_1"/>
+            <field name="description_sale">
+Acceso básico a la plataforma Roberto Rueda Fitness:
+• Programas de entrenamiento básicos
+• Ejercicios fundamentales
+• Seguimiento básico de progreso
+• Comunidad fitness
+
+Perfecto para comenzar tu journey fitness sin compromiso.
+            </field>
+            <field name="description">Acceso gratuito a funciones básicas de fitness</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 2: Plan Pro Fitness -->
+        <record id="product_fitness_pro" model="product.template">
+            <field name="name">Plan Pro Fitness</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="list_price">49.00</field>
+            <field name="standard_price">15.00</field>
+            <field name="categ_id" ref="product.product_category_1"/>
+            <field name="description_sale">
+Plan Pro Roberto Rueda Fitness - $49/mes:
+• Acceso completo a todos los programas de entrenamiento
+• Biblioteca completa de ejercicios con videos HD
+• Seguimiento avanzado de progreso y métricas
+• Planes de nutrición personalizados
+• Evaluaciones físicas detalladas
+• Sistema de logros y gamificación
+• Soporte prioritario
+• Acceso a la comunidad Pro
+
+¡Transforma tu físico con el plan más popular!
+            </field>
+            <field name="description">Plan Pro con acceso completo - $49/mes</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 3: Plan Premium Fitness -->
+        <record id="product_fitness_premium" model="product.template">
+            <field name="name">Plan Premium Fitness</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="list_price">99.99</field>
+            <field name="standard_price">30.00</field>
+            <field name="categ_id" ref="product.product_category_1"/>
+            <field name="description_sale">
+Plan Premium Roberto Rueda Fitness - $99.99/mes:
+• TODO lo del Plan Pro
+• Videos premium en 4K con múltiples ángulos
+• Programas exclusivos de élite
+• Coaching personal 1-a-1 (2 sesiones/mes)
+• Análisis biomecánico avanzado
+• Protocolos de recuperación personalizados
+• Acceso a masterclasses exclusivas
+• Comunidad Premium VIP
+• Soporte 24/7 prioritario
+
+¡Para atletas serios que buscan la excelencia!
+            </field>
+            <field name="description">Plan Premium con coaching personal - $99.99/mes</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- VINCULACIÓN DE PROGRAMAS CON SUSCRIPCIONES -->
+        <!-- ========================================= -->
+        
+        <!-- Programa Introducción al Gym - Disponible para todos -->
+        <record id="program_introduccion_gym" model="fitness.program">
+            <field name="allowed_subscription_product_ids" eval="[(6, 0, [ref('product_fitness_free'), ref('product_fitness_pro'), ref('product_fitness_premium')])]"/>
+        </record>
+        
+        <!-- Programa Fuerza Inicial - Pro y Premium -->
+        <record id="program_fuerza_inicial" model="fitness.program">
+            <field name="allowed_subscription_product_ids" eval="[(6, 0, [ref('product_fitness_pro'), ref('product_fitness_premium')])]"/>
+        </record>
+        
+        <!-- Programa MetCon Express - Solo Premium -->
+        <record id="program_metcon_express" model="fitness.program">
+            <field name="allowed_subscription_product_ids" eval="[(6, 0, [ref('product_fitness_premium')])]"/>
+        </record>
+        
+    </data>
+</odoo> 

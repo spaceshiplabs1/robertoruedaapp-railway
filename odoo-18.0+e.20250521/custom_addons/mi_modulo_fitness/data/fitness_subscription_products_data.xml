@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================= -->
+        <!-- PLANTILLAS DE SUSCRIPCIÓN                -->
+        <!-- ========================================= -->
+        
+        <!-- Plantilla: Facturación Mensual Estándar -->
+        <record id="subscription_template_monthly" model="sale.subscription.template">
+            <field name="name">Facturación Mensual Estándar</field>
+            <field name="code">MONTHLY_STD</field>
+            <field name="recurring_rule_type">monthly</field>
+            <field name="recurring_interval">1</field>
+            <field name="user_closable">True</field>
+            <field name="payment_mode">success_payment</field>
+            <field name="description">Facturación automática cada mes. Cancelable por el usuario.</field>
+        </record>
+        
+        <!-- Plantilla: Facturación Anual con Descuento -->
+        <record id="subscription_template_yearly" model="sale.subscription.template">
+            <field name="name">Facturación Anual con Descuento</field>
+            <field name="code">YEARLY_DISC</field>
+            <field name="recurring_rule_type">yearly</field>
+            <field name="recurring_interval">1</field>
+            <field name="user_closable">True</field>
+            <field name="payment_mode">success_payment</field>
+            <field name="description">Facturación anual con descuento. Ahorro del 20% vs mensual.</field>
+        </record>
+        
+        <!-- Plantilla: Plan Gratuito Continuo -->
+        <record id="subscription_template_free" model="sale.subscription.template">
+            <field name="name">Plan Gratuito Continuo</field>
+            <field name="code">FREE_CONT</field>
+            <field name="recurring_rule_type">yearly</field>
+            <field name="recurring_interval">1</field>
+            <field name="user_closable">False</field>
+            <field name="payment_mode">manual</field>
+            <field name="description">Acceso gratuito continuo. Sin facturación automática.</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- PRODUCTOS DE SUSCRIPCIÓN                 -->
+        <!-- ========================================= -->
+        
+        <!-- Producto 1: Acceso Gratuito Fitness -->
+        <record id="product_fitness_free" model="product.template">
+            <field name="name">Acceso Gratuito Fitness</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="subscription_template_id" ref="subscription_template_free"/>
+            <field name="list_price">0.00</field>
+            <field name="standard_price">0.00</field>
+            <field name="categ_id" ref="product.product_category_3"/>
+            <field name="description_sale">
+Acceso básico a la plataforma Roberto Rueda Fitness:
+• Programas de entrenamiento básicos
+• Ejercicios fundamentales
+• Seguimiento básico de progreso
+• Comunidad fitness
+
+Perfecto para comenzar tu journey fitness sin compromiso.
+            </field>
+            <field name="description">Acceso gratuito a funciones básicas de fitness</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 2: Plan Fitness Pro Mensual -->
+        <record id="product_fitness_pro_monthly" model="product.template">
+            <field name="name">Plan Fitness Pro Mensual</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="subscription_template_id" ref="subscription_template_monthly"/>
+            <field name="list_price">19.99</field>
+            <field name="standard_price">5.00</field>
+            <field name="categ_id" ref="product.product_category_3"/>
+            <field name="description_sale">
+Plan Pro Roberto Rueda Fitness - Facturación Mensual:
+• Acceso completo a todos los programas de entrenamiento
+• Biblioteca completa de ejercicios con videos HD
+• Seguimiento avanzado de progreso y métricas
+• Planes de nutrición personalizados
+• Evaluaciones físicas detalladas
+• Sistema de logros y gamificación
+• Soporte prioritario
+• Acceso a la comunidad Pro
+
+¡Transforma tu físico con el plan más popular!
+            </field>
+            <field name="description">Plan Pro con acceso completo - Facturación mensual</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 3: Plan Fitness Pro Anual -->
+        <record id="product_fitness_pro_yearly" model="product.template">
+            <field name="name">Plan Fitness Pro Anual</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="subscription_template_id" ref="subscription_template_yearly"/>
+            <field name="list_price">191.90</field>
+            <field name="standard_price">50.00</field>
+            <field name="categ_id" ref="product.product_category_3"/>
+            <field name="description_sale">
+Plan Pro Roberto Rueda Fitness - Facturación Anual:
+• TODO lo del Plan Pro Mensual
+• 20% de DESCUENTO (ahorra $48 al año)
+• Acceso prioritario a nuevas funciones
+• Consulta mensual con entrenador certificado
+• Planes de entrenamiento personalizados
+• Análisis corporal trimestral
+
+¡El mejor valor para usuarios comprometidos!
+            </field>
+            <field name="description">Plan Pro con acceso completo - Facturación anual con descuento</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 4: Plan Fitness Premium Mensual -->
+        <record id="product_fitness_premium_monthly" model="product.template">
+            <field name="name">Plan Fitness Premium Mensual</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="subscription_template_id" ref="subscription_template_monthly"/>
+            <field name="list_price">39.99</field>
+            <field name="standard_price">10.00</field>
+            <field name="categ_id" ref="product.product_category_3"/>
+            <field name="description_sale">
+Plan Premium Roberto Rueda Fitness - Facturación Mensual:
+• TODO lo del Plan Pro
+• Videos premium en 4K con múltiples ángulos
+• Programas exclusivos de élite
+• Coaching personal 1-a-1 (2 sesiones/mes)
+• Análisis biomecánico avanzado
+• Protocolos de recuperación personalizados
+• Acceso a masterclasses exclusivas
+• Comunidad Premium VIP
+• Soporte 24/7 prioritario
+
+¡Para atletas serios que buscan la excelencia!
+            </field>
+            <field name="description">Plan Premium con coaching personal - Facturación mensual</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- Producto 5: Plan Fitness Premium Anual -->
+        <record id="product_fitness_premium_yearly" model="product.template">
+            <field name="name">Plan Fitness Premium Anual</field>
+            <field name="type">service</field>
+            <field name="recurring_invoice">True</field>
+            <field name="subscription_template_id" ref="subscription_template_yearly"/>
+            <field name="list_price">383.90</field>
+            <field name="standard_price">100.00</field>
+            <field name="categ_id" ref="product.product_category_3"/>
+            <field name="description_sale">
+Plan Premium Roberto Rueda Fitness - Facturación Anual:
+• TODO lo del Plan Premium Mensual
+• 20% de DESCUENTO (ahorra $96 al año)
+• Coaching personal 1-a-1 (3 sesiones/mes)
+• Evaluación física completa trimestral
+• Plan de competición personalizado
+• Acceso a eventos exclusivos
+• Mentoría directa con Roberto Rueda
+
+¡La experiencia fitness más completa disponible!
+            </field>
+            <field name="description">Plan Premium con coaching intensivo - Facturación anual con descuento</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        
+        <!-- ========================================= -->
+        <!-- SUSCRIPCIONES DE USUARIOS DE PRUEBA      -->
+        <!-- ========================================= -->
+        
+        <!-- Suscripción de Ana Pérez - Plan Pro Mensual -->
+        <record id="subscription_ana_pro" model="sale.subscription">
+            <field name="partner_id" ref="fitness_user_ana"/>
+            <field name="template_id" ref="subscription_template_monthly"/>
+            <field name="code">SUB-ANA-PRO-001</field>
+            <field name="stage_category">progress</field>
+            <field name="date_start" eval="(DateTime.now() - timedelta(days=45)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_next_date" eval="(DateTime.now() + timedelta(days=15)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_total">59.97</field>
+            <field name="description">Suscripción Pro de Ana Pérez - Activa desde hace 45 días</field>
+        </record>
+        
+        <!-- Línea de suscripción para Ana -->
+        <record id="subscription_line_ana_pro" model="sale.subscription.line">
+            <field name="analytic_account_id" ref="subscription_ana_pro"/>
+            <field name="product_id" ref="product_fitness_pro_monthly"/>
+            <field name="name">Plan Fitness Pro Mensual</field>
+            <field name="quantity">1</field>
+            <field name="price_unit">19.99</field>
+            <field name="discount">0</field>
+        </record>
+        
+        <!-- Suscripción de Carlos López - Plan Premium Anual -->
+        <record id="subscription_carlos_premium" model="sale.subscription">
+            <field name="partner_id" ref="fitness_user_carlos"/>
+            <field name="template_id" ref="subscription_template_yearly"/>
+            <field name="code">SUB-CARLOS-PREM-001</field>
+            <field name="stage_category">progress</field>
+            <field name="date_start" eval="(DateTime.now() - timedelta(days=120)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_next_date" eval="(DateTime.now() + timedelta(days=245)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_total">383.90</field>
+            <field name="description">Suscripción Premium Anual de Carlos López - Entrenador profesional</field>
+        </record>
+        
+        <!-- Línea de suscripción para Carlos -->
+        <record id="subscription_line_carlos_premium" model="sale.subscription.line">
+            <field name="analytic_account_id" ref="subscription_carlos_premium"/>
+            <field name="product_id" ref="product_fitness_premium_yearly"/>
+            <field name="name">Plan Fitness Premium Anual</field>
+            <field name="quantity">1</field>
+            <field name="price_unit">383.90</field>
+            <field name="discount">0</field>
+        </record>
+        
+        <!-- Suscripción de Laura Gómez - Plan Gratuito -->
+        <record id="subscription_laura_free" model="sale.subscription">
+            <field name="partner_id" ref="fitness_user_laura"/>
+            <field name="template_id" ref="subscription_template_free"/>
+            <field name="code">SUB-LAURA-FREE-001</field>
+            <field name="stage_category">progress</field>
+            <field name="date_start" eval="(DateTime.now() - timedelta(days=10)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_next_date" eval="(DateTime.now() + timedelta(days=355)).strftime('%Y-%m-%d')"/>
+            <field name="recurring_total">0.00</field>
+            <field name="description">Suscripción Gratuita de Laura Gómez - Nueva usuaria explorando</field>
+        </record>
+        
+        <!-- Línea de suscripción para Laura -->
+        <record id="subscription_line_laura_free" model="sale.subscription.line">
+            <field name="analytic_account_id" ref="subscription_laura_free"/>
+            <field name="product_id" ref="product_fitness_free"/>
+            <field name="name">Acceso Gratuito Fitness</field>
+            <field name="quantity">1</field>
+            <field name="price_unit">0.00</field>
+            <field name="discount">0</field>
+        </record>
+        
+    </data>
+</odoo> 

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 9: SISTEMA DE LOGROS
+             ======================================== -->
+        
+        <!-- 1. BIBLIOTECA DE LOGROS (DEFINICIONES) -->
+        
+        <!-- Logro 1: Primer Programa Completado -->
+        <record id="achievement_primer_programa" model="fitness.achievement">
+            <field name="name">¡Primer Programa Completado!</field>
+            <field name="description">Otorgado por completar con éxito tu primer programa de entrenamiento de principio a fin.</field>
+            <field name="criteria_description">Completar todos los entrenamientos registrados de un programa al que el usuario esté inscrito (estado del programa 'Completado').</field>
+            <field name="reward_description">¡Felicitaciones y una medalla virtual de 'Guerrero Constante'!</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 2: Club de los 100kg - Press de Banca -->
+        <record id="achievement_club_100kg_press" model="fitness.achievement">
+            <field name="name">Club de los 100kg: Press de Banca</field>
+            <field name="description">Bienvenido al club de los que levantan 100kg o más en press de banca.</field>
+            <field name="criteria_description">Registrar un levantamiento de 100kg o más en press de banca en una Prueba de Evaluación Física (1RM) o en el Rendimiento de Ejercicio.</field>
+            <field name="reward_description">Reconocimiento especial y acceso a la tabla de honor (futuro).</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 3: Madrugador Fitness -->
+        <record id="achievement_madrugador_fitness" model="fitness.achievement">
+            <field name="name">Madrugador Fitness</field>
+            <field name="description">Por la disciplina de completar 20 entrenamientos antes de las 8:00 AM.</field>
+            <field name="criteria_description">Registrar 20 entradas en el Historial de Entrenamientos (fitness.workout.history) con completion_datetime antes de las 8:00 AM.</field>
+            <field name="reward_description">Medalla virtual 'Al que madruga, el gym le ayuda'.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 4: Racha de 30 Días Activos -->
+        <record id="achievement_racha_30_dias" model="fitness.achievement">
+            <field name="name">Racha de 30 Días Activos</field>
+            <field name="description">¡Increíble consistencia! 30 días consecutivos con al menos un entrenamiento registrado.</field>
+            <field name="criteria_description">Tener al menos un registro en fitness.workout.history cada día durante 30 días consecutivos.</field>
+            <field name="reward_description">Medalla 'Maestro de la Rutina'.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 5: Transformación Corporal -->
+        <record id="achievement_transformacion_corporal" model="fitness.achievement">
+            <field name="name">Transformación Corporal</field>
+            <field name="description">Por lograr una mejora significativa en composición corporal documentada.</field>
+            <field name="criteria_description">Reducir al menos 5% de grasa corporal o aumentar 3kg de masa muscular según mediciones corporales registradas.</field>
+            <field name="reward_description">Certificado de 'Transformación Exitosa' y sesión de fotos de progreso gratuita.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 6: Mentor Fitness -->
+        <record id="achievement_mentor_fitness" model="fitness.achievement">
+            <field name="name">Mentor Fitness</field>
+            <field name="description">Reconocimiento para entrenadores que han guiado exitosamente a múltiples clientes.</field>
+            <field name="criteria_description">Tener al menos 5 clientes que hayan completado programas con calificación promedio de 4+ estrellas.</field>
+            <field name="reward_description">Insignia de 'Entrenador Destacado' y reconocimiento público.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 7: Explorador de Ejercicios -->
+        <record id="achievement_explorador_ejercicios" model="fitness.achievement">
+            <field name="name">Explorador de Ejercicios</field>
+            <field name="description">Por probar y registrar una gran variedad de ejercicios diferentes.</field>
+            <field name="criteria_description">Registrar rendimiento en al menos 25 ejercicios diferentes en el historial de entrenamientos.</field>
+            <field name="reward_description">Medalla 'Aventurero del Fitness' y acceso a ejercicios premium.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Logro 8: Meta Cumplida -->
+        <record id="achievement_meta_cumplida" model="fitness.achievement">
+            <field name="name">Meta Cumplida</field>
+            <field name="description">Por alcanzar exitosamente una meta de fitness establecida.</field>
+            <field name="criteria_description">Completar cualquier meta de fitness con estado 'achieved' en el sistema.</field>
+            <field name="reward_description">Medalla 'Determinación' y descuento en próxima inscripción.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- 2. LOGROS OBTENIDOS POR USUARIOS -->
+        
+        <!-- Logro Obtenido 1: Ana Pérez completa su primer programa -->
+        <record id="user_achievement_ana_primer_programa" model="fitness.user.achievement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="achievement_id" ref="achievement_primer_programa"/>
+            <field name="date_achieved">2025-06-28</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">Completó el programa 'Fuerza Inicial (4 Semanas)' con excelente consistencia y progreso medible.</field>
+            <field name="trainer_notes">¡Excelente trabajo Ana! Muy orgulloso de tu dedicación y progreso. Has demostrado que la constancia da frutos.</field>
+        </record>
+        
+        <!-- Logro Obtenido 2: Carlos López alcanza los 100kg en Press de Banca -->
+        <record id="user_achievement_carlos_100kg" model="fitness.user.achievement">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="achievement_id" ref="achievement_club_100kg_press"/>
+            <field name="date_achieved">2025-07-15</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">Logró 100kg en su prueba de 1RM de press de banca. Técnica impecable y progresión bien planificada.</field>
+            <field name="trainer_notes">¡Felicidades Carlos! Un hito importante. Tu dedicación al entrenamiento de fuerza ha dado sus frutos.</field>
+        </record>
+        
+        <!-- Logro Obtenido 3: Ana Pérez es madrugadora -->
+        <record id="user_achievement_ana_madrugadora" model="fitness.user.achievement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="achievement_id" ref="achievement_madrugador_fitness"/>
+            <field name="date_achieved">2025-07-20</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">Ha estado registrando entrenamientos consistentemente por la mañana. 20 sesiones completadas antes de las 8:00 AM.</field>
+            <field name="trainer_notes">¡Esa disciplina matutina es admirable, Ana! Entrenar por la mañana requiere mucha determinación.</field>
+        </record>
+        
+        <!-- Logro Obtenido 4: Ana Pérez cumple su meta de correr 5K -->
+        <record id="user_achievement_ana_meta_5k" model="fitness.user.achievement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="achievement_id" ref="achievement_meta_cumplida"/>
+            <field name="date_achieved">2024-05-01</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">Completó exitosamente su meta de correr 5K sin parar en tiempo récord personal.</field>
+            <field name="trainer_notes">¡Fantástico logro Ana! De no poder correr 1km a completar 5K en solo 7 semanas. Inspirador.</field>
+        </record>
+        
+        <!-- Logro Obtenido 5: Carlos López como Mentor -->
+        <record id="user_achievement_carlos_mentor" model="fitness.user.achievement">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="achievement_id" ref="achievement_mentor_fitness"/>
+            <field name="date_achieved">2025-07-25</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">Ha guiado exitosamente a múltiples clientes, incluyendo Ana y Laura, con excelentes resultados y calificaciones.</field>
+            <field name="trainer_notes">Carlos ha demostrado ser un excelente mentor. Sus clientes no solo logran resultados, sino que disfrutan el proceso.</field>
+        </record>
+        
+        <!-- Logro Obtenido 6: Laura Gómez - Explorador de Ejercicios (en progreso) -->
+        <record id="user_achievement_laura_explorador" model="fitness.user.achievement">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="achievement_id" ref="achievement_explorador_ejercicios"/>
+            <field name="date_achieved">2025-08-01</field>
+            <field name="status">achieved</field>
+            <field name="progress_manual_notes">A pesar de ser nueva, Laura ha mostrado gran curiosidad probando diferentes ejercicios y técnicas en sus entrenamientos.</field>
+            <field name="trainer_notes">¡Excelente actitud exploradora Laura! Tu apertura a probar nuevos ejercicios acelera tu aprendizaje.</field>
+        </record>
+        
+        <!-- 3. LOGROS EN PROGRESO (FUTURO) -->
+        
+        <!-- Logro en Progreso 1: Carlos trabajando hacia Racha de 30 Días -->
+        <record id="user_achievement_carlos_racha_progreso" model="fitness.user.achievement">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="achievement_id" ref="achievement_racha_30_dias"/>
+            <field name="date_achieved" eval="False"/>
+            <field name="status">in_progress</field>
+            <field name="progress_manual_notes">Lleva 18 días consecutivos entrenando. ¡Muy cerca de lograr la racha de 30 días!</field>
+            <field name="trainer_notes">¡Sigue así Carlos! Solo 12 días más para completar este desafío de consistencia.</field>
+        </record>
+        
+        <!-- Logro en Progreso 2: Ana trabajando hacia Transformación Corporal -->
+        <record id="user_achievement_ana_transformacion_progreso" model="fitness.user.achievement">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="achievement_id" ref="achievement_transformacion_corporal"/>
+            <field name="date_achieved" eval="False"/>
+            <field name="status">in_progress</field>
+            <field name="progress_manual_notes">Ha reducido 2% de grasa corporal según últimas mediciones. Progreso constante hacia el objetivo de 5%.</field>
+            <field name="trainer_notes">¡Vas por buen camino Ana! Los cambios en composición corporal toman tiempo, pero ya se ven resultados.</field>
+        </record>
+        
+    </data>
+</odoo> 

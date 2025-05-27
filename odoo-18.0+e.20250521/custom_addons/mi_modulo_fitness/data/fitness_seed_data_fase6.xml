@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 6: SEGUIMIENTO DE NUTRICIÓN
+             ======================================== -->
+        
+        <!-- 1. BIBLIOTECA DE ALIMENTOS -->
+        
+        <!-- Alimento 1: Pechuga de Pollo -->
+        <record id="food_pechuga_pollo" model="fitness.food.item">
+            <field name="name">Pechuga de Pollo (cocida)</field>
+            <field name="serving_size_description">100g</field>
+            <field name="calories_per_serving">165</field>
+            <field name="protein_grams_per_serving">31</field>
+            <field name="carbs_grams_per_serving">0</field>
+            <field name="fat_grams_per_serving">3.6</field>
+            <field name="notes">Sin piel, asada o hervida.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimento 2: Arroz Blanco -->
+        <record id="food_arroz_blanco" model="fitness.food.item">
+            <field name="name">Arroz Blanco (cocido)</field>
+            <field name="serving_size_description">1 taza (aprox 150g)</field>
+            <field name="calories_per_serving">205</field>
+            <field name="protein_grams_per_serving">4.3</field>
+            <field name="carbs_grams_per_serving">45</field>
+            <field name="fat_grams_per_serving">0.4</field>
+            <field name="notes"></field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimento 3: Brócoli -->
+        <record id="food_brocoli" model="fitness.food.item">
+            <field name="name">Brócoli (cocido)</field>
+            <field name="serving_size_description">1 taza (aprox 90g)</field>
+            <field name="calories_per_serving">55</field>
+            <field name="protein_grams_per_serving">3.7</field>
+            <field name="carbs_grams_per_serving">11.2</field>
+            <field name="fat_grams_per_serving">0.6</field>
+            <field name="notes">Al vapor o hervido.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimento 4: Huevo Entero -->
+        <record id="food_huevo_entero" model="fitness.food.item">
+            <field name="name">Huevo Entero (grande, cocido)</field>
+            <field name="serving_size_description">1 unidad (aprox 50g)</field>
+            <field name="calories_per_serving">78</field>
+            <field name="protein_grams_per_serving">6.3</field>
+            <field name="carbs_grams_per_serving">0.6</field>
+            <field name="fat_grams_per_serving">5.3</field>
+            <field name="notes">Huevo duro o pochado.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimento 5: Almendras -->
+        <record id="food_almendras" model="fitness.food.item">
+            <field name="name">Almendras Naturales</field>
+            <field name="serving_size_description">1 onza (aprox 28g / 23 almendras)</field>
+            <field name="calories_per_serving">164</field>
+            <field name="protein_grams_per_serving">6</field>
+            <field name="carbs_grams_per_serving">6.1</field>
+            <field name="fat_grams_per_serving">14.2</field>
+            <field name="notes">Crudas, sin sal.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimento 6: Batido de Proteína -->
+        <record id="food_batido_proteina" model="fitness.food.item">
+            <field name="name">Batido de Proteína Whey (polvo)</field>
+            <field name="serving_size_description">1 scoop (aprox 30g)</field>
+            <field name="calories_per_serving">120</field>
+            <field name="protein_grams_per_serving">24</field>
+            <field name="carbs_grams_per_serving">3</field>
+            <field name="fat_grams_per_serving">1.5</field>
+            <field name="notes">Valores típicos, varían por marca.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Alimentos adicionales para variedad -->
+        <record id="food_avena" model="fitness.food.item">
+            <field name="name">Avena (cocida)</field>
+            <field name="serving_size_description">1 taza (aprox 240g)</field>
+            <field name="calories_per_serving">154</field>
+            <field name="protein_grams_per_serving">5.9</field>
+            <field name="carbs_grams_per_serving">28</field>
+            <field name="fat_grams_per_serving">3.2</field>
+            <field name="notes">Preparada con agua.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="food_platano" model="fitness.food.item">
+            <field name="name">Plátano (mediano)</field>
+            <field name="serving_size_description">1 unidad (aprox 120g)</field>
+            <field name="calories_per_serving">105</field>
+            <field name="protein_grams_per_serving">1.3</field>
+            <field name="carbs_grams_per_serving">27</field>
+            <field name="fat_grams_per_serving">0.4</field>
+            <field name="notes">Fresco, maduro.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- 2. REGISTROS DE COMIDAS -->
+        
+        <!-- Registro 1: Ana Pérez - Almuerzo -->
+        <record id="meal_log_ana_almuerzo" model="fitness.meal.log">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="date_time">2025-06-02 14:00:00</field>
+            <field name="meal_type">lunch</field>
+            <field name="notes">Almuerzo post-entreno ligero.</field>
+        </record>
+        
+        <!-- Registro 2: Ana Pérez - Desayuno -->
+        <record id="meal_log_ana_desayuno" model="fitness.meal.log">
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="date_time">2025-06-02 08:00:00</field>
+            <field name="meal_type">breakfast</field>
+            <field name="notes">Desayuno rápido antes de salir.</field>
+        </record>
+        
+        <!-- Registro 3: Carlos López - Cena -->
+        <record id="meal_log_carlos_cena" model="fitness.meal.log">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="date_time">2025-06-01 20:30:00</field>
+            <field name="meal_type">dinner</field>
+            <field name="notes">Cena alta en proteínas.</field>
+        </record>
+        
+        <!-- Registro 4: Carlos López - Post-entreno -->
+        <record id="meal_log_carlos_post_entreno" model="fitness.meal.log">
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="date_time">2025-06-01 16:30:00</field>
+            <field name="meal_type">snack_post_workout</field>
+            <field name="notes">Batido post-entreno.</field>
+        </record>
+        
+        <!-- Registro 5: Laura Gómez - Desayuno -->
+        <record id="meal_log_laura_desayuno" model="fitness.meal.log">
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="date_time">2025-04-02 07:30:00</field>
+            <field name="meal_type">breakfast</field>
+            <field name="notes">Desayuno nutritivo antes de estudiar.</field>
+        </record>
+        
+        <!-- 3. LÍNEAS DE ALIMENTOS EN COMIDAS -->
+        
+        <!-- Líneas para Ana Pérez - Almuerzo -->
+        <record id="meal_line_ana_almuerzo_pollo" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_ana_almuerzo"/>
+            <field name="food_item_id" ref="food_pechuga_pollo"/>
+            <field name="number_of_servings">1.5</field>
+            <field name="notes"></field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="meal_line_ana_almuerzo_brocoli" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_ana_almuerzo"/>
+            <field name="food_item_id" ref="food_brocoli"/>
+            <field name="number_of_servings">1.0</field>
+            <field name="notes">Con un poco de limón.</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <!-- Líneas para Ana Pérez - Desayuno -->
+        <record id="meal_line_ana_desayuno_huevos" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_ana_desayuno"/>
+            <field name="food_item_id" ref="food_huevo_entero"/>
+            <field name="number_of_servings">2.0</field>
+            <field name="notes"></field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="meal_line_ana_desayuno_almendras" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_ana_desayuno"/>
+            <field name="food_item_id" ref="food_almendras"/>
+            <field name="number_of_servings">0.5</field>
+            <field name="notes"></field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <!-- Líneas para Carlos López - Cena -->
+        <record id="meal_line_carlos_cena_pollo" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_carlos_cena"/>
+            <field name="food_item_id" ref="food_pechuga_pollo"/>
+            <field name="number_of_servings">2.0</field>
+            <field name="notes"></field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="meal_line_carlos_cena_arroz" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_carlos_cena"/>
+            <field name="food_item_id" ref="food_arroz_blanco"/>
+            <field name="number_of_servings">1.0</field>
+            <field name="notes"></field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="meal_line_carlos_cena_brocoli" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_carlos_cena"/>
+            <field name="food_item_id" ref="food_brocoli"/>
+            <field name="number_of_servings">1.5</field>
+            <field name="notes"></field>
+            <field name="sequence">30</field>
+        </record>
+        
+        <!-- Líneas para Carlos López - Post-entreno -->
+        <record id="meal_line_carlos_post_proteina" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_carlos_post_entreno"/>
+            <field name="food_item_id" ref="food_batido_proteina"/>
+            <field name="number_of_servings">1.0</field>
+            <field name="notes">Con agua fría.</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="meal_line_carlos_post_platano" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_carlos_post_entreno"/>
+            <field name="food_item_id" ref="food_platano"/>
+            <field name="number_of_servings">1.0</field>
+            <field name="notes">Para carbohidratos rápidos.</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <!-- Líneas para Laura Gómez - Desayuno -->
+        <record id="meal_line_laura_desayuno_avena" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_laura_desayuno"/>
+            <field name="food_item_id" ref="food_avena"/>
+            <field name="number_of_servings">1.0</field>
+            <field name="notes">Con canela.</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="meal_line_laura_desayuno_platano" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_laura_desayuno"/>
+            <field name="food_item_id" ref="food_platano"/>
+            <field name="number_of_servings">0.5</field>
+            <field name="notes">Cortado en rodajas sobre la avena.</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="meal_line_laura_desayuno_almendras" model="fitness.meal.line">
+            <field name="meal_log_id" ref="meal_log_laura_desayuno"/>
+            <field name="food_item_id" ref="food_almendras"/>
+            <field name="number_of_servings">0.3</field>
+            <field name="notes">Picadas como topping.</field>
+            <field name="sequence">30</field>
+        </record>
+        
+    </data>
+</odoo> 

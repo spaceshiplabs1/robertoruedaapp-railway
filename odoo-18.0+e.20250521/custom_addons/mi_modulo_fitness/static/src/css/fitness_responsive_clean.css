@@ -1,0 +1,230 @@
+/* Fitness Responsive CSS v4.0 - Clean Version (Sin Debug Visual) */
+/* Solución para elementos que desaparecen en >= 1534px */
+
+/* ========================================
+   REPARACIÓN LIMPIA - ZONA PROBLEMÁTICA
+   ======================================== */
+
+/* Forzar visibilidad en zona problemática */
+@media screen and (min-width: 1534px) {
+    
+    /* CONTENEDOR PRINCIPAL - FORZAR VISIBILIDAD */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 500px !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    /* FORM SHEET - FORZAR VISIBILIDAD */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_form_sheet {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 400px !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* GRUPOS PRINCIPALES - LAYOUT DE 2 COLUMNAS */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_group.row {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 200px !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* INNER GROUPS - COLUMNAS DE 50% CADA UNA */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_inner_group {
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex: 0 0 calc(50% - 15px) !important;
+        width: auto !important;
+        max-width: calc(50% - 15px) !important;
+        min-width: 300px !important;
+        height: auto !important;
+        min-height: 150px !important;
+        overflow: visible !important;
+        position: relative !important;
+        padding: 10px !important;
+    }
+    
+    /* CAMPOS DENTRO DE COLUMNAS */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_inner_group .o_wrap_field {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 30px !important;
+        overflow: visible !important;
+        position: relative !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* LABELS Y INPUTS */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_wrap_label,
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_wrap_input {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* WIDGETS DE CAMPO */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_field_widget {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 25px !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* NOTEBOOK (PESTAÑAS) */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_notebook {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 200px !important;
+        overflow: visible !important;
+        position: relative !important;
+        flex-direction: column !important;
+    }
+    
+    /* CONTENIDO DE PESTAÑAS */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .o_notebook_content {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 150px !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* TAB PANES */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg .tab-pane {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* REPARACIÓN PARA ELEMENTOS CON CLASES ESPECÍFICAS */
+    .o_inner_group.grid.col-12.col-md-6.col-lg-6,
+    .o_inner_group.grid.col-lg-6 {
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex: 0 0 calc(50% - 15px) !important;
+        width: auto !important;
+        max-width: calc(50% - 15px) !important;
+        min-width: 300px !important;
+        height: auto !important;
+        min-height: 150px !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* REPARACIÓN PARA ELEMENTOS CON DATA-DEBUG-WIDTH */
+    [data-debug-width] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* REPARACIÓN PARA GRID ITEMS */
+    .grid > * {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
+    }
+    
+    /* PREVENIR COLAPSO DE FLEXBOX */
+    .d-flex > *,
+    .row > * {
+        flex-shrink: 0 !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+    }
+    
+    /* REPARACIÓN DE EMERGENCIA - TODOS LOS ELEMENTOS DENTRO DEL FORMULARIO */
+    body > div.o_action_manager > div > div > div.o_content > div > div.o_form_sheet_bg * {
+        visibility: visible !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+    }
+}
+
+/* ========================================
+   REPARACIONES ADICIONALES PARA TODOS LOS TAMAÑOS
+   ======================================== */
+
+/* Prevenir que cualquier elemento del formulario se oculte */
+.o_form_sheet_bg,
+.o_form_sheet,
+.o_group,
+.o_inner_group,
+.o_wrap_field,
+.o_field_widget,
+.o_notebook,
+.o_notebook_content,
+.tab-pane {
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+
+/* Asegurar que los contenedores mantengan su tamaño */
+.o_inner_group {
+    min-width: 250px !important;
+    min-height: 100px !important;
+}
+
+/* Prevenir colapso de grid */
+.grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+}
+
+/* Prevenir colapso de flexbox */
+.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+} 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menú Principal de Fitness -->
+    <menuitem id="menu_fitness_main" 
+              name="Fitness" 
+              sequence="10" 
+              web_icon="mi_modulo_fitness,static/description/icon.png"/>
+
+    <!-- ========== SECCIÓN: PROGRAMAS Y ENTRENAMIENTOS ========== -->
+    <menuitem id="menu_fitness_programs" 
+              name="Programas y Entrenamientos" 
+              parent="menu_fitness_main" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_program_list" 
+              name="Programas de Entrenamiento" 
+              parent="menu_fitness_programs" 
+              action="action_fitness_program" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_exercise_list" 
+              name="Biblioteca de Ejercicios" 
+              parent="menu_fitness_programs" 
+              action="action_fitness_exercise" 
+              sequence="20"/>
+
+    <!-- ========== SECCIÓN: USUARIOS Y SEGUIMIENTO ========== -->
+    <menuitem id="menu_fitness_users" 
+              name="Usuarios y Seguimiento" 
+              parent="menu_fitness_main" 
+              sequence="20"/>
+
+    <menuitem id="menu_fitness_user_program_list" 
+              name="Inscripciones a Programas" 
+              parent="menu_fitness_users" 
+              action="action_fitness_user_program" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_body_measurement_list" 
+              name="Mediciones Corporales" 
+              parent="menu_fitness_users" 
+              action="action_fitness_body_measurement" 
+              sequence="20"/>
+
+    <menuitem id="menu_fitness_assessment_list" 
+              name="Evaluaciones Físicas" 
+              parent="menu_fitness_users" 
+              action="action_fitness_assessment" 
+              sequence="30"/>
+
+    <menuitem id="menu_fitness_goal_list" 
+              name="Objetivos de Fitness" 
+              parent="menu_fitness_users" 
+              action="action_fitness_goal" 
+              sequence="40"/>
+
+    <!-- ========== SECCIÓN: CONFIGURACIÓN ========== -->
+    <menuitem id="menu_fitness_config" 
+              name="Configuración" 
+              parent="menu_fitness_main" 
+              sequence="90"/>
+
+    <!-- Subsección: Catálogos Base -->
+    <menuitem id="menu_fitness_catalogs" 
+              name="Catálogos Base" 
+              parent="menu_fitness_config" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_equipment_list" 
+              name="Equipamiento" 
+              parent="menu_fitness_catalogs" 
+              action="action_fitness_equipment" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_muscle_group_list" 
+              name="Grupos Musculares" 
+              parent="menu_fitness_catalogs" 
+              action="action_fitness_muscle_group" 
+              sequence="20"/>
+
+    <menuitem id="menu_fitness_difficulty_list" 
+              name="Niveles de Dificultad" 
+              parent="menu_fitness_catalogs" 
+              action="action_fitness_difficulty" 
+              sequence="30"/>
+
+    <!-- Subsección: Tipos y Categorías -->
+    <menuitem id="menu_fitness_types" 
+              name="Tipos y Categorías" 
+              parent="menu_fitness_config" 
+              sequence="20"/>
+
+    <menuitem id="menu_fitness_program_category_list" 
+              name="Categorías de Programa" 
+              parent="menu_fitness_types" 
+              action="action_fitness_program_category" 
+              sequence="10"/>
+
+    <menuitem id="menu_fitness_program_type_list" 
+              name="Tipos de Programa" 
+              parent="menu_fitness_types" 
+              action="action_fitness_program_type" 
+              sequence="20"/>
+
+    <menuitem id="menu_fitness_workout_type_list" 
+              name="Tipos de Entrenamiento" 
+              parent="menu_fitness_types" 
+              action="action_fitness_workout_type" 
+              sequence="30"/>
+
+    <menuitem id="menu_fitness_assessment_type_list" 
+              name="Tipos de Evaluación" 
+              parent="menu_fitness_types" 
+              action="action_fitness_assessment_type" 
+              sequence="40"/>
+
+    <menuitem id="menu_fitness_goal_type_list" 
+              name="Tipos de Objetivo" 
+              parent="menu_fitness_types" 
+              action="action_fitness_goal_type" 
+              sequence="50"/>
+</odoo> 

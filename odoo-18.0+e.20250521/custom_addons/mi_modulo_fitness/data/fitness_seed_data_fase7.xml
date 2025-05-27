@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 7: ESTABLECIMIENTO DE METAS
+             ======================================== -->
+        
+        <!-- 1. METAS DE FITNESS -->
+        
+        <!-- Meta 1: Ana Pérez - Reducir Grasa Corporal (En progreso) -->
+        <record id="goal_ana_reducir_grasa" model="fitness.goal">
+            <field name="name">Reducir 3kg de Grasa Corporal</field>
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="goal_type_id" ref="goal_perdida_peso"/>
+            <field name="description">Quiero sentirme más ligera y mejorar mi composición corporal para el verano. Principalmente a través de la dieta y el programa de fuerza.</field>
+            <field name="start_date">2025-06-01</field>
+            <field name="target_date">2025-08-31</field>
+            <field name="status">in_progress</field>
+            <field name="target_metric_description">Pasar de 65kg a 62kg, manteniendo o aumentando masa muscular. Medición de % grasa también.</field>
+            <field name="progress_notes">Semana 1: Ajustando la dieta, sintiéndome bien con los entrenamientos. Peso: 64.5kg.</field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 2: Carlos López - Aumentar 1RM Press Banca (No iniciada) -->
+        <record id="goal_carlos_press_banca" model="fitness.goal">
+            <field name="name">Aumentar 1RM Press Banca a 120kg</field>
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="goal_type_id" ref="goal_ganancia_fuerza"/>
+            <field name="description">Quiero superar mi marca personal en press de banca. Seguiré una periodización específica.</field>
+            <field name="start_date">2025-06-15</field>
+            <field name="target_date">2025-09-15</field>
+            <field name="status">not_started</field>
+            <field name="target_metric_description">Lograr levantar 120kg en press de banca a 1 repetición máxima (1RM). Actual 1RM: 110kg.</field>
+            <field name="progress_notes"></field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 3: Laura Gómez - Hábito de Entrenamiento (Pendiente de inicio) -->
+        <record id="goal_laura_habito_entrenamiento" model="fitness.goal">
+            <field name="name">Establecer Hábito de 3 Entrenamientos/Semana</field>
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="goal_type_id" ref="goal_habito_saludable"/>
+            <field name="description">Ser constante con el gimnasio durante al menos 2 meses, incluso con los estudios.</field>
+            <field name="start_date">2025-06-10</field>
+            <field name="target_date">2025-08-10</field>
+            <field name="status">not_started</field>
+            <field name="target_metric_description">Asistir y completar al menos 3 sesiones de entrenamiento planificadas por semana durante 8 semanas consecutivas.</field>
+            <field name="progress_notes"></field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 4: Ana Pérez - Meta Anterior Lograda -->
+        <record id="goal_ana_correr_5k_lograda" model="fitness.goal">
+            <field name="name">Correr 5K sin parar</field>
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="goal_type_id" ref="goal_resistencia"/>
+            <field name="description">Objetivo que tuve el año pasado para empezar a correr.</field>
+            <field name="start_date">2024-03-01</field>
+            <field name="target_date">2024-05-01</field>
+            <field name="status">achieved</field>
+            <field name="target_metric_description">Ser capaz de correr 5 kilómetros continuos sin caminar.</field>
+            <field name="progress_notes">Empecé corriendo 1km, luego 2km. ¡Lo logré en 7 semanas!</field>
+            <field name="outcome_summary">¡Muy contenta! Me demostré que puedo lograr objetivos de resistencia. Tiempo final: 32 minutos.</field>
+        </record>
+        
+        <!-- Meta 5: Carlos López - Hipertrofia (En progreso) -->
+        <record id="goal_carlos_hipertrofia" model="fitness.goal">
+            <field name="name">Aumentar Masa Muscular en Brazos</field>
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="goal_type_id" ref="goal_hipertrofia"/>
+            <field name="description">Quiero aumentar el tamaño de mis brazos para mejorar mi físico como entrenador.</field>
+            <field name="start_date">2025-05-01</field>
+            <field name="target_date">2025-09-01</field>
+            <field name="status">in_progress</field>
+            <field name="target_metric_description">Aumentar circunferencia de brazos de 38cm a 40cm. Medición en frío, relajado.</field>
+            <field name="progress_notes">Mes 1: Enfocándome en volumen alto y frecuencia. Sintiendo buena congestión.</field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 6: Laura Gómez - Meta Pausada -->
+        <record id="goal_laura_peso_muerto" model="fitness.goal">
+            <field name="name">Peso Muerto 80kg</field>
+            <field name="user_id" ref="user_laura_gomez"/>
+            <field name="goal_type_id" ref="goal_ganancia_fuerza"/>
+            <field name="description">Quería llegar a levantar mi peso corporal en peso muerto.</field>
+            <field name="start_date">2025-04-01</field>
+            <field name="target_date">2025-07-01</field>
+            <field name="status">on_hold</field>
+            <field name="target_metric_description">Lograr peso muerto de 80kg (aproximadamente mi peso corporal + 20kg).</field>
+            <field name="progress_notes">Llegué a 65kg antes de pausar por exámenes. Técnica mejorando bien.</field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 7: Ana Pérez - Rendimiento Deportivo -->
+        <record id="goal_ana_rendimiento_deportivo" model="fitness.goal">
+            <field name="name">Participar en Carrera 10K Local</field>
+            <field name="user_id" ref="user_ana_perez"/>
+            <field name="goal_type_id" ref="goal_rendimiento_deportivo"/>
+            <field name="description">Quiero participar en la carrera anual de mi ciudad como desafío personal.</field>
+            <field name="start_date">2025-07-01</field>
+            <field name="target_date">2025-10-15</field>
+            <field name="status">not_started</field>
+            <field name="target_metric_description">Completar una carrera de 10 kilómetros en menos de 60 minutos.</field>
+            <field name="progress_notes"></field>
+            <field name="outcome_summary"></field>
+        </record>
+        
+        <!-- Meta 8: Carlos López - Meta Abandonada -->
+        <record id="goal_carlos_abandonada" model="fitness.goal">
+            <field name="name">Competir en Powerlifting</field>
+            <field name="user_id" ref="user_carlos_lopez"/>
+            <field name="goal_type_id" ref="goal_rendimiento_deportivo"/>
+            <field name="description">Pensé en competir en powerlifting pero cambié de enfoque.</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="target_date">2025-03-01</field>
+            <field name="status">cancelled</field>
+            <field name="target_metric_description">Participar en una competencia local de powerlifting en categoría junior.</field>
+            <field name="progress_notes">Entrené 3 meses pero decidí enfocarme más en mi carrera como entrenador.</field>
+            <field name="outcome_summary">Aunque no competí, el entrenamiento me ayudó a mejorar mi técnica y conocimiento.</field>
+        </record>
+        
+    </data>
+</odoo> 

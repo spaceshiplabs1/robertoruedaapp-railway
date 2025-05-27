@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Ultra Aggressive Fix - Fitness Module</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .viewport-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 9999;
+        }
+        .problem-zone {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .safe-zone {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .console-output {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="viewport-info" id="viewportInfo">
+        Viewport: <span id="viewportSize">0x0</span>px
+        <br>Estado: <span id="zoneStatus">Calculando...</span>
+    </div>
+
+    <div class="test-container">
+        <h1>🔧 Test Ultra Aggressive Fix - Fitness Module v4.0</h1>
+        
+        <div class="instructions">
+            <h3>📋 Instrucciones de Prueba</h3>
+            <p><strong>Problema:</strong> Los elementos del formulario desaparecen cuando el viewport es ≥ 1534px</p>
+            <p><strong>Solución:</strong> CSS y JavaScript ultra agresivos para forzar visibilidad</p>
+        </div>
+
+        <div id="zoneIndicator" class="safe-zone">
+            <h3>✅ Zona Segura (< 1534px)</h3>
+            <p>El contenido debería ser visible normalmente</p>
+        </div>
+
+        <div class="step">
+            <h4>Paso 1: Verificar Estado Actual</h4>
+            <button class="test-button" onclick="checkCurrentState()">🔍 Verificar Estado</button>
+            <button class="test-button" onclick="openFormulario()">📝 Abrir Formulario</button>
+        </div>
+
+        <div class="step">
+            <h4>Paso 2: Cambiar Tamaño de Ventana</h4>
+            <p>Cambia el ancho de la ventana para probar:</p>
+            <button class="test-button" onclick="simulateWidth(1400)">📱 1400px (Seguro)</button>
+            <button class="test-button" onclick="simulateWidth(1534)">⚠️ 1534px (Límite)</button>
+            <button class="test-button" onclick="simulateWidth(1600)">🚨 1600px (Problemático)</button>
+            <button class="test-button" onclick="simulateWidth(1800)">💥 1800px (Muy Problemático)</button>
+        </div>
+
+        <div class="step">
+            <h4>Paso 3: Funciones de Debug</h4>
+            <button class="test-button" onclick="runDebugReport()">📊 Reporte Completo</button>
+            <button class="test-button" onclick="runUltraRepair()">🔧 Reparación Ultra Agresiva</button>
+            <button class="test-button" onclick="toggleDebug()">🎛️ Toggle Debug</button>
+        </div>
+
+        <div class="step">
+            <h4>Paso 4: Monitoreo en Tiempo Real</h4>
+            <button class="test-button" onclick="startMonitoring()">▶️ Iniciar Monitoreo</button>
+            <button class="test-button" onclick="stopMonitoring()">⏹️ Detener Monitoreo</button>
+            <button class="test-button" onclick="clearConsole()">🗑️ Limpiar Consola</button>
+        </div>
+
+        <div class="console-output" id="consoleOutput">
+            <div>🚀 Consola de Debug - Fitness Module v4.0</div>
+            <div>Esperando comandos...</div>
+        </div>
+
+        <div class="instructions">
+            <h3>🎯 Qué Buscar</h3>
+            <ul>
+                <li><strong>En zona segura (< 1534px):</strong> Todo visible normalmente</li>
+                <li><strong>En zona problemática (≥ 1534px):</strong> 
+                    <ul>
+                        <li>Bordes de colores deben aparecer (rojo, azul, verde, naranja)</li>
+                        <li>Los elementos deben mantenerse visibles</li>
+                        <li>El JavaScript debe detectar y reparar automáticamente</li>
+                    </ul>
+                </li>
+                <li><strong>En consola del navegador:</strong> Logs detallados del debug</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h3>🔗 Enlaces Directos</h3>
+            <p><a href="http://localhost:8069/odoo/action-685/new" target="_blank">📝 Formulario de Inscripción (Nuevo)</a></p>
+            <p><a href="http://localhost:8069/web/login" target="_blank">🔐 Login Odoo</a></p>
+            <p><strong>Base de datos:</strong> odoo_test</p>
+        </div>
+    </div>
+
+    <script>
+        let monitoringInterval = null;
+        
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const isProblematic = width >= 1534;
+            
+            document.getElementById('viewportSize').textContent = `${width}x${height}`;
+            document.getElementById('zoneStatus').textContent = isProblematic ? 'PROBLEMÁTICA' : 'SEGURA';
+            
+            const indicator = document.getElementById('zoneIndicator');
+            if (isProblematic) {
+                indicator.className = 'problem-zone';
+                indicator.innerHTML = `
+                    <h3>🚨 Zona Problemática (≥ 1534px)</h3>
+                    <p>Ancho actual: ${width}px - Los elementos pueden desaparecer</p>
+                    <p><strong>Solución activa:</strong> CSS y JS ultra agresivos aplicados</p>
+                `;
+            } else {
+                indicator.className = 'safe-zone';
+                indicator.innerHTML = `
+                    <h3>✅ Zona Segura (< 1534px)</h3>
+                    <p>Ancho actual: ${width}px - El contenido debería ser visible normalmente</p>
+                `;
+            }
+        }
+        
+        function logToConsole(message) {
+            const console = document.getElementById('consoleOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            console.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            console.scrollTop = console.scrollHeight;
+        }
+        
+        function checkCurrentState() {
+            logToConsole('🔍 Verificando estado actual...');
+            logToConsole(`📐 Viewport: ${window.innerWidth}x${window.innerHeight}px`);
+            logToConsole(`⚠️ Zona problemática: ${window.innerWidth >= 1534 ? 'SÍ' : 'NO'}`);
+            
+            // Verificar si las funciones de debug están disponibles
+            if (typeof window.fitnessDebugReport === 'function') {
+                logToConsole('✅ Funciones de debug disponibles');
+                logToConsole('📊 Ejecutando reporte automático...');
+                window.fitnessDebugReport();
+            } else {
+                logToConsole('❌ Funciones de debug NO disponibles');
+                logToConsole('💡 Asegúrate de estar en una página de Odoo con el módulo cargado');
+            }
+        }
+        
+        function openFormulario() {
+            logToConsole('📝 Abriendo formulario de inscripción...');
+            window.open('http://localhost:8069/odoo/action-685/new', '_blank');
+        }
+        
+        function simulateWidth(width) {
+            logToConsole(`📱 Simulando ancho de ${width}px...`);
+            logToConsole('💡 Nota: Cambia manualmente el tamaño de la ventana para probar');
+            logToConsole(`🎯 Objetivo: Llevar la ventana a ${width}px de ancho`);
+        }
+        
+        function runDebugReport() {
+            logToConsole('📊 Ejecutando reporte de debug...');
+            if (typeof window.fitnessDebugReport === 'function') {
+                window.fitnessDebugReport();
+                logToConsole('✅ Reporte ejecutado - Ver consola del navegador');
+            } else {
+                logToConsole('❌ Función no disponible - Abrir formulario de Odoo primero');
+            }
+        }
+        
+        function runUltraRepair() {
+            logToConsole('🔧 Ejecutando reparación ultra agresiva...');
+            if (typeof window.ultraAggressiveRepair === 'function') {
+                const repaired = window.ultraAggressiveRepair();
+                logToConsole(`✅ Reparación completada: ${repaired} elementos reparados`);
+            } else {
+                logToConsole('❌ Función no disponible - Abrir formulario de Odoo primero');
+            }
+        }
+        
+        function toggleDebug() {
+            logToConsole('🎛️ Alternando debug...');
+            if (typeof window.fitnessDebugToggle === 'function') {
+                const active = window.fitnessDebugToggle();
+                logToConsole(`🔧 Debug ${active ? 'ACTIVADO' : 'DESACTIVADO'}`);
+            } else {
+                logToConsole('❌ Función no disponible - Abrir formulario de Odoo primero');
+            }
+        }
+        
+        function startMonitoring() {
+            if (monitoringInterval) {
+                logToConsole('⚠️ Monitoreo ya está activo');
+                return;
+            }
+            
+            logToConsole('▶️ Iniciando monitoreo en tiempo real...');
+            monitoringInterval = setInterval(() => {
+                updateViewportInfo();
+                if (window.innerWidth >= 1534) {
+                    logToConsole(`🚨 Zona problemática detectada: ${window.innerWidth}px`);
+                }
+            }, 1000);
+        }
+        
+        function stopMonitoring() {
+            if (monitoringInterval) {
+                clearInterval(monitoringInterval);
+                monitoringInterval = null;
+                logToConsole('⏹️ Monitoreo detenido');
+            } else {
+                logToConsole('⚠️ No hay monitoreo activo');
+            }
+        }
+        
+        function clearConsole() {
+            document.getElementById('consoleOutput').innerHTML = `
+                <div>🚀 Consola de Debug - Fitness Module v4.0</div>
+                <div>Consola limpiada...</div>
+            `;
+        }
+        
+        // Inicialización
+        window.addEventListener('resize', updateViewportInfo);
+        updateViewportInfo();
+        
+        // Log inicial
+        logToConsole('🚀 Test Ultra Aggressive Fix inicializado');
+        logToConsole('📋 Sigue las instrucciones paso a paso');
+        logToConsole('🔗 Abre el formulario de Odoo para probar las funciones');
+    </script>
+</body>
+</html> 

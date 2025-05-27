@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 1: MODELOS CATÁLOGO
+             ======================================== -->
+        
+        <!-- 1. NIVELES DE DIFICULTAD -->
+        <record id="difficulty_principiante" model="fitness.difficulty">
+            <field name="name">Principiante</field>
+            <field name="description">Para quienes inician o retoman.</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="difficulty_intermedio" model="fitness.difficulty">
+            <field name="name">Intermedio</field>
+            <field name="description">Ya con algo de experiencia.</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="difficulty_avanzado" model="fitness.difficulty">
+            <field name="name">Avanzado</field>
+            <field name="description">Alto nivel de condición física.</field>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="difficulty_elite" model="fitness.difficulty">
+            <field name="name">Élite</field>
+            <field name="description">Nivel competitivo/profesional.</field>
+            <field name="sequence">40</field>
+        </record>
+        
+        <record id="difficulty_todos" model="fitness.difficulty">
+            <field name="name">Todos</field>
+            <field name="description">Apto para cualquier nivel.</field>
+            <field name="sequence">5</field>
+        </record>
+        
+        <!-- 2. CATEGORÍAS DE PROGRAMA -->
+        <record id="category_perdida_grasa" model="fitness.program.category">
+            <field name="name">Pérdida de Grasa</field>
+            <field name="description">Enfocado en reducir el porcentaje de grasa corporal.</field>
+        </record>
+        
+        <record id="category_ganancia_muscular" model="fitness.program.category">
+            <field name="name">Ganancia Muscular</field>
+            <field name="description">Hipertrofia y desarrollo de fuerza.</field>
+        </record>
+        
+        <record id="category_acondicionamiento" model="fitness.program.category">
+            <field name="name">Acondicionamiento</field>
+            <field name="description">Mejora general de la condición física.</field>
+        </record>
+        
+        <record id="category_resistencia" model="fitness.program.category">
+            <field name="name">Resistencia</field>
+            <field name="description">Mejora de la capacidad cardiovascular y muscular.</field>
+        </record>
+        
+        <record id="category_preparacion_atletica" model="fitness.program.category">
+            <field name="name">Preparación Atlética</field>
+            <field name="description">Específico para un deporte o evento.</field>
+        </record>
+        
+        <!-- 3. TIPOS DE PROGRAMA -->
+        <record id="type_semanal" model="fitness.program.type">
+            <field name="name">Semanal</field>
+            <field name="description">Estructura que se repite o varía semanalmente.</field>
+        </record>
+        
+        <record id="type_bloques" model="fitness.program.type">
+            <field name="name">Bloques (Fases)</field>
+            <field name="description">Dividido en fases de varias semanas.</field>
+        </record>
+        
+        <record id="type_continuo" model="fitness.program.type">
+            <field name="name">Continuo</field>
+            <field name="description">Programa sin una duración fija predeterminada.</field>
+        </record>
+        
+        <record id="type_evento_especifico" model="fitness.program.type">
+            <field name="name">Evento Específico</field>
+            <field name="description">Diseñado para un evento o fecha objetivo.</field>
+        </record>
+        
+        <record id="type_personalizado" model="fitness.program.type">
+            <field name="name">Personalizado</field>
+            <field name="description">Adaptado 100% a un individuo.</field>
+        </record>
+        
+        <!-- 4. EQUIPAMIENTO -->
+        <record id="equipment_mancuernas" model="fitness.equipment">
+            <field name="name">Mancuernas</field>
+            <field name="description">Pesos libres, par.</field>
+        </record>
+        
+        <record id="equipment_barra_olimpica" model="fitness.equipment">
+            <field name="name">Barra Olímpica</field>
+            <field name="description">Para levantamientos compuestos.</field>
+        </record>
+        
+        <record id="equipment_kettlebell" model="fitness.equipment">
+            <field name="name">Kettlebell (Pesa Rusa)</field>
+            <field name="description">Pesa con asa.</field>
+        </record>
+        
+        <record id="equipment_bandas_resistencia" model="fitness.equipment">
+            <field name="name">Bandas de Resistencia</field>
+            <field name="description">Elásticas de diferentes resistencias.</field>
+        </record>
+        
+        <record id="equipment_peso_corporal" model="fitness.equipment">
+            <field name="name">Peso Corporal</field>
+            <field name="description">Ejercicios sin equipamiento externo.</field>
+        </record>
+        
+        <record id="equipment_maquina_remo" model="fitness.equipment">
+            <field name="name">Máquina de Remo</field>
+            <field name="description">Cardiovascular y fuerza.</field>
+        </record>
+        
+        <record id="equipment_bicicleta_estatica" model="fitness.equipment">
+            <field name="name">Bicicleta Estática</field>
+            <field name="description">Cardiovascular.</field>
+        </record>
+        
+        <!-- Equipamiento adicional necesario para los ejercicios -->
+        <record id="equipment_banco_plano" model="fitness.equipment">
+            <field name="name">Banco Plano</field>
+            <field name="description">Banco para ejercicios de press.</field>
+        </record>
+        
+        <record id="equipment_rack_sentadillas" model="fitness.equipment">
+            <field name="name">Rack de Sentadillas</field>
+            <field name="description">Estructura para sentadillas seguras.</field>
+        </record>
+        
+        <record id="equipment_barra_dominadas" model="fitness.equipment">
+            <field name="name">Barra de Dominadas</field>
+            <field name="description">Barra fija para dominadas y ejercicios colgantes.</field>
+        </record>
+        
+        <!-- 5. GRUPOS MUSCULARES -->
+        <record id="muscle_pecho" model="fitness.muscle.group">
+            <field name="name">Pecho</field>
+            <field name="description">Pectorales.</field>
+            <field name="anatomical_region">upper_body</field>
+        </record>
+        
+        <record id="muscle_espalda" model="fitness.muscle.group">
+            <field name="name">Espalda</field>
+            <field name="description">Dorsales, trapecios, lumbares, etc.</field>
+            <field name="anatomical_region">upper_body</field>
+        </record>
+        
+        <record id="muscle_piernas" model="fitness.muscle.group">
+            <field name="name">Piernas</field>
+            <field name="description">Cuádriceps, isquiotibiales, glúteos, etc.</field>
+            <field name="anatomical_region">lower_body</field>
+        </record>
+        
+        <record id="muscle_hombros" model="fitness.muscle.group">
+            <field name="name">Hombros</field>
+            <field name="description">Deltoides.</field>
+            <field name="anatomical_region">upper_body</field>
+        </record>
+        
+        <record id="muscle_biceps" model="fitness.muscle.group">
+            <field name="name">Bíceps</field>
+            <field name="description">Músculos flexores del brazo.</field>
+            <field name="anatomical_region">upper_body</field>
+        </record>
+        
+        <record id="muscle_triceps" model="fitness.muscle.group">
+            <field name="name">Tríceps</field>
+            <field name="description">Músculos extensores del brazo.</field>
+            <field name="anatomical_region">upper_body</field>
+        </record>
+        
+        <record id="muscle_abdominales" model="fitness.muscle.group">
+            <field name="name">Abdominales</field>
+            <field name="description">Músculos del core frontal.</field>
+            <field name="anatomical_region">core</field>
+        </record>
+        
+        <!-- 6. TIPOS DE EVALUACIÓN FÍSICA -->
+        <record id="assessment_1rm_press_banca" model="fitness.assessment.type">
+            <field name="name">1RM Press de Banca</field>
+            <field name="description">Fuerza máxima en press de banca a 1 repetición.</field>
+            <field name="measurement_unit">kg</field>
+            <field name="assessment_category">strength</field>
+        </record>
+        
+        <record id="assessment_max_lagartijas" model="fitness.assessment.type">
+            <field name="name">Máx. Lagartijas (Push-ups)</field>
+            <field name="description">Número máximo de lagartijas continuas con buena forma.</field>
+            <field name="measurement_unit">reps</field>
+            <field name="assessment_category">endurance</field>
+        </record>
+        
+        <record id="assessment_carrera_5km" model="fitness.assessment.type">
+            <field name="name">Carrera 5km Tiempo</field>
+            <field name="description">Tiempo para completar una carrera de 5 kilómetros.</field>
+            <field name="measurement_unit">min:seg</field>
+            <field name="assessment_category">endurance</field>
+        </record>
+        
+        <record id="assessment_salto_vertical" model="fitness.assessment.type">
+            <field name="name">Salto Vertical</field>
+            <field name="description">Altura máxima alcanzada en un salto vertical.</field>
+            <field name="measurement_unit">cm</field>
+            <field name="assessment_category">power</field>
+        </record>
+        
+        <record id="assessment_test_cooper" model="fitness.assessment.type">
+            <field name="name">Test de Cooper (12 min)</field>
+            <field name="description">Distancia máxima recorrida en 12 minutos.</field>
+            <field name="measurement_unit">metros</field>
+            <field name="assessment_category">endurance</field>
+        </record>
+        
+        <!-- 7. TIPOS DE META DE FITNESS -->
+        <record id="goal_perdida_peso" model="fitness.goal.type">
+            <field name="name">Pérdida de Peso/Grasa</field>
+            <field name="description">Reducir peso o porcentaje de grasa corporal.</field>
+            <field name="measurement_type">weight</field>
+            <field name="default_target_period_days">90</field>
+        </record>
+        
+        <record id="goal_ganancia_fuerza" model="fitness.goal.type">
+            <field name="name">Ganancia de Fuerza</field>
+            <field name="description">Aumentar la fuerza en ejercicios clave.</field>
+            <field name="measurement_type">weight</field>
+            <field name="default_target_period_days">60</field>
+        </record>
+        
+        <record id="goal_hipertrofia" model="fitness.goal.type">
+            <field name="name">Hipertrofia Muscular</field>
+            <field name="description">Aumentar el tamaño muscular.</field>
+            <field name="measurement_type">percentage</field>
+            <field name="default_target_period_days">120</field>
+        </record>
+        
+        <record id="goal_resistencia" model="fitness.goal.type">
+            <field name="name">Mejora de Resistencia</field>
+            <field name="description">Mejorar capacidad aeróbica o muscular localizada.</field>
+            <field name="measurement_type">time</field>
+            <field name="default_target_period_days">45</field>
+        </record>
+        
+        <record id="goal_habito_saludable" model="fitness.goal.type">
+            <field name="name">Hábito Saludable</field>
+            <field name="description">Incorporar o mantener un hábito específico.</field>
+            <field name="measurement_type">frequency</field>
+            <field name="default_target_period_days">30</field>
+        </record>
+        
+        <record id="goal_rendimiento_deportivo" model="fitness.goal.type">
+            <field name="name">Rendimiento Deportivo</field>
+            <field name="description">Alcanzar un objetivo en un deporte específico.</field>
+            <field name="measurement_type">qualitative</field>
+            <field name="default_target_period_days">180</field>
+        </record>
+        
+    </data>
+</odoo> 

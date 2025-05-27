@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== EQUIPAMIENTO ========== -->
+    <record id="view_fitness_equipment_tree" model="ir.ui.view">
+        <field name="name">fitness.equipment.tree</field>
+        <field name="model">fitness.equipment</field>
+        <field name="arch" type="xml">
+            <list string="Equipamiento">
+                <field name="name"/>
+                <field name="brand"/>
+                <field name="model"/>
+                <field name="location"/>
+                <field name="cost"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_equipment_form" model="ir.ui.view">
+        <field name="name">fitness.equipment.form</field>
+        <field name="model">fitness.equipment</field>
+        <field name="arch" type="xml">
+            <form string="Equipamiento">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Equipo"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="brand"/>
+                            <field name="model"/>
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="cost"/>
+                            <field name="purchase_date"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description"/>
+                        </page>
+                        <page string="Mantenimiento">
+                            <field name="maintenance_notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_equipment" model="ir.actions.act_window">
+        <field name="name">Equipamiento</field>
+        <field name="res_model">fitness.equipment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== GRUPOS MUSCULARES ========== -->
+    <record id="view_fitness_muscle_group_tree" model="ir.ui.view">
+        <field name="name">fitness.muscle.group.tree</field>
+        <field name="model">fitness.muscle.group</field>
+        <field name="arch" type="xml">
+            <list string="Grupos Musculares">
+                <field name="name"/>
+                <field name="anatomical_region"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_muscle_group_form" model="ir.ui.view">
+        <field name="name">fitness.muscle.group.form</field>
+        <field name="model">fitness.muscle.group</field>
+        <field name="arch" type="xml">
+            <form string="Grupo Muscular">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Grupo Muscular"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="anatomical_region"/>
+                        <field name="active"/>
+                    </group>
+                    <field name="description" placeholder="Descripción del grupo muscular..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_muscle_group" model="ir.actions.act_window">
+        <field name="name">Grupos Musculares</field>
+        <field name="res_model">fitness.muscle.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== DIFICULTADES ========== -->
+    <record id="view_fitness_difficulty_tree" model="ir.ui.view">
+        <field name="name">fitness.difficulty.tree</field>
+        <field name="model">fitness.difficulty</field>
+        <field name="arch" type="xml">
+            <list string="Niveles de Dificultad" default_order="sequence">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_difficulty_form" model="ir.ui.view">
+        <field name="name">fitness.difficulty.form</field>
+        <field name="model">fitness.difficulty</field>
+        <field name="arch" type="xml">
+            <form string="Nivel de Dificultad">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Nivel"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="sequence"/>
+                        <field name="color" widget="color"/>
+                    </group>
+                    <field name="description" placeholder="Descripción del nivel de dificultad..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_difficulty" model="ir.actions.act_window">
+        <field name="name">Niveles de Dificultad</field>
+        <field name="res_model">fitness.difficulty</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== CATEGORÍAS DE PROGRAMA ========== -->
+    <record id="view_fitness_program_category_tree" model="ir.ui.view">
+        <field name="name">fitness.program.category.tree</field>
+        <field name="model">fitness.program.category</field>
+        <field name="arch" type="xml">
+            <list string="Categorías de Programa">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_program_category_form" model="ir.ui.view">
+        <field name="name">fitness.program.category.form</field>
+        <field name="model">fitness.program.category</field>
+        <field name="arch" type="xml">
+            <form string="Categoría de Programa">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la Categoría"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="color" widget="color"/>
+                        <field name="active"/>
+                    </group>
+                    <field name="description" placeholder="Descripción de la categoría..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_program_category" model="ir.actions.act_window">
+        <field name="name">Categorías de Programa</field>
+        <field name="res_model">fitness.program.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== TIPOS DE PROGRAMA ========== -->
+    <record id="view_fitness_program_type_tree" model="ir.ui.view">
+        <field name="name">fitness.program.type.tree</field>
+        <field name="model">fitness.program.type</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de Programa">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_program_type_form" model="ir.ui.view">
+        <field name="name">fitness.program.type.form</field>
+        <field name="model">fitness.program.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Programa">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Tipo"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="active"/>
+                    </group>
+                    <field name="description" placeholder="Descripción del tipo de programa..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_program_type" model="ir.actions.act_window">
+        <field name="name">Tipos de Programa</field>
+        <field name="res_model">fitness.program.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== TIPOS DE ENTRENAMIENTO ========== -->
+    <record id="view_fitness_workout_type_tree" model="ir.ui.view">
+        <field name="name">fitness.workout.type.tree</field>
+        <field name="model">fitness.workout.type</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de Entrenamiento">
+                <field name="name"/>
+                <field name="workout_style"/>
+                <field name="typical_duration_minutes"/>
+                <field name="intensity_level"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_workout_type_form" model="ir.ui.view">
+        <field name="name">fitness.workout.type.form</field>
+        <field name="model">fitness.workout.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Entrenamiento">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Tipo"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="workout_style"/>
+                            <field name="intensity_level"/>
+                        </group>
+                        <group>
+                            <field name="typical_duration_minutes"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Descripción del tipo de entrenamiento..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_workout_type" model="ir.actions.act_window">
+        <field name="name">Tipos de Entrenamiento</field>
+        <field name="res_model">fitness.workout.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== TIPOS DE EVALUACIÓN ========== -->
+    <record id="view_fitness_assessment_type_tree" model="ir.ui.view">
+        <field name="name">fitness.assessment.type.tree</field>
+        <field name="model">fitness.assessment.type</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de Evaluación">
+                <field name="name"/>
+                <field name="assessment_category"/>
+                <field name="measurement_unit"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_assessment_type_form" model="ir.ui.view">
+        <field name="name">fitness.assessment.type.form</field>
+        <field name="model">fitness.assessment.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Evaluación">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Tipo"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="assessment_category"/>
+                            <field name="measurement_unit"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description" placeholder="Descripción del tipo de evaluación..."/>
+                        </page>
+                        <page string="Instrucciones">
+                            <field name="instructions" placeholder="Instrucciones para realizar la evaluación..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_assessment_type" model="ir.actions.act_window">
+        <field name="name">Tipos de Evaluación</field>
+        <field name="res_model">fitness.assessment.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========== TIPOS DE OBJETIVO ========== -->
+    <record id="view_fitness_goal_type_tree" model="ir.ui.view">
+        <field name="name">fitness.goal.type.tree</field>
+        <field name="model">fitness.goal.type</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de Objetivo">
+                <field name="name"/>
+                <field name="measurement_type"/>
+                <field name="default_target_period_days"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_goal_type_form" model="ir.ui.view">
+        <field name="name">fitness.goal.type.form</field>
+        <field name="model">fitness.goal.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Objetivo">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Tipo"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="measurement_type"/>
+                            <field name="default_target_period_days"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Descripción del tipo de objetivo..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_goal_type" model="ir.actions.act_window">
+        <field name="name">Tipos de Objetivo</field>
+        <field name="res_model">fitness.goal.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo> 

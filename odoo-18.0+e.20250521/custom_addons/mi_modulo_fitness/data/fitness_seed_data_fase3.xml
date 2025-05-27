@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ========================================
+             FASE 3: ESTRUCTURA DE ENTRENAMIENTO
+             ======================================== -->
+        
+        <!-- EJERCICIOS ADICIONALES NECESARIOS PARA LOS WORKOUTS -->
+        <record id="exercise_press_inclinado_mancuernas" model="fitness.exercise">
+            <field name="name">Press Inclinado con Mancuernas</field>
+            <field name="description">Ejercicio para pecho superior usando mancuernas en banco inclinado.</field>
+            <field name="primary_muscle_group_id" ref="muscle_pecho"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_hombros'), ref('muscle_triceps')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_mancuernas'), ref('equipment_banco_plano')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url">https://youtube.com/ejemplo_press_inclinado</field>
+            <field name="internal_notes">Banco a 30-45 grados. Controlar el descenso.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_jalon_pecho" model="fitness.exercise">
+            <field name="name">Jalón al Pecho</field>
+            <field name="description">Ejercicio de tracción para espalda usando máquina de poleas.</field>
+            <field name="primary_muscle_group_id" ref="muscle_espalda"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_biceps')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_maquina_remo')])]"/>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="video_url">https://youtube.com/ejemplo_jalon</field>
+            <field name="internal_notes">Alternativa a dominadas para principiantes.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_kettlebell_swings" model="fitness.exercise">
+            <field name="name">Kettlebell Swings</field>
+            <field name="description">Ejercicio explosivo de cadera con kettlebell para potencia y acondicionamiento.</field>
+            <field name="primary_muscle_group_id" ref="muscle_piernas"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_espalda'), ref('muscle_abdominales')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_kettlebell')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_kettlebell_swings</field>
+            <field name="internal_notes">Bisagra de cadera, no sentadilla. Explosivo hacia arriba.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="exercise_burpees" model="fitness.exercise">
+            <field name="name">Burpees</field>
+            <field name="description">Ejercicio de cuerpo completo que combina sentadilla, plancha, lagartija y salto.</field>
+            <field name="primary_muscle_group_id" ref="muscle_abdominales"/>
+            <field name="secondary_muscle_group_ids" eval="[(6, 0, [ref('muscle_pecho'), ref('muscle_piernas'), ref('muscle_hombros')])]"/>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_peso_corporal')])]"/>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="video_url">https://youtube.com/ejemplo_burpees</field>
+            <field name="internal_notes">Pecho al suelo en la fase de plancha. Salto explosivo.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- 1. PROGRAMAS DE ENTRENAMIENTO -->
+        <record id="program_fuerza_inicial" model="fitness.program">
+            <field name="name">Fuerza Inicial (4 Semanas)</field>
+            <field name="description">Programa de 4 semanas para principiantes enfocado en construir una base de fuerza con ejercicios compuestos.</field>
+            <field name="difficulty_id" ref="difficulty_principiante"/>
+            <field name="program_category_id" ref="category_ganancia_muscular"/>
+            <field name="program_type_id" ref="type_bloques"/>
+            <field name="duration_text">4 Semanas</field>
+            <field name="privacy_setting">public</field>
+            <field name="autosync_user_schedule">False</field>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_barra_olimpica'), ref('equipment_mancuernas'), ref('equipment_banco_plano'), ref('equipment_rack_sentadillas')])]"/>
+            <field name="active">True</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="program_metcon_express" model="fitness.program">
+            <field name="name">Acondicionamiento Metabólico Express</field>
+            <field name="description">Entrenamientos cortos y de alta intensidad para mejorar el acondicionamiento y quemar calorías. Rutinas de 30 minutos.</field>
+            <field name="difficulty_id" ref="difficulty_intermedio"/>
+            <field name="program_category_id" ref="category_acondicionamiento"/>
+            <field name="program_type_id" ref="type_semanal"/>
+            <field name="duration_text">Continuo (rutinas semanales)</field>
+            <field name="privacy_setting">public</field>
+            <field name="autosync_user_schedule">False</field>
+            <field name="required_equipment_ids" eval="[(6, 0, [ref('equipment_mancuernas'), ref('equipment_kettlebell'), ref('equipment_peso_corporal')])]"/>
+            <field name="active">True</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <!-- 2. ENTRENAMIENTOS/WORKOUTS -->
+        <record id="workout_fuerza_dia_a" model="fitness.workout">
+            <field name="name">Semana 1-2: Día A - Empuje</field>
+            <field name="description">Enfoque en movimientos de empuje para pecho, hombros y tríceps.</field>
+            <field name="program_id" ref="program_fuerza_inicial"/>
+            <field name="sequence_in_program">10</field>
+            <field name="estimated_duration_minutes">60</field>
+            <field name="workout_type">standard</field>
+            <field name="active">True</field>
+            <field name="internal_notes">Recordar al usuario la importancia de la técnica sobre el peso en esta fase.</field>
+            <field name="user_facing_notes">Concéntrate en controlar el movimiento en cada repetición. ¡Descansa bien entre series!</field>
+        </record>
+        
+        <record id="workout_fuerza_dia_b" model="fitness.workout">
+            <field name="name">Semana 1-2: Día B - Tracción y Pierna</field>
+            <field name="description">Enfoque en movimientos de tracción para espalda y bíceps, más ejercicios base de pierna.</field>
+            <field name="program_id" ref="program_fuerza_inicial"/>
+            <field name="sequence_in_program">20</field>
+            <field name="estimated_duration_minutes">75</field>
+            <field name="workout_type">standard</field>
+            <field name="active">True</field>
+            <field name="internal_notes">Verificar la profundidad de la sentadilla.</field>
+            <field name="user_facing_notes">Mantén el core activado durante las sentadillas y dominadas.</field>
+        </record>
+        
+        <record id="workout_metcon_lunes" model="fitness.workout">
+            <field name="name">Lunes: MetCon Full Body A</field>
+            <field name="description">Circuito de cuerpo completo para elevar el ritmo cardíaco.</field>
+            <field name="program_id" ref="program_metcon_express"/>
+            <field name="sequence_in_program">10</field>
+            <field name="estimated_duration_minutes">30</field>
+            <field name="workout_type">circuit</field>
+            <field name="active">True</field>
+            <field name="internal_notes">Asegurar transiciones rápidas entre ejercicios.</field>
+            <field name="user_facing_notes">¡Da tu máximo en cada ronda! Descansa solo lo indicado.</field>
+        </record>
+        
+        <!-- 3. LÍNEAS DE EJERCICIO PARA WORKOUTS -->
+        
+        <!-- Líneas para Workout "Día A - Empuje" -->
+        <record id="workout_line_1_1_1" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_banca"/>
+            <field name="sequence">10</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">8-10</field>
+            <field name="rest_period_text">90-120s</field>
+            <field name="special_instructions">Calentamiento previo con barra sola. Enfócate en bajar controlado.</field>
+        </record>
+        
+        <record id="workout_line_1_1_2" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_inclinado_mancuernas"/>
+            <field name="sequence">20</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">10-12</field>
+            <field name="rest_period_text">60-90s</field>
+            <field name="special_instructions">Banco a 30-45 grados.</field>
+        </record>
+        
+        <record id="workout_line_1_1_3" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_a"/>
+            <field name="exercise_id" ref="exercise_press_militar"/>
+            <field name="sequence">30</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">8-10</field>
+            <field name="rest_period_text">90s</field>
+            <field name="special_instructions">Core apretado, no usar impulso de piernas.</field>
+        </record>
+        
+        <record id="workout_line_1_1_4" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_a"/>
+            <field name="exercise_id" ref="exercise_extension_triceps"/>
+            <field name="sequence">40</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">12-15</field>
+            <field name="rest_period_text">60s</field>
+            <field name="special_instructions">Ejercicio de finalización. Controlar el movimiento.</field>
+        </record>
+        
+        <!-- Líneas para Workout "Día B - Tracción y Pierna" -->
+        <record id="workout_line_1_2_1" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_b"/>
+            <field name="exercise_id" ref="exercise_sentadilla"/>
+            <field name="sequence">10</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">8-10</field>
+            <field name="rest_period_text">120s</field>
+            <field name="special_instructions">Enfócate en la profundidad y técnica.</field>
+        </record>
+        
+        <record id="workout_line_1_2_2" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_b"/>
+            <field name="exercise_id" ref="exercise_jalon_pecho"/>
+            <field name="sequence">20</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">8-12</field>
+            <field name="rest_period_text">90s</field>
+            <field name="special_instructions">Alternativa a dominadas. Si puedes hacer dominadas, úsalas.</field>
+        </record>
+        
+        <record id="workout_line_1_2_3" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_b"/>
+            <field name="exercise_id" ref="exercise_peso_muerto"/>
+            <field name="sequence">30</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">6-8</field>
+            <field name="rest_period_text">120s</field>
+            <field name="special_instructions">Peso moderado, enfoque en técnica perfecta.</field>
+        </record>
+        
+        <record id="workout_line_1_2_4" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_fuerza_dia_b"/>
+            <field name="exercise_id" ref="exercise_curl_biceps"/>
+            <field name="sequence">40</field>
+            <field name="sets_text">3</field>
+            <field name="repetitions_text">12-15</field>
+            <field name="rest_period_text">60s</field>
+            <field name="special_instructions">Ejercicio de finalización para bíceps.</field>
+        </record>
+        
+        <!-- Líneas para Workout "MetCon Full Body A" -->
+        <record id="workout_line_2_1_1" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_metcon_lunes"/>
+            <field name="exercise_id" ref="exercise_kettlebell_swings"/>
+            <field name="sequence">10</field>
+            <field name="sets_text">4 Rondas</field>
+            <field name="repetitions_text">15 reps</field>
+            <field name="rest_period_text">Sin descanso, pasar al siguiente</field>
+            <field name="special_instructions">Bisagra de cadera, no sentadilla.</field>
+        </record>
+        
+        <record id="workout_line_2_1_2" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_metcon_lunes"/>
+            <field name="exercise_id" ref="exercise_plancha"/>
+            <field name="sequence">20</field>
+            <field name="sets_text">4 Rondas</field>
+            <field name="repetitions_text">30 segundos</field>
+            <field name="rest_period_text">Sin descanso, pasar al siguiente</field>
+            <field name="special_instructions">Mantener cadera alineada.</field>
+        </record>
+        
+        <record id="workout_line_2_1_3" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_metcon_lunes"/>
+            <field name="exercise_id" ref="exercise_burpees"/>
+            <field name="sequence">30</field>
+            <field name="sets_text">4 Rondas</field>
+            <field name="repetitions_text">10 reps</field>
+            <field name="rest_period_text">Descansar 60-90s después de completar todos los ejercicios del circuito</field>
+            <field name="special_instructions">Pecho al suelo. Salto explosivo al final.</field>
+        </record>
+        
+        <record id="workout_line_2_1_4" model="fitness.workout.line">
+            <field name="workout_id" ref="workout_metcon_lunes"/>
+            <field name="exercise_id" ref="exercise_zancadas"/>
+            <field name="sequence">40</field>
+            <field name="sets_text">4 Rondas</field>
+            <field name="repetitions_text">20 reps (10 por pierna)</field>
+            <field name="rest_period_text">Completar la ronda y descansar 60-90s</field>
+            <field name="special_instructions">Alternar piernas. Mantener torso erguido.</field>
+        </record>
+        
+    </data>
+</odoo> 

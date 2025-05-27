@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Tree para Ejercicios -->
+    <record id="view_fitness_exercise_tree" model="ir.ui.view">
+        <field name="name">fitness.exercise.tree</field>
+        <field name="model">fitness.exercise</field>
+        <field name="arch" type="xml">
+            <list string="Biblioteca de Ejercicios">
+                <field name="name"/>
+                <field name="primary_muscle_group_id"/>
+                <field name="difficulty_id"/>
+                <field name="required_equipment_ids" widget="many2many_tags"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista Form para Ejercicios -->
+    <record id="view_fitness_exercise_form" model="ir.ui.view">
+        <field name="name">fitness.exercise.form</field>
+        <field name="model">fitness.exercise</field>
+        <field name="arch" type="xml">
+            <form string="Ejercicio">
+                <header>
+                    <field name="active" widget="boolean_toggle"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del Ejercicio"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="primary_muscle_group_id"/>
+                            <field name="difficulty_id"/>
+                        </group>
+                        <group>
+                            <field name="video_url" widget="url"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción e Instrucciones">
+                            <field name="description" placeholder="Instrucciones detalladas para realizar el ejercicio..."/>
+                        </page>
+                        <page string="Grupos Musculares">
+                            <group>
+                                <field name="secondary_muscle_group_ids" widget="many2many_tags"/>
+                            </group>
+                        </page>
+                                                 <page string="Equipamiento">
+                             <field name="required_equipment_ids">
+                                 <list>
+                                     <field name="name"/>
+                                     <field name="brand"/>
+                                     <field name="location"/>
+                                 </list>
+                             </field>
+                         </page>
+                        <page string="Notas Internas">
+                            <field name="internal_notes" placeholder="Notas para entrenadores sobre este ejercicio..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Kanban para Ejercicios -->
+    <record id="view_fitness_exercise_kanban" model="ir.ui.view">
+        <field name="name">fitness.exercise.kanban</field>
+        <field name="model">fitness.exercise</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="primary_muscle_group_id" class="o_kanban_small_column">
+                <field name="name"/>
+                <field name="primary_muscle_group_id"/>
+                <field name="difficulty_id"/>
+                <field name="image_1920"/>
+                <field name="video_url"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="record.image_1920.raw_value ? '/web/image/fitness.exercise/' + record.id.raw_value + '/image_1920' : '/web/static/img/placeholder.png'" alt="Ejercicio"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_record_body">
+                                    <field name="difficulty_id"/>
+                                    <br/>
+                                    <field name="primary_muscle_group_id"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <span t-if="record.video_url.raw_value" class="badge badge-info">
+                                            <i class="fa fa-video-camera"/> Video
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vista Search para Ejercicios -->
+    <record id="view_fitness_exercise_search" model="ir.ui.view">
+        <field name="name">fitness.exercise.search</field>
+        <field name="model">fitness.exercise</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Ejercicios">
+                <field name="name" string="Ejercicio" filter_domain="[('name','ilike',self)]"/>
+                <field name="primary_muscle_group_id"/>
+                <field name="secondary_muscle_group_ids"/>
+                <field name="difficulty_id"/>
+                <field name="required_equipment_ids"/>
+                <separator/>
+                <filter string="Con Video" name="with_video" domain="[('video_url','!=',False)]"/>
+                <filter string="Sin Video" name="without_video" domain="[('video_url','=',False)]"/>
+                <separator/>
+                <filter string="Activos" name="active" domain="[('active','=',True)]"/>
+                <filter string="Archivados" name="inactive" domain="[('active','=',False)]"/>
+                <separator/>
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Grupo Muscular Principal" name="group_muscle" context="{'group_by':'primary_muscle_group_id'}"/>
+                    <filter string="Dificultad" name="group_difficulty" context="{'group_by':'difficulty_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción para Ejercicios -->
+    <record id="action_fitness_exercise" model="ir.actions.act_window">
+        <field name="name">Biblioteca de Ejercicios</field>
+        <field name="res_model">fitness.exercise</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_fitness_exercise_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Crea tu primer ejercicio!
+            </p>
+            <p>
+                La biblioteca de ejercicios te permite mantener un catálogo completo
+                de movimientos con instrucciones, grupos musculares y equipamiento.
+            </p>
+        </field>
+    </record>
+</odoo> 

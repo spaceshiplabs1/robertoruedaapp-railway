@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== INSCRIPCIONES DE USUARIOS A PROGRAMAS ========== -->
+    <record id="view_fitness_user_program_tree" model="ir.ui.view">
+        <field name="name">fitness.user.program.tree</field>
+        <field name="model">fitness.user.program</field>
+        <field name="arch" type="xml">
+            <list string="Inscripciones a Programas">
+                <field name="user_id"/>
+                <field name="program_id"/>
+                <field name="enrollment_status"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="completion_percentage" widget="progressbar"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_user_program_form" model="ir.ui.view">
+        <field name="name">fitness.user.program.form</field>
+        <field name="model">fitness.user.program</field>
+        <field name="arch" type="xml">
+            <form string="Inscripción a Programa">
+                <header>
+                    <field name="enrollment_status" widget="statusbar" statusbar_visible="pending_start,active,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group class="row">
+                        <group string="Información Básica" class="col-12 col-md-6">
+                            <field name="user_id"/>
+                            <field name="program_id"/>
+                            <field name="enrollment_status"/>
+                        </group>
+                        <group string="Fechas y Progreso" class="col-12 col-md-6">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="completion_percentage" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fotos de Progreso">
+                            <group>
+                                <group string="Foto Inicial">
+                                    <field name="initial_enrollment_picture" widget="image" class="oe_avatar" options="{'size': [150, 150]}"/>
+                                </group>
+                                <group string="Foto Actual">
+                                    <field name="current_progress_picture" widget="image" class="oe_avatar" options="{'size': [150, 150]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notas y Comentarios">
+                            <group>
+                                <field name="trainer_notes" placeholder="Notas del entrenador sobre esta inscripción..." nolabel="1"/>
+                                <separator string="Feedback del Usuario"/>
+                                <field name="user_feedback" placeholder="Feedback del usuario sobre el programa..." nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fitness_user_program_kanban" model="ir.ui.view">
+        <field name="name">fitness.user.program.kanban</field>
+        <field name="model">fitness.user.program</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="enrollment_status" class="o_kanban_small_column">
+                <field name="user_id"/>
+                <field name="program_id"/>
+                <field name="enrollment_status"/>
+                <field name="completion_percentage"/>
+                <field name="current_progress_picture"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="record.current_progress_picture.raw_value ? '/web/image/fitness.user.program/' + record.id.raw_value + '/current_progress_picture' : '/web/static/img/placeholder.png'" alt="Usuario"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="user_id"/>
+                                </strong>
+                                <div class="o_kanban_record_body">
+                                    <field name="program_id"/>
+                                    <br/>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="completion_percentage" widget="progressbar"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_fitness_user_program" model="ir.actions.act_window">
+        <field name="name">Inscripciones a Programas</field>
+        <field name="res_model">fitness.user.program</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Inscribe usuarios a programas de entrenamiento!
+            </p>
+            <p>
+                Gestiona las inscripciones de usuarios a programas y su progreso.
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== MEDICIONES CORPORALES ========== -->
+    <record id="view_fitness_body_measurement_tree" model="ir.ui.view">
+        <field name="name">fitness.body.measurement.tree</field>
+        <field name="model">fitness.body.measurement</field>
+        <field name="arch" type="xml">
+            <list string="Mediciones Corporales">
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="weight"/>
+                <field name="chest"/>
+                <field name="waist"/>
+                <field name="hips"/>
+                <field name="body_fat_percentage"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_body_measurement_form" model="ir.ui.view">
+        <field name="name">fitness.body.measurement.form</field>
+        <field name="model">fitness.body.measurement</field>
+        <field name="arch" type="xml">
+            <form string="Medición Corporal">
+                <sheet>
+                    <field name="measurement_picture" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group class="row">
+                        <group class="col-12 col-md-6">
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group class="col-12 col-md-6">
+                            <field name="weight"/>
+                            <field name="body_fat_percentage"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Circunferencias">
+                            <group>
+                                <group string="Torso">
+                                    <field name="chest"/>
+                                    <field name="waist"/>
+                                    <field name="hips"/>
+                                </group>
+                                <group string="Extremidades">
+                                    <field name="left_arm"/>
+                                    <field name="right_arm"/>
+                                    <field name="left_thigh"/>
+                                    <field name="right_thigh"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notas">
+                            <field name="notes" placeholder="Condiciones de la medición, observaciones..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_body_measurement" model="ir.actions.act_window">
+        <field name="name">Mediciones Corporales</field>
+        <field name="res_model">fitness.body.measurement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Registra la primera medición corporal!
+            </p>
+            <p>
+                Lleva un seguimiento detallado de las mediciones corporales de tus usuarios.
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== EVALUACIONES FÍSICAS ========== -->
+    <record id="view_fitness_assessment_tree" model="ir.ui.view">
+        <field name="name">fitness.assessment.tree</field>
+        <field name="model">fitness.assessment</field>
+        <field name="arch" type="xml">
+            <list string="Evaluaciones Físicas">
+                <field name="user_id"/>
+                <field name="assessment_type_id"/>
+                <field name="date"/>
+                <field name="value_numerical"/>
+                <field name="value_text"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_assessment_form" model="ir.ui.view">
+        <field name="name">fitness.assessment.form</field>
+        <field name="model">fitness.assessment</field>
+        <field name="arch" type="xml">
+            <form string="Evaluación Física">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group class="row">
+                        <group class="col-12 col-md-6">
+                            <field name="user_id"/>
+                            <field name="assessment_type_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group class="col-12 col-md-6">
+                            <field name="value_numerical"/>
+                            <field name="value_text"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notas y Observaciones">
+                            <field name="notes" placeholder="Notas detalladas de la evaluación..."/>
+                        </page>
+                        <page string="Evidencia">
+                            <field name="assessment_picture" widget="image"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_assessment" model="ir.actions.act_window">
+        <field name="name">Evaluaciones Físicas</field>
+        <field name="res_model">fitness.assessment</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Realiza la primera evaluación física!
+            </p>
+            <p>
+                Registra evaluaciones físicas periódicas para medir el progreso.
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== OBJETIVOS DE FITNESS ========== -->
+    <record id="view_fitness_goal_tree" model="ir.ui.view">
+        <field name="name">fitness.goal.tree</field>
+        <field name="model">fitness.goal</field>
+        <field name="arch" type="xml">
+            <list string="Objetivos de Fitness">
+                <field name="user_id"/>
+                <field name="goal_type_id"/>
+                <field name="start_date"/>
+                <field name="target_date"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fitness_goal_form" model="ir.ui.view">
+        <field name="name">fitness.goal.form</field>
+        <field name="model">fitness.goal</field>
+        <field name="arch" type="xml">
+            <form string="Objetivo de Fitness">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="in_progress,achieved,on_hold"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group class="row">
+                        <group class="col-12 col-md-6">
+                            <field name="user_id"/>
+                            <field name="goal_type_id"/>
+                            <field name="start_date"/>
+                            <field name="target_date"/>
+                        </group>
+                        <group class="col-12 col-md-6">
+                            <field name="target_metric_description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description" placeholder="Descripción detallada del objetivo..."/>
+                        </page>
+                        <page string="Notas de Progreso">
+                            <field name="progress_notes" placeholder="Notas sobre el progreso hacia el objetivo..."/>
+                        </page>
+                        <page string="Resultado Final">
+                            <field name="outcome_summary" placeholder="Resumen del resultado o reflexión final..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fitness_goal" model="ir.actions.act_window">
+        <field name="name">Objetivos de Fitness</field>
+        <field name="res_model">fitness.goal</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Define el primer objetivo de fitness!
+            </p>
+            <p>
+                Establece y da seguimiento a objetivos personalizados de fitness.
+            </p>
+        </field>
+    </record>
+</odoo> 
