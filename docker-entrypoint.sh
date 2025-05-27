@@ -15,7 +15,18 @@ echo "🔑 Enterprise Code: ${ENTERPRISE_CODE:-NOT_SET}"
 echo "🔧 Creating Odoo configuration..."
 envsubst < /etc/odoo/odoo.railway.conf > /etc/odoo/odoo.conf
 
-# Note: ODOO_DATA_DIR=/app/filestore is set, so Odoo will handle permissions
+# Check if database needs initialization
+echo "🔍 Checking if database needs initialization..."
+DB_INITIALIZED=$(PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -U "${DB_USER}" -d "${DB_NAME}" -t -c "SELECT COUNT(*) FROM information_schema.tables WHERE table_name='ir_module_module';" 2>/dev/null || echo "0")
+
+if [ "$DB_INITIALIZED" = "0" ] || [ "$DB_INITIALIZED" = " 0" ]; then
+    echo "🔧 Database not initialized, forcing initialization with base modules..."
+    # Initialize database with base modules
+    echo "🏗️ Running Odoo initialization..."
+    /entrypoint.sh odoo -c /etc/odoo/odoo.conf -i base --stop-after-init --no-http
+    echo "✅ Database initialization complete!"
+fi
+
 echo "🔧 ODOO_DATA_DIR set to handle filestore permissions automatically"
 
 # Show the generated config for debugging

@@ -5,8 +5,8 @@ FROM odoo:18
 # Switch to root for setup
 USER root
 
-# Install envsubst for environment variable substitution and gosu for user switching
-RUN apt-get update && apt-get install -y gettext-base gosu && rm -rf /var/lib/apt/lists/*
+# Install envsubst for environment variable substitution, gosu for user switching, and postgresql-client for db checks
+RUN apt-get update && apt-get install -y gettext-base gosu postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Copy fitness module
 COPY odoo-18.0+e.20250521/custom_addons /mnt/extra-addons
