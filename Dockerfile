@@ -5,25 +5,22 @@ FROM odoo:18
 # Switch to root for setup
 USER root
 
-# Copy custom fitness module
+# Copy fitness module
 COPY odoo-18.0+e.20250521/custom_addons /mnt/extra-addons
 
-# Copy main configuration
+# Copy config
 COPY odoo.conf /etc/odoo/odoo.conf
 
-# Create and set permissions for all directories
-RUN mkdir -p /app/filestore /var/lib/odoo && \
-    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore /var/lib/odoo
+# Set permissions and create directories
+RUN mkdir -p /app/filestore && \
+    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore
 
 # Switch back to odoo user
 USER odoo
 
-# Set working directory
-WORKDIR /usr/lib/python3/dist-packages/odoo
-
 # Expose Odoo port
 EXPOSE 8069
 
-# Start Odoo with our configuration
-# Using python3 explicitly since that's what's available in the container
-CMD ["python3", "/usr/lib/python3/dist-packages/odoo/odoo-bin", "-c", "/etc/odoo/odoo.conf"] 
+# Use the standard Odoo entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["odoo", "-c", "/etc/odoo/odoo.conf"] 
