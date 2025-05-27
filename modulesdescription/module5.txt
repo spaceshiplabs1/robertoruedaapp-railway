@@ -1,0 +1,132 @@
+¡Perfecto, sigamos adelante!
+
+**Paso 5: Modelo de Ejercicios (Punto #4 de tu lista)**
+
+Este código va en un nuevo archivo: `mi_modulo_fitness/models/fitness_exercise.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_exercise.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields
+
+class FitnessExercise(models.Model):
+    _name = 'fitness.exercise'
+    _description = 'Ejercicio Individual (Biblioteca de Movimientos)'
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para historial y actividades
+    _order = 'name' # Ordenar alfabéticamente por nombre por defecto
+
+    name = fields.Char(string="Nombre del Ejercicio", required=True, tracking=True, index=True)
+    description = fields.Text(string="Descripción/Instrucciones del Ejercicio", translate=True)
+
+    primary_muscle_group_id = fields.Many2one(
+        comodel_name='fitness.muscle.group',
+        string="Grupo Muscular Primario",
+        tracking=True,
+        ondelete='restrict' # Evitar borrar un grupo muscular si está en uso
+    )
+    secondary_muscle_group_ids = fields.Many2many(
+        comodel_name='fitness.muscle.group',
+        relation='fitness_exercise_secondary_muscle_rel',
+        column1='exercise_id',
+        column2='muscle_group_id',
+        string="Grupos Musculares Secundarios"
+    )
+
+    required_equipment_ids = fields.Many2many(
+        comodel_name='fitness.equipment',
+        relation='fitness_exercise_equipment_rel',
+        column1='exercise_id',
+        column2='equipment_id',
+        string="Equipamiento Requerido"
+    )
+
+    difficulty_id = fields.Many2one(
+        comodel_name='fitness.difficulty',
+        string="Nivel de Dificultad",
+        tracking=True,
+        ondelete='restrict' # Evitar borrar una dificultad si está en uso
+    )
+
+    # Multimedia para demostración
+    image_1920 = fields.Image(string="Imagen Demostrativa", max_width=1920, max_height=1920)
+    video_url = fields.Char(
+        string="URL del Video Demostrativo",
+        help="Enlace a un video externo (ej. YouTube, Vimeo) que muestre cómo realizar el ejercicio."
+    )
+    
+    internal_notes = fields.Text(
+        string="Notas Internas (para Entrenadores)",
+        help="Observaciones o puntos clave sobre el ejercicio para uso interno del entrenador."
+    )
+
+    active = fields.Boolean(
+        string="Activo", 
+        default=True, 
+        help="Desmarcar para archivar el ejercicio y que no esté disponible para ser añadido a nuevos entrenamientos."
+    )
+
+    # Podríamos añadir un constraint para asegurar que el nombre del ejercicio sea único
+    # _sql_constraints = [
+    #     ('name_uniq', 'unique (name)', "El nombre del ejercicio debe ser único.")
+    # ]
+```
+
+**Actualización del archivo `models/__init__.py`:**
+
+Añade la importación de `fitness_exercise.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program
+from . import fitness_workout
+from . import fitness_exercise # Añadida esta línea
+# from . import fitness_workout_line # Siguiente...
+```
+
+---
+
+**Listado de Modelos V1 (Estado Actual):**
+
+**Realizados (Código Python Proporcionado):**
+
+1.  **Información del Usuario (Extensión de `res.partner`)** (en `res_partner.py`)
+2.  **Modelos Catálogo:** (todos en `fitness_catalogs.py`)
+    * `fitness.difficulty`
+    * `fitness.program.category`
+    * `fitness.program.type`
+    * `fitness.equipment`
+    * `fitness.muscle.group`
+    * `fitness.assessment.type` (Catálogo para el Punto #10)
+    * `fitness.goal.type` (Catálogo para el Punto #12)
+3.  **Programas de Entrenamiento (`fitness.program`)** (Punto #2, en `fitness_program.py`)
+4.  **Entrenamientos/Workouts (`fitness.workout`)** (Punto #3, en `fitness_workout.py`)
+5.  **Ejercicios (`fitness.exercise`)** (Punto #4, en `fitness_exercise.py`)
+
+**Pendientes (Según tu lista de V1, en orden aproximado de dependencia y numeración):**
+
+* **Componentes de Workout (`fitness.workout.line`)** (Punto #5) - *Este sería el siguiente.*
+* **Seguimiento de Progreso del Usuario (`fitness.user.program`)** (Punto #6)
+* **Mediciones Corporales (`fitness.body.measurement`)** (Punto #9)
+* **Pruebas de Evaluación Física (`fitness.assessment`)** (Cuerpo del Punto #10)
+* **Seguimiento de Nutrición (Modelos básicos)** (Punto #11)
+    * `fitness.food.item`
+    * `fitness.meal.log`
+    * `fitness.meal.line`
+* **Establecimiento de Metas (`fitness.goal`)** (Cuerpo del Punto #12)
+* **Historial de Entrenamientos (`fitness.workout.history`)** (Punto #7)
+* **Rendimiento en Ejercicios (`fitness.exercise.performance`)** (Punto #8)
+* **Sistema de Logros (Modelos básicos)** (Punto #14)
+    * `fitness.achievement`
+    * `fitness.user.achievement`
+* **Protocolo de Usuario (`fitness.user.protocol`)** (Punto #15)
+
+---
+
+El siguiente paso es el **Punto #5: Componentes de Workout (`fitness.workout.line`)**. Este modelo es crucial ya que detalla cómo se realiza cada ejercicio dentro de un workout específico (series, repeticiones, etc.). Dependerá de `fitness.workout` y `fitness.exercise`.
+
+¿Continuamos con `fitness.workout.line`?

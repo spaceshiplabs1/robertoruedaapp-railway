@@ -1,0 +1,153 @@
+¡Vamos a definir el último modelo de la V1!
+
+**Paso 15: Modelo de Protocolo de Usuario (Punto #15 de tu lista)**
+
+Este código irá en un nuevo archivo: `mi_modulo_fitness/models/fitness_user_protocol.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_user_protocol.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class FitnessUserProtocol(models.Model):
+    _name = 'fitness.user.protocol'
+    _description = "Protocolo de Estilo de Vida/Recuperación Asignado al Usuario"
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para historial y actividades
+    _order = 'user_id, start_date desc, is_active_protocol desc'
+
+    name = fields.Char(string="Referencia del Protocolo", compute='_compute_name', store=True, readonly=True)
+
+    user_id = fields.Many2one(
+        comodel_name='res.partner',
+        string="Usuario",
+        required=True,
+        ondelete='cascade', # O 'restrict'
+        index=True,
+        tracking=True
+    )
+    
+    is_active_protocol = fields.Boolean(
+        string="¿Protocolo Activo Principal?",
+        default=True,
+        tracking=True,
+        help="Marcar si este es el conjunto de protocolos que el usuario está siguiendo activamente. "
+             "Se recomienda gestionar para que solo haya un protocolo activo a la vez por usuario."
+    )
+
+    start_date = fields.Date(
+        string="Fecha de Inicio del Protocolo",
+        default=fields.Date.context_today,
+        required=True,
+        tracking=True
+    )
+    end_date = fields.Date(
+        string="Fecha de Fin del Protocolo (Opcional)",
+        tracking=True,
+        help="Dejar en blanco si es indefinido o hasta nueva indicación."
+    )
+
+    # Descripciones de los protocolos específicos (campos de Texto para flexibilidad en V1)
+    fasting_protocol_description = fields.Text(
+        string="Protocolo de Ayuno", 
+        help="Ej: '16:8 diario (ventana de alimentación 12pm-8pm)', 'Ayuno de 24h los lunes'."
+    )
+    sauna_steam_protocol_description = fields.Text(
+        string="Protocolo de Sauna / Baño de Vapor",
+        help="Ej: 'Sauna infrarroja 3x semana, 20 min', 'Vapor después de entrenamientos de fuerza'."
+    )
+    cold_exposure_protocol_description = fields.Text(
+        string="Protocolo de Exposición al Frío",
+        help="Ej: 'Duchas frías matutinas (final 2-3 min)', 'Inmersión en hielo 1x semana, 5 min a 10°C'."
+    )
+    sleep_recovery_protocol_description = fields.Text(
+        string="Protocolo de Sueño y Recuperación",
+        help="Ej: 'Acostarse a las 10pm, despertar 6am. No cafeína después de las 2pm. Habitación oscura y fresca.'."
+    )
+    daily_movement_protocol_description = fields.Text(
+        string="Protocolo de Movimiento Diario (NEAT)",
+        help="Ej: 'Objetivo: 10,000-12,000 pasos diarios. Subir escaleras en lugar de ascensor.'."
+    )
+    hydration_protocol_description = fields.Text(
+        string="Protocolo de Hidratación",
+        help="Ej: 'Mínimo 3 litros de agua al día. Considerar electrolitos en días de mucho calor o sudoración'."
+    )
+    stress_management_protocol_description = fields.Text(
+        string="Protocolo de Manejo de Estrés",
+        help="Ej: 'Meditación diaria 10 min (mañana)', 'Técnicas de respiración', 'Journaling'."
+    )
+    
+    other_recommendations = fields.Text(
+        string="Otras Recomendaciones / Notas Generales del Protocolo",
+        help="Suplementación específica, hábitos adicionales, recursos recomendados, etc."
+    )
+
+    @api.depends('user_id.name', 'start_date', 'is_active_protocol')
+    def _compute_name(self):
+        for record in self:
+            user_name = record.user_id.name if record.user_id else "N/D"
+            date_str = fields.Date.to_string(record.start_date) if record.start_date else "N/D"
+            active_status = " (Activo)" if record.is_active_protocol else ""
+            record.name = f"Protocolo: {user_name} - {date_str}{active_status}"
+
+    # Consideración para V2: Lógica para asegurar que solo un protocolo esté activo por usuario,
+    # o un sistema de versionado/historial de protocolos más explícito si cambian frecuentemente.
+    # Por ahora, 'is_active_protocol' y las fechas ayudan a gestionarlo manualmente.
+```
+*He añadido un campo para `stress_management_protocol_description` y `hydration_protocol_description` ya que son comunes en protocolos de estilo de vida. El campo `is_active_protocol` ayudará a identificar el protocolo vigente.*
+
+**Actualización del archivo `models/__init__.py`:**
+
+Esta es la última importación de modelo para V1.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (FINALIZADO para V1)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program
+from . import fitness_workout
+from . import fitness_exercise
+from . import fitness_workout_line
+from . import fitness_user_program
+from . import fitness_body_measurement
+from . import fitness_assessment
+from . import fitness_nutrition
+from . import fitness_goal
+from . import fitness_workout_history
+from . import fitness_exercise_performance
+from . import fitness_achievement
+from . import fitness_user_protocol # Añadida esta última línea para V1
+```
+
+---
+
+**Listado de Modelos V1 (Estado Actual):**
+
+**Realizados (Código Python Proporcionado para todos los modelos de V1):**
+
+1.  **Información del Usuario (Extensión de `res.partner`)**
+2.  **Modelos Catálogo:** `fitness.difficulty`, `fitness.program.category`, `fitness.program.type`, `fitness.equipment`, `fitness.muscle.group`, `fitness.assessment.type`, `fitness.goal.type`
+3.  **Programas de Entrenamiento (`fitness.program`)** (Punto #2)
+4.  **Entrenamientos/Workouts (`fitness.workout`)** (Punto #3)
+5.  **Ejercicios (`fitness.exercise`)** (Punto #4)
+6.  **Componentes de Workout (`fitness.workout.line`)** (Punto #5)
+7.  **Seguimiento de Progreso del Usuario (`fitness.user.program`)** (Punto #6)
+8.  **Mediciones Corporales (`fitness.body.measurement`)** (Punto #9)
+9.  **Pruebas de Evaluación Física (`fitness.assessment`)** (Cuerpo del Punto #10)
+10. **Seguimiento de Nutrición (Básico)** (Punto #11): `fitness.food.item`, `fitness.meal.log`, `fitness.meal.line`
+11. **Establecimiento de Metas (`fitness.goal`)** (Cuerpo del Punto #12)
+12. **Historial de Entrenamientos (`fitness.workout.history`)** (Punto #7)
+13. **Rendimiento en Ejercicios (`fitness.exercise.performance`)** (Punto #8)
+14. **Sistema de Logros (Básico)** (Punto #14):
+    * `fitness.achievement` (Definición del Logro)
+    * `fitness.user.achievement` (Logro Obtenido por Usuario)
+15. **Protocolo de Usuario (`fitness.user.protocol`)** (Punto #15)
+
+**Pendientes:**
+
+* **¡NINGUNO!** Hemos cubierto la definición Python para todos los modelos que acordamos para la V1.
+
+---
+

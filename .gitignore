@@ -218,7 +218,7 @@ Thumbs.db
 *.swp
 *.swo
 
-# Local configuration files
+# Local development files
 *.local
 .env.local
 odoo_local_dev.conf
@@ -231,16 +231,33 @@ logs/
 *_backup.sql
 *.dump
 *.backup
-
-# Temporary files
-*.tmp
 *.bak
-
-# Session files
-sessions/
+*.tmp
 
 # File uploads (development)
 filestore/
+storage/
+sessions/
 
-# Git backup (if you have one)
-.git_backup/ 
+# Git backup
+.git_backup/
+
+# Large Odoo installation (Railway will install Odoo automatically)
+odoo-18.0+e.20250521/odoo/
+odoo-18.0+e.20250521/addons/
+odoo-18.0+e.20250521/setup/
+odoo-18.0+e.20250521/debian/
+odoo-18.0+e.20250521/doc/
+odoo-18.0+e.20250521/requirements.txt
+odoo-18.0+e.20250521/setup.py
+odoo-18.0+e.20250521/setup.cfg
+odoo-18.0+e.20250521/odoo-bin
+odoo-18.0+e.20250521/odoo.py
+odoo-18.0+e.20250521/PKG-INFO
+odoo-18.0+e.20250521/MANIFEST.in
+odoo-18.0+e.20250521/LICENSE
+odoo-18.0+e.20250521/README.md
+odoo-18.0+e.20250521/odoo.egg-info/
+
+# But keep our custom addons!
+!odoo-18.0+e.20250521/custom_addons/ 

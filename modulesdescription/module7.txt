@@ -1,0 +1,156 @@
+¡Sigamos adelante!
+
+**Paso 7: Modelo de Seguimiento de Progreso del Usuario (Inscripción a Programa) (Punto #6 de tu lista)**
+
+Este código va en un nuevo archivo: `mi_modulo_fitness/models/fitness_user_program.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_user_program.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class FitnessUserProgram(models.Model):
+    _name = 'fitness.user.program'
+    _description = "Inscripción y Progreso de Usuario en Programa de Entrenamiento"
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para historial y actividades
+    _order = 'user_id, start_date desc' # Ordenar por usuario, luego fecha de inicio descendente
+
+    name = fields.Char(string="Referencia de Inscripción", compute='_compute_name', store=True, readonly=True)
+
+    user_id = fields.Many2one(
+        comodel_name='res.partner',
+        string="Usuario",
+        required=True,
+        ondelete='cascade', # Considera 'restrict' si prefieres no borrar inscripciones al borrar un usuario
+        index=True,
+        tracking=True,
+        domain="[('customer_rank', '>', 0)]" # Ejemplo de dominio: solo clientes
+    )
+    program_id = fields.Many2one(
+        comodel_name='fitness.program',
+        string="Programa de Entrenamiento",
+        required=True,
+        ondelete='restrict', # No permitir borrar un programa si tiene inscripciones
+        index=True,
+        tracking=True
+    )
+
+    enrollment_status = fields.Selection([
+        ('active', 'Activa'),
+        ('paused', 'Pausada'),
+        ('completed', 'Completada'),
+        ('cancelled', 'Cancelada'),
+        ('pending_start', 'Pendiente de Inicio')
+    ], string="Estado de la Inscripción", default='pending_start', required=True, tracking=True)
+
+    start_date = fields.Date(string="Fecha de Inicio Programada/Real", default=fields.Date.context_today, tracking=True)
+    end_date = fields.Date(string="Fecha de Finalización Estimada/Real", tracking=True)
+
+    completion_percentage = fields.Float(
+        string="Progreso (%)",
+        default=0.0,
+        tracking=True,
+        group_operator="avg", # Para agregación en vistas de Odoo si se usan
+        help="Porcentaje de finalización del programa. Idealmente calculado."
+        # compute='_compute_completion_percentage', store=True # La lógica de cálculo se definirá después
+    )
+
+    initial_enrollment_picture = fields.Image(
+        string="Foto Inicial (al Inscribirse)",
+        max_width=1920, max_height=1920,
+        help="Foto del usuario al iniciar este programa específico."
+    )
+    current_progress_picture = fields.Image(
+        string="Foto de Progreso Actual",
+        max_width=1920, max_height=1920,
+        help="Foto más reciente del progreso del usuario en este programa."
+    )
+
+    trainer_notes = fields.Text(string="Notas del Entrenador (sobre esta inscripción)")
+    user_feedback = fields.Text(string="Feedback del Usuario (sobre el programa)")
+
+    # Relación a los entrenamientos completados por este usuario para este programa
+    # workout_history_ids = fields.One2many('fitness.workout.history', 'user_program_id', string="Historial de Entrenamientos Realizados")
+
+
+    _sql_constraints = [
+        ('user_program_start_date_uniq', 'unique (user_id, program_id, start_date)', 
+         "Un usuario no puede tener múltiples inscripciones al mismo programa con la misma fecha de inicio.")
+    ]
+
+    @api.depends('user_id.name', 'program_id.name')
+    def _compute_name(self):
+        for record in self:
+            user_name = record.user_id.name if record.user_id else "N/D"
+            program_name = record.program_id.name if record.program_id else "N/D"
+            record.name = f"Inscripción: {user_name} - {program_name}"
+
+    # def _compute_completion_percentage(self):
+    #     for record in self:
+    #         # Lógica futura para calcular el porcentaje de completitud
+    #         # basada en record.workout_history_ids y los workouts definidos en record.program_id.workout_ids
+    #         record.completion_percentage = 0.0 # Placeholder
+```
+*He añadido `tracking=True` a varios campos para habilitar el chatter de Odoo. El campo `name` es calculado para una mejor representación. El cálculo de `completion_percentage` se deja como placeholder. Se añadió un estado `pending_start` a `enrollment_status`.*
+
+**Actualización del archivo `models/__init__.py`:**
+
+Añade la importación de `fitness_user_program.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program
+from . import fitness_workout
+from . import fitness_exercise
+from . import fitness_workout_line
+from . import fitness_user_program # Añadida esta línea
+# from . import fitness_body_measurement # Siguiente...
+```
+
+---
+
+**Listado de Modelos V1 (Estado Actual):**
+
+**Realizados (Código Python Proporcionado):**
+
+1.  **Información del Usuario (Extensión de `res.partner`)** (en `res_partner.py`)
+2.  **Modelos Catálogo:** (todos en `fitness_catalogs.py`)
+    * `fitness.difficulty`
+    * `fitness.program.category`
+    * `fitness.program.type`
+    * `fitness.equipment`
+    * `fitness.muscle.group`
+    * `fitness.assessment.type` (Catálogo para el Punto #10)
+    * `fitness.goal.type` (Catálogo para el Punto #12)
+3.  **Programas de Entrenamiento (`fitness.program`)** (Punto #2, en `fitness_program.py`)
+4.  **Entrenamientos/Workouts (`fitness.workout`)** (Punto #3, en `fitness_workout.py`)
+5.  **Ejercicios (`fitness.exercise`)** (Punto #4, en `fitness_exercise.py`)
+6.  **Componentes de Workout (`fitness.workout.line`)** (Punto #5, en `fitness_workout_line.py`)
+7.  **Seguimiento de Progreso del Usuario (`fitness.user.program`)** (Punto #6, en `fitness_user_program.py`)
+
+**Pendientes (Según tu lista de V1, en orden aproximado de dependencia y numeración):**
+
+* **Mediciones Corporales (`fitness.body.measurement`)** (Punto #9) - *Este sería el siguiente.*
+* **Pruebas de Evaluación Física (`fitness.assessment`)** (Cuerpo del Punto #10)
+* **Seguimiento de Nutrición (Modelos básicos)** (Punto #11)
+    * `fitness.food.item`
+    * `fitness.meal.log`
+    * `fitness.meal.line`
+* **Establecimiento de Metas (`fitness.goal`)** (Cuerpo del Punto #12)
+* **Historial de Entrenamientos (`fitness.workout.history`)** (Punto #7)
+* **Rendimiento en Ejercicios (`fitness.exercise.performance`)** (Punto #8)
+* **Sistema de Logros (Modelos básicos)** (Punto #14)
+    * `fitness.achievement`
+    * `fitness.user.achievement`
+* **Protocolo de Usuario (`fitness.user.protocol`)** (Punto #15)
+
+---
+
+Siguiendo tu lista, el siguiente sería el **Punto #9: Mediciones Corporales (`fitness.body.measurement`)**. (Aunque el #7 y #8 son Historial y Rendimiento, Mediciones es un modelo independiente que podemos definir ahora).
+
+¿Procedemos con `fitness.body.measurement`?

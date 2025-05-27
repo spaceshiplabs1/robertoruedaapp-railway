@@ -1,0 +1,87 @@
+De acuerdo. Procederemos de manera eficiente.
+
+**Paso 2: Modelos Catálogo (Prerrequisitos para Programas, Ejercicios, etc.)**
+
+Este código va en un nuevo archivo: `mi_modulo_fitness/models/fitness_catalogs.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_catalogs.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields
+
+class FitnessDifficulty(models.Model):
+    _name = 'fitness.difficulty'
+    _description = 'Nivel de Dificultad para Programas/Ejercicios'
+    _order = 'sequence, name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+    sequence = fields.Integer(string="Secuencia", default=10)
+
+class FitnessProgramCategory(models.Model):
+    _name = 'fitness.program.category'
+    _description = 'Categoría de Programa de Entrenamiento'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+
+class FitnessProgramType(models.Model):
+    _name = 'fitness.program.type'
+    _description = 'Tipo de Programa de Entrenamiento'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+
+class FitnessEquipment(models.Model):
+    _name = 'fitness.equipment'
+    _description = 'Equipamiento Requerido para Ejercicios/Programas'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+
+class FitnessMuscleGroup(models.Model):
+    _name = 'fitness.muscle.group'
+    _description = 'Grupo Muscular'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+
+class FitnessAssessmentType(models.Model):
+    _name = 'fitness.assessment.type'
+    _description = 'Tipo de Prueba de Evaluación Física'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción de la Prueba", translate=True)
+    unit_of_measure = fields.Char(string="Unidad de Medida", help="Ej: kg, reps, segundos, cm")
+
+class FitnessGoalType(models.Model):
+    _name = 'fitness.goal.type'
+    _description = 'Tipo de Meta de Fitness'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre", required=True, translate=True)
+    description = fields.Text(string="Descripción", translate=True)
+```
+
+**Actualización del archivo `models/__init__.py`:**
+
+Ahora debes actualizar el archivo `mi_modulo_fitness/models/__init__.py` para que importe el nuevo archivo `fitness_catalogs.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs # Añadida esta línea
+# from . import fitness_program # Se añadirán más a medida que avancemos
+```
+
+Con esto, tenemos definidos los modelos catálogo. El siguiente paso natural, de acuerdo a tu lista y las dependencias, sería el **Punto #2: Programas de Entrenamiento (`fitness.program`)**.
+
+¿Procedemos con `fitness.program`?

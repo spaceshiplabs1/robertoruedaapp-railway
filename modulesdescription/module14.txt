@@ -1,0 +1,168 @@
+¡Casi llegamos al final de la lista de modelos para V1!
+
+Tienes razón. Después de los dos modelos para el **Sistema de Logros (Punto #14)**, solo nos quedaría un modelo más de tu lista: **Protocolo de Usuario (`fitness.user.protocol`) (Punto #15)**.
+
+Así que, ¡sigamos adelante con los logros!
+
+**Paso 14: Modelos del Sistema de Logros (Punto #14 de tu lista - Versión Básica)**
+
+Estos dos modelos (`fitness.achievement` y `fitness.user.achievement`) irán en un nuevo archivo: `mi_modulo_fitness/models/fitness_achievement.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_achievement.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class FitnessAchievement(models.Model):
+    _name = 'fitness.achievement'
+    _description = 'Definición de Logro o Hazaña de Fitness'
+    _order = 'name'
+
+    name = fields.Char(string="Nombre del Logro", required=True, translate=True)
+    description = fields.Text(string="Descripción del Logro", translate=True, help="Qué representa este logro y por qué es importante.")
+    
+    # Para V1, los criterios y recompensas son descriptivos.
+    # La lógica de asignación automática sería para V2.
+    criteria_description = fields.Text(
+        string="Criterios para Obtener (Descripción)", 
+        help="Descripción textual de cómo se obtiene este logro. Ej: Completar el primer programa, levantar X peso, etc."
+    )
+    reward_description = fields.Text(
+        string="Recompensa (Descripción)", 
+        help="Descripción de la recompensa o reconocimiento. Ej: Medalla virtual, puntos extra, mención especial."
+    )
+    
+    image_1920 = fields.Image(
+        string="Icono/Imagen del Logro", 
+        max_width=512, max_height=512, 
+        help="Imagen visual para representar el logro (ej. una medalla)."
+    )
+    
+    active = fields.Boolean(
+        string="Activo", 
+        default=True, 
+        help="Si el logro está activo y puede ser asignado."
+    )
+    
+    # Campo para agrupar o categorizar logros si es necesario en el futuro
+    # achievement_category_id = fields.Many2one('fitness.achievement.category', string="Categoría de Logro")
+
+
+class FitnessUserAchievement(models.Model):
+    _name = 'fitness.user.achievement'
+    _description = 'Logro Obtenido por un Usuario'
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para notificar al usuario quizás
+    _order = 'user_id, date_achieved desc'
+
+    name = fields.Char(string="Referencia", compute='_compute_name', store=True, readonly=True)
+
+    user_id = fields.Many2one(
+        comodel_name='res.partner',
+        string="Usuario",
+        required=True,
+        ondelete='cascade', # O 'restrict'
+        index=True,
+        tracking=True
+    )
+    achievement_id = fields.Many2one(
+        comodel_name='fitness.achievement',
+        string="Logro Obtenido",
+        required=True,
+        ondelete='restrict', # No borrar una definición de logro si ya fue asignada
+        tracking=True
+    )
+    
+    date_achieved = fields.Date(
+        string="Fecha de Obtención",
+        default=fields.Date.context_today,
+        required=True,
+        tracking=True
+    )
+    
+    # Para V1, el estado y progreso son principalmente para registro manual por el entrenador.
+    status = fields.Selection([
+        ('locked', 'Bloqueado / No Iniciado'),
+        ('in_progress', 'En Progreso'), # Si el entrenador quiere marcar un progreso manual
+        ('achieved', 'Logrado')
+    ], string="Estado", default='achieved', tracking=True, help="Para V1, usualmente se registrará como 'Logrado'.")
+
+    # Progreso manual (descriptivo para V1)
+    progress_manual_notes = fields.Text(
+        string="Notas de Progreso (Manual)",
+        help="Descripción del progreso actual si el estado es 'En Progreso'."
+    )
+
+    trainer_notes = fields.Text(
+        string="Notas del Entrenador",
+        help="Comentarios del entrenador al asignar el logro."
+    )
+
+    @api.depends('user_id.name', 'achievement_id.name', 'date_achieved')
+    def _compute_name(self):
+        for record in self:
+            user_name = record.user_id.name if record.user_id else "N/D"
+            achievement_name = record.achievement_id.name if record.achievement_id else "N/D"
+            date_str = fields.Date.to_string(record.date_achieved) if record.date_achieved else "N/D"
+            record.name = f"Logro: {user_name} - {achievement_name} ({date_str})"
+
+```
+*En `FitnessAchievement`, los campos `criteria_description` y `reward_description` son textuales para la V1. En `FitnessUserAchievement`, el `status` por defecto es 'achieved' asumiendo una asignación manual cuando se consigue, pero se incluyen otras opciones. `progress_manual_notes` permite un seguimiento descriptivo.*
+
+**Actualización del archivo `models/__init__.py`:**
+
+Añade la importación de `fitness_achievement.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program
+from . import fitness_workout
+from . import fitness_exercise
+from . import fitness_workout_line
+from . import fitness_user_program
+from . import fitness_body_measurement
+from . import fitness_assessment
+from . import fitness_nutrition
+from . import fitness_goal
+from . import fitness_workout_history
+from . import fitness_exercise_performance
+from . import fitness_achievement # Añadida esta línea
+# from . import fitness_user_protocol # ¡El último!
+```
+
+---
+
+**Listado de Modelos V1 (Estado Actual):**
+
+**Realizados (Código Python Proporcionado):**
+
+1.  **Información del Usuario (Extensión de `res.partner`)**
+2.  **Modelos Catálogo:** `fitness.difficulty`, `fitness.program.category`, `fitness.program.type`, `fitness.equipment`, `fitness.muscle.group`, `fitness.assessment.type`, `fitness.goal.type`
+3.  **Programas de Entrenamiento (`fitness.program`)** (Punto #2)
+4.  **Entrenamientos/Workouts (`fitness.workout`)** (Punto #3)
+5.  **Ejercicios (`fitness.exercise`)** (Punto #4)
+6.  **Componentes de Workout (`fitness.workout.line`)** (Punto #5)
+7.  **Seguimiento de Progreso del Usuario (`fitness.user.program`)** (Punto #6)
+8.  **Mediciones Corporales (`fitness.body.measurement`)** (Punto #9)
+9.  **Pruebas de Evaluación Física (`fitness.assessment`)** (Cuerpo del Punto #10)
+10. **Seguimiento de Nutrición (Básico)** (Punto #11): `fitness.food.item`, `fitness.meal.log`, `fitness.meal.line`
+11. **Establecimiento de Metas (`fitness.goal`)** (Cuerpo del Punto #12)
+12. **Historial de Entrenamientos (`fitness.workout.history`)** (Punto #7)
+13. **Rendimiento en Ejercicios (`fitness.exercise.performance`)** (Punto #8)
+14. **Sistema de Logros (Básico)** (Punto #14):
+    * `fitness.achievement` (Definición del Logro)
+    * `fitness.user.achievement` (Logro Obtenido por Usuario)
+
+**Pendientes (Según tu lista de V1):**
+
+* **Protocolo de Usuario (`fitness.user.protocol`)** (Punto #15) - *¡Este es el último modelo de la lista!*
+
+---
+
+Efectivamente, solo nos queda el **Punto #15: Protocolo de Usuario (`fitness.user.protocol`)**.
+
+¿Listos para definir este último modelo de la V1?

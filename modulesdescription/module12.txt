@@ -1,0 +1,162 @@
+¡Claro! Vamos con el Punto #7. Después de este, te detallaré exactamente qué modelos nos quedarían pendientes de la V1.
+
+**Paso 12: Modelo de Historial de Entrenamientos (Punto #7 de tu lista)**
+
+Este código va en un nuevo archivo: `mi_modulo_fitness/models/fitness_workout_history.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_workout_history.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class FitnessWorkoutHistory(models.Model):
+    _name = 'fitness.workout.history'
+    _description = "Historial de Entrenamientos Completados por el Usuario"
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para historial y actividades
+    _order = 'user_id, completion_datetime desc' # Ordenar por usuario, luego fecha más reciente
+
+    name = fields.Char(string="Referencia de Sesión", compute='_compute_name', store=True, readonly=True)
+
+    user_id = fields.Many2one(
+        comodel_name='res.partner',
+        string="Usuario",
+        required=True,
+        ondelete='cascade', # O 'restrict', según política de borrado
+        index=True,
+        tracking=True
+    )
+    workout_definition_id = fields.Many2one(
+        comodel_name='fitness.workout',
+        string="Entrenamiento Realizado (Plantilla)",
+        required=True, 
+        ondelete='restrict', # No borrar una plantilla de workout si tiene historiales
+        tracking=True,
+        help="El entrenamiento planificado que el usuario realizó."
+    )
+    user_program_id = fields.Many2one(
+        comodel_name='fitness.user.program',
+        string="Inscripción al Programa (Contexto)",
+        ondelete='set null', # Si se borra la inscripción, el historial permanece pero sin este enlace
+        tracking=True,
+        help="Opcional: La inscripción al programa bajo la cual se realizó este entrenamiento."
+    )
+
+    completion_datetime = fields.Datetime(
+        string="Fecha y Hora de Finalización",
+        required=True,
+        default=fields.Datetime.now,
+        tracking=True,
+        index=True
+    )
+    actual_duration_minutes = fields.Integer(
+        string="Duración Real de la Sesión (minutos)",
+        tracking=True,
+        help="Tiempo total que el usuario dedicó a esta sesión de entrenamiento."
+    )
+
+    user_rating = fields.Selection([
+        ('1', '1 - Muy Malo'),
+        ('2', '2 - Malo'),
+        ('3', '3 - Regular'),
+        ('4', '4 - Bueno'),
+        ('5', '5 - Excelente')
+    ], string="Calificación General de la Sesión", tracking=True)
+
+    difficulty_feedback = fields.Selection([
+        ('too_easy', 'Demasiado Fácil'),
+        ('just_right', 'Adecuado / Justo lo Esperado'),
+        ('challenging', 'Desafiante (pero lograble)'),
+        ('too_hard', 'Demasiado Difícil'),
+        ('modified_significantly', 'Modificado Significativamente'),
+        ('incomplete', 'Incompleto')
+    ], string="Percepción de Dificultad de la Sesión", tracking=True)
+    
+    user_session_notes = fields.Text(
+        string="Notas del Usuario sobre la Sesión",
+        help="Comentarios del usuario: cómo se sintió, energía, logros, problemas, etc."
+    )
+    
+    # Líneas de rendimiento de cada ejercicio en esta sesión
+    exercise_performance_ids = fields.One2many(
+        comodel_name='fitness.exercise.performance', # Modelo del Punto #8 (se definirá a continuación)
+        inverse_name='workout_history_id',
+        string="Rendimiento Detallado de Ejercicios",
+        copy=True 
+    )
+
+    # Campos adicionales que podrían ser útiles (quizás para V2 o si son simples)
+    # location_type = fields.Selection([('gym','Gimnasio'), ('home','Casa'), ('outdoors','Exterior'), ('other','Otro')], string="Lugar")
+    # perceived_exertion_rpe = fields.Integer(string="RPE (1-10)", help="Tasa de Esfuerzo Percibido general de la sesión")
+
+    @api.depends('user_id.name', 'workout_definition_id.name', 'completion_datetime')
+    def _compute_name(self):
+        for record in self:
+            user_name = record.user_id.name if record.user_id else "N/D"
+            workout_name = record.workout_definition_id.name if record.workout_definition_id else "N/D"
+            date_str = fields.Datetime.context_timestamp(record, record.completion_datetime).strftime('%Y-%m-%d %H:%M') if record.completion_datetime else "N/D"
+            record.name = f"Historial: {user_name} - {workout_name} ({date_str})"
+
+```
+*He añadido `tracking=True` a los campos relevantes y un campo `name` calculado. También algunas opciones más al `difficulty_feedback`.*
+
+**Actualización del archivo `models/__init__.py`:**
+
+Añade la importación de `fitness_workout_history.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program
+from . import fitness_workout
+from . import fitness_exercise
+from . import fitness_workout_line
+from . import fitness_user_program
+from . import fitness_body_measurement
+from . import fitness_assessment
+from . import fitness_nutrition
+from . import fitness_goal
+from . import fitness_workout_history # Añadida esta línea
+# from . import fitness_exercise_performance # Siguiente...
+```
+
+---
+
+**Listado de Modelos V1 (Estado Actual):**
+
+**Realizados (Código Python Proporcionado):**
+
+1.  **Información del Usuario (Extensión de `res.partner`)**
+2.  **Modelos Catálogo:** `fitness.difficulty`, `fitness.program.category`, `fitness.program.type`, `fitness.equipment`, `fitness.muscle.group`, `fitness.assessment.type`, `fitness.goal.type`
+3.  **Programas de Entrenamiento (`fitness.program`)** (Punto #2)
+4.  **Entrenamientos/Workouts (`fitness.workout`)** (Punto #3)
+5.  **Ejercicios (`fitness.exercise`)** (Punto #4)
+6.  **Componentes de Workout (`fitness.workout.line`)** (Punto #5)
+7.  **Seguimiento de Progreso del Usuario (`fitness.user.program`)** (Punto #6)
+8.  **Mediciones Corporales (`fitness.body.measurement`)** (Punto #9)
+9.  **Pruebas de Evaluación Física (`fitness.assessment`)** (Cuerpo del Punto #10)
+10. **Seguimiento de Nutrición (Básico)** (Punto #11): `fitness.food.item`, `fitness.meal.log`, `fitness.meal.line`
+11. **Establecimiento de Metas (`fitness.goal`)** (Cuerpo del Punto #12)
+12. **Historial de Entrenamientos (`fitness.workout.history`)** (Punto #7)
+
+**Pendientes (Según tu lista de V1):**
+
+* **Rendimiento en Ejercicios (`fitness.exercise.performance`)** (Punto #8) - *Este es el siguiente y está directamente relacionado con `fitness.workout.history`.*
+* **Sistema de Logros (Modelos básicos)** (Punto #14)
+    * `fitness.achievement`
+    * `fitness.user.achievement`
+* **Protocolo de Usuario (`fitness.user.protocol`)** (Punto #15)
+
+---
+
+Como ves, después de este paso 7, los modelos que faltan son:
+* `fitness.exercise.performance` (Punto #8)
+* `fitness.achievement` y `fitness.user.achievement` (Punto #14)
+* `fitness.user.protocol` (Punto #15)
+
+El más inmediato y dependiente del que acabamos de hacer es el **Punto #8: Rendimiento en Ejercicios (`fitness.exercise.performance`)**. Este modelo detallará qué se hizo exactamente en cada ejercicio de un entrenamiento registrado en `fitness.workout.history`.
+
+¿Procedemos con `fitness.exercise.performance`?

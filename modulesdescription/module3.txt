@@ -1,0 +1,106 @@
+De acuerdo, continuemos.
+
+**Paso 3: Modelo de Programas de Entrenamiento (Punto #2 de tu lista)**
+
+Este código va en un nuevo archivo: `mi_modulo_fitness/models/fitness_program.py`.
+
+**Archivo: `mi_modulo_fitness/models/fitness_program.py`**
+```python
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields
+
+class FitnessProgram(models.Model):
+    _name = 'fitness.program'
+    _description = 'Programa de Entrenamiento Fitness'
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # Para historial de cambios y actividades
+
+    name = fields.Char(string="Nombre del Programa", required=True, tracking=True)
+    description = fields.Text(string="Descripción Detallada")
+    
+    difficulty_id = fields.Many2one(
+        comodel_name='fitness.difficulty', 
+        string="Nivel de Dificultad", 
+        tracking=True,
+        ondelete='restrict' # No permitir borrar dificultad si está usada en un programa
+    )
+    program_category_id = fields.Many2one(
+        comodel_name='fitness.program.category', 
+        string="Categoría del Programa", 
+        tracking=True,
+        ondelete='restrict'
+    )
+    program_type_id = fields.Many2one(
+        comodel_name='fitness.program.type', 
+        string="Tipo de Programa", 
+        tracking=True,
+        ondelete='restrict'
+    )
+    
+    duration_text = fields.Char(
+        string="Duración del Programa", 
+        help="Ej: 4 Semanas, Ciclo Continuo, 90 Días"
+    )
+
+    privacy_setting = fields.Selection([
+        ('public', 'Público'),
+        ('private', 'Privado (Solo para uso interno del entrenador/admin)')
+    ], string="Visibilidad", default='private', required=True, tracking=True)
+
+    autosync_user_schedule = fields.Boolean(
+        string="¿Sincronización Automática con Horario de Usuario?", 
+        default=False, 
+        help="Marcar si el programa debe tener lógica futura para auto-asignarse al calendario del usuario."
+    )
+
+    required_equipment_ids = fields.Many2many(
+        comodel_name='fitness.equipment',                
+        relation='fitness_program_equipment_rel',    
+        column1='program_id',                       
+        column2='equipment_id',                     
+        string="Equipamiento Requerido"
+    )
+
+    # Campos relacionales (el otro lado de la relación se define en los otros modelos)
+    workout_ids = fields.One2many(
+        comodel_name='fitness.workout', 
+        inverse_name='program_id', 
+        string="Entrenamientos del Programa"
+    )
+    user_enrollment_ids = fields.One2many(
+        comodel_name='fitness.user.program', 
+        inverse_name='program_id', 
+        string="Inscripciones de Usuarios"
+    )
+    
+    active = fields.Boolean(
+        string="Activo", 
+        default=True, 
+        help="Desmarcar para archivar el programa y que no esté disponible para nuevas inscripciones."
+    )
+    image_1920 = fields.Image(string="Imagen Principal", max_width=1920, max_height=1920)
+    sequence = fields.Integer(string="Secuencia de Orden", default=10)
+
+    # _sql_constraints = [
+    #     ('name_uniq', 'unique (name)', "El nombre del programa ya existe y debe ser único.")
+    # ]
+```
+*He añadido `ondelete='restrict'` a los campos Many2one de los catálogos para prevenir que se borre una dificultad, categoría o tipo si está siendo usada por algún programa. También ajusté el nombre de algunos parámetros de los campos relacionales para mayor claridad (`comodel_name`, `inverse_name`, `relation`, `column1`, `column2`). La restricción `_sql_constraints` para nombre único está comentada por si decides activarla.*
+
+**Actualización del archivo `models/__init__.py`:**
+
+Ahora debes actualizar el archivo `mi_modulo_fitness/models/__init__.py` para que importe el nuevo archivo `fitness_program.py`.
+
+**Archivo: `mi_modulo_fitness/models/__init__.py` (Actualizado)**
+```python
+# -*- coding: utf-8 -*-
+
+from . import res_partner
+from . import fitness_catalogs
+from . import fitness_program # Añadida esta línea
+# from . import fitness_workout # Se añadirán más a medida que avancemos
+```
+
+Con esto, tenemos el modelo `fitness.program`. El siguiente en tu lista es el **Punto #3: Workouts (`fitness.workout`)**. Este modelo dependerá de `fitness.program`.
+
+¿Procedemos con `fitness.workout`?

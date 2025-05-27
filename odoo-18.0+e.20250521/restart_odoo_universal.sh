@@ -34,8 +34,8 @@ start_odoo() {
     echo "🗄️  Base de datos: $DB_NAME"
     echo ""
     
-    # Iniciar Odoo usando el archivo de configuración LOCAL
-    python -m odoo -c /Users/spaceshiplabs/Documents/robertoruedaapp/odoo_local_dev.conf
+    # Iniciar Odoo
+    python -m odoo --addons-path=odoo/addons,custom_addons -d "$DB_NAME"
 }
 
 # Función principal
