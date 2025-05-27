@@ -19,8 +19,8 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # Set permissions and create directories
-RUN mkdir -p /app/filestore && \
-    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore /docker-entrypoint.sh
+RUN mkdir -p /var/lib/odoo && \
+    chown -R odoo:odoo /mnt/extra-addons /etc/odoo /var/lib/odoo /docker-entrypoint.sh
 
 # Switch back to odoo user
 USER odoo

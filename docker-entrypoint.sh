@@ -19,5 +19,9 @@ envsubst < /etc/odoo/odoo.railway.conf > /etc/odoo/odoo.conf
 echo "📋 Generated configuration:"
 cat /etc/odoo/odoo.conf | head -20
 
+# Note: Custom fitness seeding script available at /mnt/extra-addons/aplicar_semillado_fitness.sh
+echo "🏋️‍♂️ Fitness module with custom seeding data available"
+echo "📁 Custom addons path: /mnt/extra-addons"
+
 # Execute the original command
 exec "$@" 
