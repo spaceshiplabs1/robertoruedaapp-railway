@@ -36,9 +36,10 @@ echo "   Port: $PORT"
 echo "   Addons: $ADDONS_PATH"
 echo ""
 
-# Start Odoo with loaded environment
+# Start Odoo with loaded environment (single process for development)
 python -m odoo \
     --config=../odoo.conf \
     --addons-path="$ADDONS_PATH" \
     --database="$DB_NAME" \
+    --workers=0 \
     --dev=reload,qweb,werkzeug,xml 

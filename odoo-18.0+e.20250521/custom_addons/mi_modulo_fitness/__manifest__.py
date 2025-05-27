@@ -10,7 +10,7 @@
     'author': "Tu Nombre o Nombre de tu Empresa",
     'category': 'Services/Fitness',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'product', 'sale_subscription'],
+    'depends': ['base', 'mail', 'product', 'sale', 'sale_subscription', 'crm', 'calendar'],
     'data': [
         'security/ir.model.access.csv',
         'data/fitness_seed_data_fase1.xml',
