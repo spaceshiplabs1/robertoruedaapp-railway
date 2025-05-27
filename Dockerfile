@@ -23,12 +23,12 @@ RUN mkdir -p /app/filestore && \
     chown -R odoo:odoo /mnt/extra-addons /etc/odoo /app/filestore /docker-entrypoint.sh && \
     chmod -R 755 /app/filestore
 
-# Don't switch to odoo user yet - entrypoint needs root for permissions
-# USER odoo
+# Switch back to odoo user
+USER odoo
 
 # Expose Odoo port
 EXPOSE 8069
 
-# Use our custom entrypoint
+# Use our custom entrypoint first, then standard Odoo
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["gosu", "odoo", "odoo", "-c", "/etc/odoo/odoo.conf"] 
+CMD ["odoo", "-c", "/etc/odoo/odoo.conf"] 
