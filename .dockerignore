@@ -1,0 +1,104 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# IDEs and editors
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+odoo-venv/
+venv/
+env/
+
+# Logs and temporary files
+*.log
+*.tmp
+.env
+.env.local
+.env.*.local
+local.env
+
+# Odoo specific excludes
+/data/
+/sessions/
+*.pid
+*.sock
+
+# Development and testing files
+dev.sh
+run_local.sh
+test_*.py
+*_test.py
+tests/
+
+# Documentation and README files
+README.md
+*.md
+LICENSE
+CONTRIBUTING.md
+
+# Backup and archive files
+_backups_and_archives/
+*.backup
+*.sql
+*.dump
+*.tar.gz
+*.zip
+
+# Railway and deployment files (except essential ones)
+Dockerfile.*
+!Dockerfile
+railway.optimized.json
+.railwayignore
+
+# Application specific files not needed for build
+appfitness*.txt
+verify_neon_connection.py
+DEPLOYMENT_STATUS.md
+
+# Odoo installation files (not needed in container)
+odoo-18.0+e.20250521/
+*.deb
+*.rpm
+
+# Script files not needed in production
+*.sh
+!docker-entrypoint.sh
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Large files that shouldn't be in source control
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm 
